@@ -153,4 +153,5 @@
     <string name="forget_password_str">Forget Password?</string>
     <string name="enter_email_id_str">Enter Email ID</string>
     <string name="reset_password_str">Reset Password</string>
+    <string name="hello_world_str">hello world</string>
 </resources>
