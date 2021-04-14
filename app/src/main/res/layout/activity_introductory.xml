@@ -59,10 +59,10 @@
         app:layout_constraintVertical_bias="0"
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/intro" />
-    <!--
+
     <com.cuberto.liquid_swipe.LiquidPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
