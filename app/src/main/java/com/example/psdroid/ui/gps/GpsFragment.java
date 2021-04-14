@@ -71,7 +71,7 @@ public class GpsFragment extends Fragment {
         });
         // makeMap();
     }
-    //Create the GPS Tracking Toolbar Mene
+    //Create the GPS Tracking Toolbar Menu
     private void makeMap() {
         //Initialize Map
         MapFragment map_view = new MapFragment();
