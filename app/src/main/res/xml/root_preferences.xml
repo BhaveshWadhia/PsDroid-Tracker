@@ -1,0 +1,130 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_screen"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <PreferenceCategory
+        android:id="@+id/general"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_general_settings"
+        app:title="@string/settings_header1">
+        <SwitchPreferenceCompat
+            android:id="@+id/Emergency_Services"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="switch_preference_1"
+            android:summaryOff="@string/emergency_services_off"
+            android:summaryOn="@string/emergency_services_on"
+            app:defaultValue="true"
+            app:title="@string/emergency_title" />
+        <ListPreference
+            android:id="@+id/SirenSound"
+            android:entries="@array/siren_entries"
+            android:entryValues="@array/siren_values"
+            android:key="list_preference_1"
+            app:title="@string/siren_sound_title"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            android:layout_height="match_parent"
+            android:entries="@array/emergencynotification_entries"
+            android:entryValues="@array/emergencynotification_values"
+            android:key="list_preference_2"
+            android:title="Emergency Notification Sound"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            android:defaultValue="true"
+            android:entries="@array/tracking_request_entries"
+            android:entryValues="@array/tracking_request_values"
+            android:key="list_preference_3"
+            android:title="@string/tracking_request_title"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            android:entries="@array/fake_call_timer_entries"
+            android:entryValues="@array/fake_call_timer_values"
+            android:key="list_preference_4"
+            android:title="@string/fake_call_timer_title"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:id="@+id/Notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:title="@string/settings_header2"
+        app:icon="@drawable/ic_navbar_notifications" >
+        <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="check_box_preference_1"
+            android:summary="@string/alert_summary"
+            android:title="@string/emergency_alerts_title"
+            app:defaultValue="true"
+            app:enabled="false" />
+        <CheckBoxPreference
+            android:key="check_box_preference_2"
+            android:summary="@string/allow_notification_summary"
+            android:title="@string/allow_notification_title"
+            app:defaultValue="true" />
+        <SwitchPreference
+            android:key="switch_preference_2"
+            android:summaryOff="@string/low_battery_off"
+            android:summaryOn="@string/low_battery_on"
+            android:title="@string/low_battery_title"
+            app:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="check_box_preference_3"
+            android:summary="@string/send_sms_summary"
+            android:title="@string/send_sms_title"
+            app:defaultValue="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:id="@+id/About"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_help"
+        app:title="@string/settings_header3">
+        <Preference
+            android:id="@+id/version"
+            android:key="version_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/version_summary"
+            android:title="@string/version_title"
+            app:defaultValue="true" />
+        <Preference
+            android:id="@+id/feedback"
+            android:key="feedback_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/title_feedback"
+            app:defaultValue="true"
+            app:icon="@drawable/ic_right_arrow">
+            <intent
+                android:targetClass="com.example.psdroid.ui.settings.FeedbackActivity"
+                android:targetPackage="com.example.psdroid" />
+        </Preference>
+        <Preference
+            android:id="@+id/Terms_and_conditions"
+            android:key="terms_condition_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/terms_conditions_title"
+            app:defaultValue="true"
+            app:icon="@drawable/ic_right_arrow">
+            <intent
+                android:targetClass="com.example.psdroid.ui.settings.TermsConditionsActivity"
+                android:targetPackage="com.example.psdroid" />
+        </Preference>
+        <Preference
+            android:id="@+id/privacy_policy"
+            android:key="privacy_policy_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/privacy_policy_title"
+            app:icon="@drawable/ic_right_arrow">
+            <intent
+                android:targetClass="com.example.psdroid.ui.settings.PrivacyPolicyActivity"
+                android:targetPackage="com.example.psdroid" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

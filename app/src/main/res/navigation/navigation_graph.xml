@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/home_navGraph">
+
+    <fragment
+        android:id="@+id/home_navGraph"
+        android:name="com.example.psdroid.ui.home.HomeFragment"
+        android:label="@string/navbar_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/Gps_navGraph"
+        android:name="com.example.psdroid.ui.gps.GpsFragment"
+        android:label="@string/navbar_gps"
+        tools:layout="@layout/fragment_gps" />
+
+    <fragment
+        android:id="@+id/navNotifications_btn"
+        android:name="com.example.psdroid.ui.notifications.NotificationsFragment"
+        android:label="@string/navbar_notifications"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>

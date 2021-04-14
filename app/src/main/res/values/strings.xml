@@ -1,0 +1,156 @@
+<resources>
+
+    <string name="app_name" translatable="false">PsDroid Tracker</string>
+    <string name="default_web_client_id">408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com</string>
+    <!-- **MAIN SCREEEN STRINGS** -->
+    <string name="navbar_home">Home</string>
+    <string name="navbar_gps">GPS Tracking</string>
+    <string name="navbar_notifications">Notifications</string>
+    <string name="search_notifications">Search Notifications</string>
+    <string name="title_home">Home</string>
+    <string name="help_str">Help</string>
+    <string name="settings_str">Settings</string>
+    <string name="logout_str">Log Out</string>
+    <string name="gpsstat_str">GPS Status</string>
+    <string name="wifi_str">Wifi Status</string>
+    <string name="wifi_on_str">On</string>
+    <string name="wifi_off_str">Off</string>
+    <string name="gps_off_str">Off</string>
+    <string name="gps_on_str">On</string>
+    <string name="start_btn">Start Button</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="notification_img1">Notification Image</string>
+    <string name="title_users">Family/Friends</string>
+    <string name="adduser_btn">Add User Button</string>
+    <string name="gpstrack_str">GPS Tracking</string>
+    <!-- ADD USER ACTIVITY -->
+    <string name="empty_list_title">Contact List</string>
+    <string name="empty_list_desc">Currently no contacts are added, why not start by tapping on the below "Add User" button</string>
+    <string name="contact_list_icon">Contact List Icon</string>
+    <string name="add_contacts_button">Add contacts button</string>
+
+    <!-- **SETTINGS SCREEN STRINGS** -->
+    <string name="title_activity_settings">Settings</string>
+    <!-- GENERAL -->
+    <string name="settings_header1">General</string>
+    <string name="emergency_title">Emergency Services</string>
+    <string name="emergency_services_off">Off</string>
+    <string name="emergency_services_on">On</string>
+    <string name="siren_sound_title">Siren Sound</string>
+    <string name="emergency_notification_title">Emergency Notification Sound</string>
+    <string name="tracking_request_title">Tracking Request</string>
+    <string name="fake_call_timer_title">Fake Call Timer</string>
+    <!-- NOTIFICATIONS -->
+    <string name="settings_header2">Notification</string>
+    <string name="allow_notification_title">Allow Notifications</string>
+    <string name="allow_notification_summary">Enable All Notifications</string>
+    <string name="emergency_alerts_title">Emergency Alerts</string>
+    <string name="alert_summary">Enable Emergency Alerts</string>
+    <string name="low_battery_title">Low Battery Alert</string>
+    <string name="low_battery_off">Off</string>
+    <string name="low_battery_on">On</string>
+    <string name="send_sms_title">Send SMS</string>
+    <string name="send_sms_summary">Send SMS when Offline</string>
+    <!-- ABOUT -->
+    <string name="settings_header3">About</string>
+    <string name="version_title">Version</string>
+    <string name="version_summary">v1.0.0</string>
+    <string name="title_feedback">Feedback</string>
+    <string name="name_str">Name</string>
+    <string name="feedback_button_text">Send Feedback</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="terms_conditions_title">Terms __ Conditions</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+        "Bold, graphic, intentional.\n\n"
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+        "Motion provides meaning.\n\n"
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+        "3D world.\n\n"
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+        "Light and shadow.\n\n"
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+        "Resting elevation.\n\n"
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+        "Component elevations.\n\n"
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+        "Avoiding elevation interference.\n\n"
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string name="welcome_to_psdroid_tracer">Welcome to Psdroid Tracer</string>
+    <string name="intro1_str1">Extra Step\nto Safety</string>
+    <string name="intro2_str1">Safety in\nyour hands</string>
+    <string name="intro1_str2">We believe in keeping you safe</string>
+    <string name="intro2_str2">We suppose your security is your success</string>
+    <string name="advanced_str">Advanced</string>
+    <string name="skip_str">Skip</string>
+    <string name="sos_str">SOS</string>
+    <string name="help_str2">Help !!</string>
+    <string name="intro3_str1">Keep each\nother safe</string>
+    <string name="intro3_str2">Security is not a product, but a process</string>
+    <string name="mobile_number_str">Mobile Number</string>
+    <string name="email_str">Email</string>
+    <string name="password_str">Password</string>
+    <string name="confirm_password_str">Confirm Password</string>
+    <string name="signup_str">Signup</string>
+    <string name="email_id_username_str">Email ID/Username</string>
+    <string name="login_str">Login</string>
+    <string name="forget_password_str">Forget Password?</string>
+    <string name="enter_email_id_str">Enter Email ID</string>
+    <string name="reset_password_str">Reset Password</string>
+</resources>

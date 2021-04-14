@@ -1,0 +1,48 @@
+<resources>
+    <!-- Siren Preference -->
+    <string-array name="siren_entries">
+        <item>Police Siren</item>
+        <item>Scream Siren</item>
+    </string-array>
+    <string-array name="siren_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <!-- Emergency notification Preference -->
+    <string-array name="emergencynotification_entries">
+        <item>Default</item>
+        <item>Emergency Beep</item>
+    </string-array>
+    <string-array name="emergencynotification_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <!-- Tracking request Preference -->
+    <string-array name="tracking_request_entries">
+        <item>All users</item>
+        <item>Only Family Members</item>
+        <item>Nobody</item>
+    </string-array>
+    <string-array name="tracking_request_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <!-- Fake call Preference -->
+    <string-array name="fake_call_timer_entries">
+        <item>1 minute</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+    </string-array>
+    <string-array name="fake_call_timer_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>
+
+

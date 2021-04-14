@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "408198163992",
+    "project_id": "psdroidtracer",
+    "storage_bucket": "psdroidtracer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408198163992:android:14bba69b3dcf06cd025d6d",
+        "android_client_info": {
+          "package_name": "com.example.intropageforpsdroidproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcJ8RZRnUxWH-WL17EzCmleDmif7txKEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
