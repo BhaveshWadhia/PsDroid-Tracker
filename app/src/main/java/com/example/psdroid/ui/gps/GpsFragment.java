@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.psdroid.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,10 +71,7 @@ public class GpsFragment extends Fragment {
         });
         // makeMap();
     }
-    */
-    //Create the GPS Tracking Toolbar Menu
-
-   /*
+    //Create the GPS Tracking Toolbar Mene
     private void makeMap() {
         //Initialize Map
         MapFragment map_view = new MapFragment();
