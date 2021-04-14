@@ -30,11 +30,10 @@ public class GpsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_gps,container,false);
         SupportMapFragment add_MapSupport = (SupportMapFragment) getSupportMapFragment().findFragmentById(R.id.map);
           add_MapSupport.getMapAsync(googleMap -> {
-              LatLng xyz = new LatLng(-34,151);
-              googleMap.addMarker(new MarkerOptions().position(xyz).title("Demo User"));
+              LatLng xyz = new LatLng(-34,151);  //Place at this location
+              googleMap.addMarker(new MarkerOptions().position(xyz).title("Demo User"));  //Title of the marker
               googleMap.moveCamera(CameraUpdateFactory.newLatLng(xyz));
           });
-
         return v;
     }
     private FragmentManager getSupportMapFragment() {
@@ -48,8 +47,6 @@ public class GpsFragment extends Fragment {
         inflater_1.inflate(R.menu.gpstracking_menu, menu_1);
         super.onCreateOptionsMenu(menu_1, inflater_1);
     }
-
-
    /*
     // When view is created
     @Override
