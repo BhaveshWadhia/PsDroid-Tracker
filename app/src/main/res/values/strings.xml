@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name" translatable="false">PsDroid Tracker</string>
-    <string name="default_web_client_id">408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com</string>
+    <!--<string name="default_web_client_id">408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com</string>-->
     <!-- **MAIN SCREEEN STRINGS** -->
     <string name="navbar_home">Home</string>
     <string name="navbar_gps">GPS Tracking</string>
