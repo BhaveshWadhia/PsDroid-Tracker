@@ -10,11 +10,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
-        android:hint="@string/email_id_username_str"
-        android:inputType="text|textEmailAddress"
+        android:hint="@string/username"
+        android:importantForAutofill="no"
+        android:inputType="textVisiblePassword"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"
         android:paddingTop="10dp"
+        android:paddingEnd="20dp"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".3"
-        app:layout_constraintWidth_percent=".8"
-        android:importantForAutofill="no" />
+        app:layout_constraintWidth_percent=".8" />
 
     <EditText
         android:id="@+id/pass"

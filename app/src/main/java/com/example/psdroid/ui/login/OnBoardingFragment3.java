@@ -24,11 +24,13 @@ public class OnBoardingFragment3 extends Fragment {
         skip.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+            getActivity().finish();
         });
         fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+            getActivity().finish();
         });
         return root;
     }

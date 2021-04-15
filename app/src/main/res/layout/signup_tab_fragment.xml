@@ -21,18 +21,17 @@
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".2"
+        app:layout_constraintVertical_bias=".1"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/user"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_bg"
-        android:hint="@string/email_str"
+        android:hint="@string/username"
         android:importantForAutofill="no"
-        android:inputType="textEmailSubject"
+        android:inputType="textVisiblePassword|textNoSuggestions"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
@@ -42,7 +41,27 @@
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mobile"
-        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_bias=".05"
+        app:layout_constraintWidth_percent=".8" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:hint="@string/email_str"
+        android:importantForAutofill="no"
+        android:inputType="textEmailSubject"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintVertical_bias=".05"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText

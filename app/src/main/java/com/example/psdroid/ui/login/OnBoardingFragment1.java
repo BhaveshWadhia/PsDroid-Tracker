@@ -22,6 +22,7 @@ public class OnBoardingFragment1 extends Fragment {
         skip.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+            getActivity().finish();
         });
         return root;
     }

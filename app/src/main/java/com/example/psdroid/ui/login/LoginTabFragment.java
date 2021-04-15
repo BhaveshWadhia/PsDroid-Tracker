@@ -9,9 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginTabFragment extends Fragment {
     EditText username,pass;
@@ -19,7 +30,6 @@ public class LoginTabFragment extends Fragment {
     Button login;
 
     float v=0;
-    private FirebaseAuth auth;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,49 +55,68 @@ public class LoginTabFragment extends Fragment {
         forget.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         login.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
 
-        auth = FirebaseAuth.getInstance();
+
+
+
 
         login.setOnClickListener(v -> {
             String txt_user = username.getText().toString();
             String txt_pass = pass.getText().toString();
-            loginUser(txt_user,txt_pass);
+            if(txt_user.isEmpty()||txt_pass.isEmpty()){
+                Toast.makeText(getActivity(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+            }
+
+            else{
+                    isUser();
+            }
+
         });
         forget.setOnClickListener(v -> callforget());
         return root;
     }
 
+    private void isUser() {
+        String userEnteredUsername = username.getText().toString().trim();
+        String userEnteredPassword = pass.getText().toString().trim();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+        Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String passwordfromdatabase = snapshot.child(userEnteredUsername).child("pass").getValue(String.class);
+
+                    if(passwordfromdatabase.equals(userEnteredPassword)){
+                        Intent intent = new Intent(getActivity(),MainScreen.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Wrong Password", Toast.LENGTH_SHORT).show();
+                        pass.requestFocus();
+                    }
+                }
+                else {
+                    Toast.makeText(getActivity(), "No such user exists", Toast.LENGTH_SHORT).show();
+                    username.requestFocus();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     private void callforget() {
         startActivity(new Intent(getActivity(),ForgotPassword.class));
 
+
     }
 
 
-/*  @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        username = findViewById(R.id.username);
-        pass = findViewById(R.id.pass);
-        forget = findViewById(R.id.forget);
-        login = findViewById(R.id.button);
-        auth = FirebaseAuth.getInstance();
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String txt_user = username.getText().toString();
-                String txt_pass = pass.getText().toString();
-                loginUser(txt_user,txt_pass);
-            }
-        });
-    }  */
-
-    private void loginUser(String txt_user, String txt_pass) {
-
-        auth.signInWithEmailAndPassword(txt_user,txt_pass).addOnSuccessListener(authResult -> {
-            Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(LoginTabFragment.this,));
-            //finish();
-        });
-    }
 }
 
