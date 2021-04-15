@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name" translatable="false">PsDroid Tracker</string>
-   <!-- <string name="default_web_client_id">408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com</string>-->
+    <string name="default_web_client_id">408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com</string>
     <!-- **MAIN SCREEEN STRINGS** -->
     <string name="navbar_home">Home</string>
     <string name="navbar_gps">GPS Tracking</string>
@@ -135,7 +135,7 @@
     <string name="welcome_to_psdroid_tracer">Welcome to Psdroid Tracer</string>
     <string name="intro1_str1">Extra Step\nto Safety</string>
     <string name="intro2_str1">Safety in\nyour hands</string>
-    <string name="intro1_str2">We believe in \nkeeping you safe</string>
+    <string name="intro1_str2">We believe in keeping you safe</string>
     <string name="intro2_str2">We suppose your security is your success</string>
     <string name="advanced_str">Advanced</string>
     <string name="skip_str">Skip</string>
@@ -153,5 +153,4 @@
     <string name="forget_password_str">Forget Password?</string>
     <string name="enter_email_id_str">Enter Email ID</string>
     <string name="reset_password_str">Reset Password</string>
-    <string name="username">Username</string>
 </resources>
