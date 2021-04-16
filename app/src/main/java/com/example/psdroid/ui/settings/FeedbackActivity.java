@@ -29,21 +29,19 @@ public class FeedbackActivity extends AppCompatActivity {
         EditText edit1= findViewById(R.id.feedback_textbox1);
         EditText edit2= findViewById(R.id.feedback_textbox2);
         Button btn= findViewById(R.id.feedback_button);
-        RatingBar simpleRatingBar = findViewById(R.id.feedback_rating); // initiate a rating bar
-        int numberOfStars = simpleRatingBar.getNumStars(); // get total number of stars of rating bar
+        RatingBar simpleRatingBar = findViewById(R.id.feedback_rating); //Initiate a rating bar
+        int numberOfStars = simpleRatingBar.getNumStars(); //Get total number of stars of rating bar
         btn.setOnClickListener(v -> {
-            Intent i= new Intent(Intent.ACTION_SEND);
-            Intent i2 = new Intent(Intent.ACTION_SENDTO);
-            i.setType("message/html");
-            i2.setData(Uri.parse("mailto:psdroid2021@gmail.com"));
-            // i.putExtra(Intent.EXTRA_EMAIL, "psdroid2021@gmail.com");
-            i.putExtra(Intent.EXTRA_SUBJECT,"Feedback from App");
-            i.putExtra(Intent.EXTRA_TEXT,"Rating:"+numberOfStars);
-            i.putExtra(Intent.EXTRA_TEXT,"Name: "+edit1.getText()+"\n Feedback: "+edit2.getText());
-            i.putExtra(Intent.EXTRA_TEXT,"Description :");
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[]{"psdroid2021@gmail.com"});   //Set email
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback of Application");            //Set Subject of email
+            emailIntent.putExtra(Intent.EXTRA_TEXT, "Name: "+edit1.getText().toString()       //Set details
+                    +"\n"+"Rating:"+numberOfStars
+                    +"\n"+"Description:"+ edit2.getText().toString());
             try {
-                startActivity(Intent.createChooser(i,"Please select Email"));
-            }
+                startActivity(Intent.createChooser(emailIntent,"Please select Email")); 
+            }       
             catch (ActivityNotFoundException ex)
             {
                 Toast.makeText(FeedbackActivity.this, "There are no Email Client", Toast.LENGTH_SHORT).show();
