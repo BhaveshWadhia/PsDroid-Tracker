@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
+import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.hitomi.cmlibrary.CircleMenu;
 
@@ -97,7 +99,7 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
         }
         if (id == R.id.home_settings_btn) {
-            Toast.makeText(getContext(), "Settings...", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getContext(), "Settings...", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getContext(), SettingsActivity.class));
         }
         if (id == R.id.home_logout_btn) {
@@ -106,8 +108,9 @@ public class HomeFragment extends Fragment {
             alert_builder.setMessage("Are you sure you want to logout?");
             alert_builder.setCancelable(true);
             alert_builder.setPositiveButton("Exit", (dialog, which) -> {
-                Toast.makeText(getContext(), "Logging-Out Soon...", Toast.LENGTH_SHORT).show();
-                //LOG OUT from app and return to first page
+                // Toast.makeText(getContext(), "Logging-Out Soon...", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                //LOG OUT from app and return to login page
             });
             alert_builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
             AlertDialog alertDialog = alert_builder.create();

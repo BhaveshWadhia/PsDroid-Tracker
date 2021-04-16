@@ -11,12 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +31,7 @@ public class LoginTabFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment,container,false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_login,container,false);
 
         username = root.findViewById(R.id.username);
         pass = root.findViewById(R.id.pass);
@@ -54,11 +52,6 @@ public class LoginTabFragment extends Fragment {
         pass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         forget.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         login.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
-
-
-
-
-
         login.setOnClickListener(v -> {
             String txt_user = username.getText().toString();
             String txt_pass = pass.getText().toString();

@@ -5,42 +5,56 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.psdroid.ui.settings.FeedbackActivity">
 
-    <EditText
-        android:id="@+id/feedback_txtbox1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:autofillHints=""
-        android:hint="@string/name_str"
-        android:inputType="textShortMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/feedback_txtbox2"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/feedback_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:autofillHints=""
-        android:hint="@string/title_feedback"
-        android:inputType="textLongMessage"
-        android:maxHeight="240dp"
-        android:minHeight="100dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedback_txtbox1" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/title_feedback"
+        app:titleTextColor="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/feedback_textbox1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginEnd="10dp"
+        android:hint="@string/name_str"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedback_toolbar" />
+
+    <EditText
+        android:id="@+id/feedback_textbox2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="@string/title_feedback"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine|text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedback_textbox1" />
 
     <Button
         android:id="@+id/feedback_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/theme_lightblue"
         android:text="@string/feedback_button_text"
@@ -53,33 +67,30 @@
         android:id="@+id/feedback_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
         android:elevation="8dp"
         android:outlineProvider="none"
         android:progressTint="@color/theme_lightblue"
         android:rating="3.5"
         android:secondaryProgressTint="@color/theme_blue"
-        app:layout_constraintBottom_toTopOf="@+id/feedback_button"
         app:layout_constraintEnd_toEndOf="@+id/logo_icon"
         app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="@+id/logo_icon" />
+        app:layout_constraintStart_toStartOf="@+id/logo_icon"
+        app:layout_constraintTop_toBottomOf="@+id/logo_icon" />
 
     <ImageView
         android:id="@+id/logo_icon"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_corners"
-        android:elevation="8dp"
-        android:foregroundGravity="fill_horizontal|center_vertical|clip_horizontal|center"
+        android:foregroundGravity="clip_horizontal"
         android:outlineProvider="background"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/feedback_rating"
+        app:layout_constraintBottom_toBottomOf="@+id/feedback_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedback_txtbox2"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/feedback_textbox2"
+        app:layout_constraintVertical_bias="0.25"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,7 @@ public class SignupTabFragment extends Fragment {
     private FirebaseAuth auth;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.signup_tab_fragment,container,false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_signup,container,false);
         email = root.findViewById(R.id.email);
         mobile= root.findViewById(R.id.mobile);
         user= root.findViewById(R.id.user);

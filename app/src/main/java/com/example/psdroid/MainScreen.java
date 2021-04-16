@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_mainscreen);       // Set content of main activity as activity_main.xml
+            setContentView(R.layout.activity_mainscreen);       // Set content of main activity as activity_mainscreen.xml
             app_toolbar = findViewById(R.id.app_toolbar);  //Set toolbar for the application
             setSupportActionBar(app_toolbar);               //Set toolbar in the layout
             BottomNavigationView main_navbar = findViewById(R.id.nav_view);     // Set bottom navigation bar in the layout

@@ -20,6 +20,7 @@ import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
+import java.util.Objects;
 
 //Add Users Activity
 public class AddUsersActivity extends AppCompatActivity {
@@ -37,22 +38,22 @@ public class AddUsersActivity extends AppCompatActivity {
         setContentView(R.layout.friends_family_activity);      // Set content of main activity as family_friends_activity.xml
         addUser_toolbar = findViewById(R.id.addUser_toolbar);  //Set toolbar for the application
         setSupportActionBar(addUser_toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         //Initialize array list
         contact_name = new ArrayList<>();
         contact_number = new ArrayList<>();
         contact_photo = new ArrayList<>();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         btn = findViewById(R.id.addUser_btn);
+        //Create click listener for back button
+        addUser_toolbar.setNavigationOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), MainScreen.class));
+            finish();    //Close the activity
+        });
         // Add contact clicked
         btn.setOnClickListener(v -> {
             Intent contacts = new Intent(Intent.ACTION_PICK);
             contacts.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
             startActivityForResult(contacts, PICK_CONTACT);
-        });
-        //Create click listener for back button
-        addUser_toolbar.setNavigationOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), MainScreen.class));
-            finish();    //Close the activity
         });
     }
 
