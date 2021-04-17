@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
+
+    <com.bachors.prefixinput.EditText
         android:id="@+id/mobile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -15,6 +16,7 @@
         android:hint="@string/mobile_number_str"
         android:importantForAutofill="no"
         android:inputType="phone"
+        android:text="+91"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"

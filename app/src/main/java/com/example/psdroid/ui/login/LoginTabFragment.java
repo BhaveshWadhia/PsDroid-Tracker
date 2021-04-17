@@ -105,7 +105,7 @@ public class LoginTabFragment extends Fragment {
     }
 
     private void callforget() {
-        startActivity(new Intent(getActivity(),ForgotPassword.class));
+       // startActivity(new Intent(getActivity(),VerifyOTP.class));
 
 
     }

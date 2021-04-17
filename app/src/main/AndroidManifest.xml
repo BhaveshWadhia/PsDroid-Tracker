@@ -1,58 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.psdroid">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PsDroidNew" >
-        <activity android:name="com.example.psdroid.ui.login.LoginActivity"
+        android:theme="@style/Theme.PsDroidNew">
+        <activity android:name=".ui.login.SetPassword"></activity>
+        <activity android:name=".ui.login.VerifyOTP" />
+        <activity
+            android:name=".ui.login.LoginActivity"
             android:label="LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.example.psdroid.ui.login.IntroductoryActivity"
+        <activity
+            android:name=".ui.login.IntroductoryActivity"
             android:label="IntroductoryActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.psdroid.ui.login.ForgotPassword"
+        <activity
+            android:name=".ui.login.ForgotPassword"
             android:label="ForgotPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.psdroid.ui.settings.PrivacyPolicyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.settings.PrivacyPolicyActivity"
             android:label="PrivacyPolicy"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.psdroid.ui.settings.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.settings.FeedbackActivity"
             android:label="Feedback"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.psdroid.ui.settings.TermsConditionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.settings.TermsConditionsActivity"
             android:label="TermsConditions"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.psdroid.ui.settings.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
             android:label="Settings"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.psdroid.ui.add_users.AddUsersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.add_users.AddUsersActivity"
             android:label="AddUserActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.example.psdroid.MainScreen"
+        <activity
+            android:name=".MainScreen"
             android:label="MainScreenActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.example.psdroid.MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-            <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
-            <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="@string/MAP_KEY" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/MAP_KEY" />
     </application>
+
 </manifest>

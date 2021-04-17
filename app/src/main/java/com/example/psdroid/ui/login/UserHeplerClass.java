@@ -7,12 +7,13 @@ public class UserHeplerClass {
     public UserHeplerClass() {
     }
 
-    public UserHeplerClass(String email, String user,String mobile, String pass, String conpass) {
+    public UserHeplerClass( String user,String email,String mobile,String pass,String conpass ) {
         this.email = email;
         this.user = user;
         this.mobile = mobile;
         this.pass = pass;
         this.conpass = conpass;
+
 
     }
 
@@ -56,3 +57,5 @@ public class UserHeplerClass {
         this.conpass = conpass;
     }
 }
+
+

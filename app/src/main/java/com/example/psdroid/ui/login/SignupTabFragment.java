@@ -2,7 +2,9 @@ package com.example.psdroid.ui.login;
 //Import Class
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,9 @@ import com.example.psdroid.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignupTabFragment extends Fragment {
 
@@ -33,6 +38,30 @@ public class SignupTabFragment extends Fragment {
         pass= root.findViewById(R.id.pass);
         conpass= root.findViewById(R.id.conpass);
         button= root.findViewById(R.id.reset);
+
+        mobile.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if(validateMobile(mobile.getText().toString())){
+                        button.setEnabled(true);
+                    }else {
+                        button.setEnabled(false);
+                        mobile.setError("Invalid Mobile No");
+                    }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
         button.setOnClickListener(v -> {
@@ -59,16 +88,36 @@ public class SignupTabFragment extends Fragment {
                 Toast.makeText(getActivity(), "Invalid mobile number!", Toast.LENGTH_SHORT).show();
             } else{
           //      registerUser(txt_email,txt_pass);
-                UserHeplerClass heplerClass = new UserHeplerClass(txt_email,txt_user,txt_mobile,txt_pass,txt_conpass);
+
+
+
+
+            /*    UserHeplerClass heplerClass = new UserHeplerClass(txt_email,txt_user,txt_mobile,txt_pass,txt_conpass);
                 reference.child(txt_user).setValue(heplerClass);
-                Toast.makeText(getActivity(), "Registered successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(),MainScreen.class);
+                Toast.makeText(getActivity(), "Registered successfully!", Toast.LENGTH_SHORT).show();*/
+                Intent intent = new Intent(getActivity(),VerifyOTP.class);
+
+                intent.putExtra("user",txt_user);
+                intent.putExtra("mob",txt_mobile);
+                intent.putExtra("mail",txt_email);
+                intent.putExtra("pass",txt_pass);
+                intent.putExtra("cpass",txt_conpass);
                 startActivity(intent);
+
+
+
+
             }
         });
 
         return root;
 
+    }
+
+    boolean validateMobile(String input){
+        Pattern p = Pattern.compile("[+][0-9]{2}"+"[6-9][0-9]{9}");
+        Matcher m = p.matcher(input);
+        return m.matches();
     }
 
    /* @Override

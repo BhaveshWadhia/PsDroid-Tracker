@@ -51,4 +51,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:27.0.0')
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.cuberto:liquid-swipe:1.0.0'
+    implementation 'com.chaos.view:pinview:1.4.4'
+    implementation 'com.github.bachors:Android-Prefix-Input:1.0'
+    implementation 'com.google.android.gms:play-services-safetynet:17.0.0'
 }
