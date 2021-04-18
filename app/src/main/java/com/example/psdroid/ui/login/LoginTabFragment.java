@@ -64,15 +64,11 @@ public class LoginTabFragment extends Fragment {
             }
 
         });
-        String txt_user = username.getText().toString();
-        if(txt_user.isEmpty()){
-            Toast.makeText(getActivity(), "Please provide your username", Toast.LENGTH_SHORT).show();
-        }
-        else {
+
 
 
             forget.setOnClickListener(v -> callforget());
-        }
+
         return root;
     }
 
