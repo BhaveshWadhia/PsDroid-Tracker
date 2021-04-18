@@ -64,7 +64,15 @@ public class LoginTabFragment extends Fragment {
             }
 
         });
-        forget.setOnClickListener(v -> callforget());
+        String txt_user = username.getText().toString();
+        if(txt_user.isEmpty()){
+            Toast.makeText(getActivity(), "Please provide your username", Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+
+            forget.setOnClickListener(v -> callforget());
+        }
         return root;
     }
 
@@ -105,7 +113,13 @@ public class LoginTabFragment extends Fragment {
     }
 
     private void callforget() {
-       // startActivity(new Intent(getActivity(),VerifyOTP.class));
+        String userEnteredUsername = username.getText().toString().trim();
+
+
+        Intent intent = new Intent(getActivity(),ForgotPassword.class);
+
+        intent.putExtra("user",userEnteredUsername);
+        startActivity(intent);
 
 
     }
