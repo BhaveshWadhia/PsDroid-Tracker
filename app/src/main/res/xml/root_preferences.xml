@@ -112,8 +112,8 @@
             app:defaultValue="true"
             app:icon="@drawable/ic_right_arrow">
             <intent
-                android:targetClass="com.example.psdroid.ui.settings.TermsConditionsActivity"
-                android:targetPackage="com.example.psdroid" />
+                android:action="android.intent.action.VIEW"
+                android:data="https://psdroidtracker.blogspot.com/p/terms-conditions.html" />
         </Preference>
         <Preference
             android:id="@+id/privacy_policy"
@@ -123,8 +123,8 @@
             android:title="@string/privacy_policy_title"
             app:icon="@drawable/ic_right_arrow">
             <intent
-                android:targetClass="com.example.psdroid.ui.settings.PrivacyPolicyActivity"
-                android:targetPackage="com.example.psdroid" />
+                android:action="android.intent.action.VIEW"
+                android:data="https://psdroidtracker.blogspot.com/p/privacy-policy.html" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

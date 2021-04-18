@@ -25,6 +25,10 @@ android {
     }
 }
 dependencies {
+    implementation "androidx.browser:browser:1.2.0"
+    implementation 'com.chaos.view:pinview:1.4.4'
+    implementation 'com.github.bachors:Android-Prefix-Input:1.0'
+    implementation 'com.google.android.gms:play-services-safetynet:17.0.0'
     implementation 'com.google.firebase:firebase-perf:19.1.1'
     implementation 'com.google.firebase:firebase-core:18.0.3'
     implementation 'androidx.appcompat:appcompat:1.2.0'
