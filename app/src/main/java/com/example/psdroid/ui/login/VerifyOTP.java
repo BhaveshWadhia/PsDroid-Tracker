@@ -1,8 +1,7 @@
 package com.example.psdroid.ui.login;
-
+//Import Class
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ActivityChooserView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +12,7 @@ import android.widget.Toast;
 import com.chaos.view.PinView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -26,7 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
-
+// Verify OPT Activity
 public class VerifyOTP extends AppCompatActivity {
     PinView pinview;
     String codebysystem;
@@ -56,10 +52,6 @@ public class VerifyOTP extends AppCompatActivity {
             }
         });
         sendVerificationCodeToUser(_mobile);
-
-
-
-        
     }
 
     private void sendVerificationCodeToUser(String mobile) {
@@ -73,19 +65,15 @@ public class VerifyOTP extends AppCompatActivity {
                         .setCallbacks(mCallBack)          // OnVerificationStateChangedCallbacks
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
-
     }
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBack =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
                 @Override
                 public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                     super.onCodeSent(s, forceResendingToken);
                     codebysystem = s;
-
                 }
-
                 @Override
                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                         String code = phoneAuthCredential.getSmsCode();
@@ -94,29 +82,22 @@ public class VerifyOTP extends AppCompatActivity {
                             verifyCode(code);
                         }
                 }
-
                 @Override
                 public void onVerificationFailed(@NonNull FirebaseException e) {
-
                     Toast.makeText(VerifyOTP.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
             };
 
     private void verifyCode(String code) {
-
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codebysystem,code);
         signInWithPhoneAuthCredential(credential);
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        
                         if(("updateData").equalsIgnoreCase(WhatToDo)){
                             updateOldUserData();
                         }
@@ -135,14 +116,12 @@ public class VerifyOTP extends AppCompatActivity {
     private void updateOldUserData() {
         String _mobile = getIntent().getStringExtra("mob");
         String _user = getIntent().getStringExtra("user");
-
         Intent intent = new Intent(getApplicationContext(),SetPassword.class);
         intent.putExtra("mob",_mobile);
         intent.putExtra("user",_user);
         startActivity(intent);
         finish();
     }
-
     private void storeNewUser() {
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
@@ -153,16 +132,13 @@ public class VerifyOTP extends AppCompatActivity {
         String _cpass = getIntent().getStringExtra("cpass");
         UserHeplerClass heplerClass = new UserHeplerClass(_user,_mail,_mobile,_pass,_cpass);
         reference.child(_user).setValue(heplerClass);
-        Intent intent = new Intent(VerifyOTP.this,MainScreen.class);
-
+        Intent intent = new Intent(VerifyOTP.this, MainScreen.class);
         intent.putExtra("user",_user);
         intent.putExtra("mob",_mobile);
         intent.putExtra("mail",_mail);
         intent.putExtra("pass",_pass);
         intent.putExtra("cpass",_cpass);
         startActivity(intent);
-
-
         Toast.makeText(VerifyOTP.this, "Verification Completed!", Toast.LENGTH_SHORT).show();
         finish();
     }
