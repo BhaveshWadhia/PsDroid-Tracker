@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PsDroidNew">
-        <activity android:name=".ui.login.SetPassword"></activity>
+        <activity android:name=".ui.login.SetPassword" />
         <activity android:name=".ui.login.VerifyOTP" />
         <activity
             android:name=".ui.login.LoginActivity"
@@ -36,16 +36,8 @@
             android:label="ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.settings.PrivacyPolicyActivity"
-            android:label="PrivacyPolicy"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.settings.FeedbackActivity"
             android:label="Feedback"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.settings.TermsConditionsActivity"
-            android:label="TermsConditions"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.settings.SettingsActivity"

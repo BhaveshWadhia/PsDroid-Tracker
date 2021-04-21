@@ -9,7 +9,7 @@ import com.example.psdroid.ui.gps.GpsFragment;
 import com.example.psdroid.ui.home.HomeFragment;
 import com.example.psdroid.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-//Main activity
+//Main Screen Activity
     public class MainScreen extends AppCompatActivity {
       public Toolbar  app_toolbar;
         //Create instance of the main screen & display fist page as Home

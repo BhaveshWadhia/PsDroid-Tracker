@@ -9,6 +9,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:scaleType="centerCrop"
         android:src="@drawable/button_bg"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +21,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/view_bg"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,12 +71,13 @@
             app:srcCompat="@drawable/ic_google" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:background="@drawable/rounded_corners"
-        android:src="@drawable/logo"
+        android:src="@drawable/psdroid_logo"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

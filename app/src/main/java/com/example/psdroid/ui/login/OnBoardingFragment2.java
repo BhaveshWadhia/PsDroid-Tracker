@@ -10,10 +10,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.psdroid.R;
-
+// OnBoarding Fragment_1
 public class OnBoardingFragment2 extends Fragment {
     TextView skip;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_onboarding2,container,false);

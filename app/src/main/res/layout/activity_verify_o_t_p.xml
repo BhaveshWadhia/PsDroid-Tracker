@@ -15,7 +15,7 @@
             android:id="@+id/cross"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/cancel"
+            android:src="@drawable/ic_cancel"
             app:tint="@color/black"
             android:padding="5dp"/>
 
@@ -58,13 +58,26 @@
             android:layout_gravity="center"
             />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+
+            android:text="(OPT)"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <com.chaos.view.PinView
             android:id="@+id/pinview"
             style="@style/PinWidget.PinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:background="@color/white"
             android:cursorVisible="true"
             android:inputType="number"
