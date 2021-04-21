@@ -11,13 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -86,7 +92,43 @@ public class SignupTabFragment extends Fragment {
                 Toast.makeText(getActivity(), "Password did not match!", Toast.LENGTH_SHORT).show();
             }  else if (txt_mobile.length() < 10){
                 Toast.makeText(getActivity(), "Invalid mobile number!", Toast.LENGTH_SHORT).show();
-            } else{
+            }
+            else if(!user.getText().toString().isEmpty()){
+
+                String userEnteredUsername = user.getText().toString().trim();
+
+
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+                Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
+                            user.requestFocus();
+                        }
+                        else {
+                            Intent intent = new Intent(getActivity(), VerifyOTP.class);
+
+                            intent.putExtra("user", txt_user);
+                            intent.putExtra("mob", txt_mobile);
+                            intent.putExtra("mail", txt_email);
+                            intent.putExtra("pass", txt_pass);
+                            intent.putExtra("cpass", txt_conpass);
+                            startActivity(intent);
+
+                        }
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
           //      registerUser(txt_email,txt_pass);
 
 
@@ -95,19 +137,16 @@ public class SignupTabFragment extends Fragment {
             /*    UserHeplerClass heplerClass = new UserHeplerClass(txt_email,txt_user,txt_mobile,txt_pass,txt_conpass);
                 reference.child(txt_user).setValue(heplerClass);
                 Toast.makeText(getActivity(), "Registered successfully!", Toast.LENGTH_SHORT).show();*/
-                Intent intent = new Intent(getActivity(),VerifyOTP.class);
 
-                intent.putExtra("user",txt_user);
-                intent.putExtra("mob",txt_mobile);
-                intent.putExtra("mail",txt_email);
-                intent.putExtra("pass",txt_pass);
-                intent.putExtra("cpass",txt_conpass);
-                startActivity(intent);
+
 
 
 
 
             }
+
+
+
         });
 
         return root;
