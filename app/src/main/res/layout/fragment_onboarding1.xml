@@ -99,7 +99,7 @@
         android:layout_width="50dp"
         android:layout_height="10dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_tab1"
+        android:src="@drawable/tab1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias=".6"

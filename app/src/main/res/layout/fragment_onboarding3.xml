@@ -98,7 +98,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="10dp"
-        android:src="@drawable/ic_tab3"
+        android:src="@drawable/tab3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="5dp"
