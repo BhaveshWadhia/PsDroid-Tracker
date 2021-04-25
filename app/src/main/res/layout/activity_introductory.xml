@@ -8,37 +8,39 @@
 
     <ImageView
         android:id="@+id/image"
-        app:layout_constraintVertical_bias="0"
-        android:elevation="2dp"
-        android:scaleType="centerCrop"
         android:layout_width="wrap_content"
         android:layout_height="900dp"
-        android:src="@drawable/intro"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_intro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:elevation="2dp"
-        android:src="@drawable/logo"
-        app:layout_constraintVertical_bias=".1"
+        android:scaleType="centerCrop"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+
+        android:src="@drawable/psdroid_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintVertical_bias=".1" />
 
     <TextView
         android:id="@+id/appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:elevation="2dp"
         android:text="@string/app_name"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +65,8 @@
     <com.cuberto.liquid_swipe.LiquidPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="134dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,26 @@
 package com.example.psdroid.ui.gps;
 //Import class
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import com.example.psdroid.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 //GPS Fragment
-public class GpsFragment extends Fragment {
+public class
+GpsFragment extends Fragment {
     public GpsFragment() {
         //Constructor
     }
@@ -27,8 +29,10 @@ public class GpsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true); // Enable Menu for this fragment
         View v = inflater.inflate(R.layout.fragment_gps,container,false);
+        assert getSupportMapFragment() != null;
         SupportMapFragment add_MapSupport = (SupportMapFragment) getSupportMapFragment().findFragmentById(R.id.map);
-          add_MapSupport.getMapAsync(googleMap -> {
+        assert add_MapSupport != null;
+        add_MapSupport.getMapAsync(googleMap -> {
               LatLng xyz = new LatLng(-34,151);  //Place at this location
               googleMap.addMarker(new MarkerOptions().position(xyz).title("Demo User"));  //Title of the marker
               googleMap.moveCamera(CameraUpdateFactory.newLatLng(xyz));

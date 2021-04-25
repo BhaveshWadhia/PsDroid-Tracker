@@ -1,14 +1,10 @@
 package com.example.psdroid.ui.login;
-
+//Import Class
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.audiofx.BassBoost;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
@@ -20,12 +16,10 @@ import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.net.NetworkInterface;
-
+// Set Password Activity
 public class SetPassword extends AppCompatActivity {
-         EditText npass,connpass;
-ImageView cancel;
+    EditText npass,connpass;
+    ImageView cancel;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
@@ -33,38 +27,22 @@ ImageView cancel;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_password);
-
         npass = findViewById(R.id.pass);
         connpass = findViewById(R.id.conpass);
         cancel = findViewById(R.id.cancel);
-
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SetPassword.this,LoginActivity.class));
-                finish();
-            }
+        cancel.setOnClickListener(view -> {
+            startActivity(new Intent(SetPassword.this,LoginActivity.class));
+            finish();
         });
-
-
-
-
-
     }
-
-
     public void setNewPassword(View view){
         CheckInternet checkInternet = new CheckInternet();
         if(!checkInternet.isConnected(this)){
             showCustomDialog();
-            return;
         }
         else {
             String np = npass.getText().toString().trim();
             String cnp = connpass.getText().toString().trim();
-
-
          /*   String _user = getIntent().getStringExtra("user");
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
@@ -81,9 +59,6 @@ ImageView cancel;
                 Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
             }
             else{
-
-
-
                 String _user = getIntent().getStringExtra("user");
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
@@ -94,13 +69,9 @@ ImageView cancel;
                 finish();
             }
         }
-
-
-
     }
 
     private void showCustomDialog() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(SetPassword.this);
         builder.setMessage("Please connect to the internet to proceed further")
                 .setCancelable(false)
@@ -108,7 +79,6 @@ ImageView cancel;
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

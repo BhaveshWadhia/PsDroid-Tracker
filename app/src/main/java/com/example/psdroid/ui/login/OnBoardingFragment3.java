@@ -11,15 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+// OnBoarding Fragment_1
 public class OnBoardingFragment3 extends Fragment {
-
     FloatingActionButton fab;
     TextView skip;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_onboarding3,container,false);
-
         skip = root.findViewById(R.id.skip);
         skip.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);

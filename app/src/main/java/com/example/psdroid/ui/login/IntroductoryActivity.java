@@ -13,16 +13,12 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.psdroid.R;
-
+// Introductory Activity
 public class IntroductoryActivity extends AppCompatActivity {
-
-    ImageView logo,intro;
-    LottieAnimationView lottieAnimationView;
-    TextView appname;
-
+    public ImageView logo,intro;
+    public LottieAnimationView lottieAnimationView;
+    public TextView appname;
     private static final int NUM_PAGES = 3;
-    private ViewPager viewPager;
-    private ScreenSlidePagerAdapter pagerAdapter;
     Animation anim;
 
     @Override
@@ -35,8 +31,8 @@ public class IntroductoryActivity extends AppCompatActivity {
         lottieAnimationView =  findViewById(R.id.lottie);
         appname = findViewById(R.id.appname);
 
-        viewPager = findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.pager);
+        ScreenSlidePagerAdapter pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
         anim = AnimationUtils.loadAnimation(this,R.anim.o_b_anim);
@@ -48,11 +44,10 @@ public class IntroductoryActivity extends AppCompatActivity {
         appname.animate().translationY(2300).setDuration(1000).setStartDelay(4000);
 
     }
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter{
+    private static class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter{
         public ScreenSlidePagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
         }
-
         @NonNull
         @Override
         public Fragment getItem(int position) {
@@ -66,7 +61,6 @@ public class IntroductoryActivity extends AppCompatActivity {
             }
             return null;
         }
-
         @Override
         public int getCount() {
             return NUM_PAGES;

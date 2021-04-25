@@ -98,7 +98,7 @@
             android:singleLine="true"
             android:title="@string/title_feedback"
             app:defaultValue="true"
-            app:icon="@drawable/ic_right_arrow">
+            app:icon="@drawable/ic_arrow_right">
             <intent
                 android:targetClass="com.example.psdroid.ui.settings.FeedbackActivity"
                 android:targetPackage="com.example.psdroid" />
@@ -110,7 +110,7 @@
             android:singleLine="true"
             android:title="@string/terms_conditions_title"
             app:defaultValue="true"
-            app:icon="@drawable/ic_right_arrow">
+            app:icon="@drawable/ic_arrow_right">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://psdroidtracker.blogspot.com/p/terms-conditions.html" />
@@ -121,7 +121,7 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="@string/privacy_policy_title"
-            app:icon="@drawable/ic_right_arrow">
+            app:icon="@drawable/ic_arrow_right">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://psdroidtracker.blogspot.com/p/privacy-policy.html" />

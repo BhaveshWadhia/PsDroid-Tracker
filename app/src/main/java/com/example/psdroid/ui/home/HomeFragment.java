@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +22,6 @@ import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.hitomi.cmlibrary.CircleMenu;
-
 //Home Fragment
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;

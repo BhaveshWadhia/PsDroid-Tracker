@@ -21,17 +21,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
+// Login Tab Fragment
 public class LoginTabFragment extends Fragment {
-    EditText username,pass;
+    EditText username, pass;
     TextView forget;
     Button login;
-
-    float v=0;
-
+    float v = 0;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_login,container,false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_login, container, false);
 
         username = root.findViewById(R.id.username);
         pass = root.findViewById(R.id.pass);
@@ -55,71 +53,51 @@ public class LoginTabFragment extends Fragment {
         login.setOnClickListener(v -> {
             String txt_user = username.getText().toString();
             String txt_pass = pass.getText().toString();
-            if(txt_user.isEmpty()||txt_pass.isEmpty()){
+            if (txt_user.isEmpty() || txt_pass.isEmpty()) {
                 Toast.makeText(getActivity(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+            } else {
+                isUser();
             }
-
-            else{
-                    isUser();
-            }
-
         });
-
-
-
-            forget.setOnClickListener(v -> callforget());
-
+        forget.setOnClickListener(v -> callforget());
         return root;
     }
 
     private void isUser() {
         String userEnteredUsername = username.getText().toString().trim();
         String userEnteredPassword = pass.getText().toString().trim();
-
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-
         Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     String passwordfromdatabase = snapshot.child(userEnteredUsername).child("pass").getValue(String.class);
-
-                    if(passwordfromdatabase.equals(userEnteredPassword)){
-                        Intent intent = new Intent(getActivity(),MainScreen.class);
+                    assert passwordfromdatabase != null;
+                    if (passwordfromdatabase.equals(userEnteredPassword)) {
+                        Intent intent = new Intent(getActivity(), MainScreen.class);
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getActivity(), "Wrong Password", Toast.LENGTH_SHORT).show();
                         pass.requestFocus();
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(getActivity(), "No such user exists", Toast.LENGTH_SHORT).show();
                     username.requestFocus();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
     }
-
     private void callforget() {
         String userEnteredUsername = username.getText().toString().trim();
-
-
-        Intent intent = new Intent(getActivity(),ForgotPassword.class);
-
-        intent.putExtra("user",userEnteredUsername);
+        Intent intent = new Intent(getActivity(), ForgotPassword.class);
+        intent.putExtra("user", userEnteredUsername);
         startActivity(intent);
-
-
     }
-
-
 }
+
 
