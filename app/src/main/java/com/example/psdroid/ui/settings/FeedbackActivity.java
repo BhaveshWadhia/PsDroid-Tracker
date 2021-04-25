@@ -34,7 +34,7 @@ public class FeedbackActivity extends AppCompatActivity {
         btn.setOnClickListener(v -> {
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setType("text/plain");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[]{"psdroid2021@gmail.com"});   //Set email
+            emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[]{"psdroidtracker@gmail.com"});   //Set email
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback of Application");            //Set Subject of email
             emailIntent.putExtra(Intent.EXTRA_TEXT, "Name: "+edit1.getText().toString()       //Set details
                     +"\n"+"Rating:"+numberOfStars
