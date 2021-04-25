@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+//Signup Tab Fragment
 public class SignupTabFragment extends Fragment {
 
     private EditText mobile,user,email,pass,conpass;
@@ -48,7 +48,6 @@ public class SignupTabFragment extends Fragment {
         mobile.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -59,16 +58,11 @@ public class SignupTabFragment extends Fragment {
                         button.setEnabled(false);
                         mobile.setError("Invalid Mobile No");
                     }
-
-
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
-
 
         button.setOnClickListener(v -> {
             rootNode = FirebaseDatabase.getInstance();
@@ -95,8 +89,6 @@ public class SignupTabFragment extends Fragment {
             }  else if(!user.getText().toString().isEmpty()){
 
                 String userEnteredUsername = user.getText().toString().trim();
-
-
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
                 Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
@@ -119,34 +111,19 @@ public class SignupTabFragment extends Fragment {
 
                         }
                     }
-
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
-
-
                 //      registerUser(txt_email,txt_pass);
-
-
-
 
             /*    UserHeplerClass heplerClass = new UserHeplerClass(txt_email,txt_user,txt_mobile,txt_pass,txt_conpass);
                 reference.child(txt_user).setValue(heplerClass);
                 Toast.makeText(getActivity(), "Registered successfully!", Toast.LENGTH_SHORT).show();*/
-
-
-
-
-
-
             }
         });
-
         return root;
-
     }
 
     boolean validateMobile(String input){
@@ -154,7 +131,6 @@ public class SignupTabFragment extends Fragment {
         Matcher m = p.matcher(input);
         return m.matches();
     }
-
    /* @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,9 +162,6 @@ public class SignupTabFragment extends Fragment {
                 } else{
                     registerUser(txt_email,txt_pass);
                 }
-
-
-
 
             }
         });
