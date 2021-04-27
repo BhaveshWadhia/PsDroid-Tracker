@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
+        change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -97,9 +98,7 @@ public class HomeFragment extends Fragment {
         }
         if (id == R.id.home_wifi_btn){
             item.setIcon(R.drawable.ic_wifi_off);
-            change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
-            System.out.println(change_wifi.isWifiEnabled());
-           // change_wifi.setWifiEnabled(false);               // **This is not working** //
+            change_wifi.setWifiEnabled(false);               // **This is not working** //
         }
         if (id == R.id.home_help_btn) {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
