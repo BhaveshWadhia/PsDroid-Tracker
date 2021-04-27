@@ -22,9 +22,15 @@ import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.hitomi.cmlibrary.CircleMenu;
+
+import java.util.Objects;
+
+import static androidx.core.content.ContextCompat.getSystemService;
+
 //Home Fragment
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
+
     public HomeFragment() {
         //Constructor
     }
@@ -32,9 +38,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
-        change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
     //When view is created load the menus
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -91,7 +97,9 @@ public class HomeFragment extends Fragment {
         }
         if (id == R.id.home_wifi_btn){
             item.setIcon(R.drawable.ic_wifi_off);
-            change_wifi.setWifiEnabled(false);               // **This is not working** //
+            change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
+            System.out.println(change_wifi.isWifiEnabled());
+           // change_wifi.setWifiEnabled(false);               // **This is not working** //
         }
         if (id == R.id.home_help_btn) {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();

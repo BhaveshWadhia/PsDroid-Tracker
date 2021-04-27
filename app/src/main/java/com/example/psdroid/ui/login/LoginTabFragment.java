@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginTabFragment extends Fragment {
     EditText username, pass;
     TextView forget;
+    ProgressBar progressBar;
     Button login;
     float v = 0;
 
@@ -35,6 +37,7 @@ public class LoginTabFragment extends Fragment {
         pass = root.findViewById(R.id.pass);
         forget = root.findViewById(R.id.forget);
         login = root.findViewById(R.id.reset);
+        progressBar = root.findViewById(R.id.login_progressBar);
 
         username.setTranslationX(800);
         pass.setTranslationX(800);
@@ -64,6 +67,7 @@ public class LoginTabFragment extends Fragment {
     }
 
     private void isUser() {
+        progressBar.setVisibility(View.VISIBLE);
         String userEnteredUsername = username.getText().toString().trim();
         String userEnteredPassword = pass.getText().toString().trim();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
@@ -77,11 +81,14 @@ public class LoginTabFragment extends Fragment {
                     if (passwordfromdatabase.equals(userEnteredPassword)) {
                         Intent intent = new Intent(getActivity(), MainScreen.class);
                         startActivity(intent);
+                        progressBar.setVisibility(View.INVISIBLE);
                     } else {
+                        progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity(), "Wrong Password", Toast.LENGTH_SHORT).show();
                         pass.requestFocus();
                     }
                 } else {
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(getActivity(), "No such user exists", Toast.LENGTH_SHORT).show();
                     username.requestFocus();
                 }
