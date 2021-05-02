@@ -35,7 +35,7 @@
     <string name="settings_header1">General</string>
     <string name="emergency_title">Emergency Services</string>
     <string name="emergency_services_off">Off</string>
-    <string name="emergency_services_on">On</string>
+    <string name="emergency_services_on">allows application to detect emergency situations and send SOS message with the exact location to the trusted contacts</string>
     <string name="siren_sound_title">Siren Sound</string>
     <string name="emergency_notification_title">Emergency Notification Sound</string>
     <string name="tracking_request_title">Tracking Request</string>
@@ -43,14 +43,14 @@
     <!-- NOTIFICATIONS -->
     <string name="settings_header2">Notification</string>
     <string name="allow_notification_title">Allow Notifications</string>
-    <string name="allow_notification_summary">Enable All Notifications</string>
+    <string name="allow_notification_summary">User will recieve emergency notifications from the system</string>
     <string name="emergency_alerts_title">Emergency Alerts</string>
-    <string name="alert_summary">Enable Emergency Alerts</string>
+    <string name="alert_summary">User will recieve emergency alerts from the system</string>
     <string name="low_battery_title">Low Battery Alert</string>
     <string name="low_battery_off">Off</string>
     <string name="low_battery_on">On</string>
     <string name="send_sms_title">Send SMS</string>
-    <string name="send_sms_summary">Send SMS when Offline</string>
+    <string name="send_sms_summary">SMS of the location will be sent to your trusted contacts when you are offline </string>
     <!-- ABOUT -->
     <string name="settings_header3">About</string>
     <string name="version_title">Version</string>
