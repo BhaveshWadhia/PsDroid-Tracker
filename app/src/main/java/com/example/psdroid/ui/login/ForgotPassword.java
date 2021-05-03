@@ -2,6 +2,7 @@ package com.example.psdroid.ui.login;
 //Import Class
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,7 +59,6 @@ public class ForgotPassword extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
     }
@@ -83,7 +84,7 @@ public class ForgotPassword extends AppCompatActivity {
                 }
                 else{
                     number.setError("No such user exists or you may have provided wrong username. Please provide correct username");
-                    startActivity(new Intent(ForgotPassword.this,LoginActivity.class));
+                    new Handler().postDelayed(() ->startActivity(new Intent(ForgotPassword.this,LoginActivity.class)),2000);
                 }
                 finish();
             }

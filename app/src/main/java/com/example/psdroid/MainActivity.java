@@ -1,15 +1,16 @@
 package com.example.psdroid;
 //Import Class
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.psdroid.ui.login.AccountCreatedActivity;
+import com.example.psdroid.ui.login.IntroductoryActivity;
 
-import com.example.psdroid.R;
 //Main Activity
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_introductory);
+        startActivity(new Intent(this, IntroductoryActivity.class));
     }
 }

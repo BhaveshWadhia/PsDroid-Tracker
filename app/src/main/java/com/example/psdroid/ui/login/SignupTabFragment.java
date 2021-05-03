@@ -108,7 +108,6 @@ public class SignupTabFragment extends Fragment {
                             intent.putExtra("pass", txt_pass);
                             intent.putExtra("cpass", txt_conpass);
                             startActivity(intent);
-
                         }
                     }
                     @Override

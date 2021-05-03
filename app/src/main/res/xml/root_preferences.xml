@@ -16,7 +16,8 @@
             android:key="switch_preference_1"
             android:summaryOff="@string/emergency_services_off"
             android:summaryOn="@string/emergency_services_on"
-            app:defaultValue="true"
+            android:defaultValue="true"
+            android:summary="When turned on will send emergency alerts to other users"
             app:title="@string/emergency_title" />
         <ListPreference
             android:id="@+id/SirenSound"
@@ -24,12 +25,14 @@
             android:entryValues="@array/siren_values"
             android:key="list_preference_1"
             app:title="@string/siren_sound_title"
+            android:summary="Allows user to set siren sound"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
             android:layout_height="match_parent"
             android:entries="@array/emergencynotification_entries"
             android:entryValues="@array/emergencynotification_values"
             android:key="list_preference_2"
+            android:summary="Allows user to set emergency notification sound"
             android:title="Emergency Notification Sound"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
@@ -38,15 +41,16 @@
             android:entryValues="@array/tracking_request_values"
             android:key="list_preference_3"
             android:title="@string/tracking_request_title"
+            android:summary="Allows user to receive tracking requests"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
             android:entries="@array/fake_call_timer_entries"
             android:entryValues="@array/fake_call_timer_values"
             android:key="list_preference_4"
             android:title="@string/fake_call_timer_title"
+            android:summary="Set default delay to receive fake call"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
-
     <PreferenceCategory
         android:id="@+id/Notifications"
         android:layout_width="match_parent"
@@ -65,6 +69,7 @@
             android:key="check_box_preference_2"
             android:summary="@string/allow_notification_summary"
             android:title="@string/allow_notification_title"
+
             app:defaultValue="true" />
         <SwitchPreference
             android:key="switch_preference_2"
@@ -74,8 +79,8 @@
             app:defaultValue="false" />
         <CheckBoxPreference
             android:key="check_box_preference_3"
-            android:summary="@string/send_sms_summary"
-            android:title="@string/send_sms_title"
+            android:summary="@string/offline_mode_summary"
+            android:title="@string/offline_mode_title"
             app:defaultValue="false" />
     </PreferenceCategory>
     <PreferenceCategory

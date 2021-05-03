@@ -28,7 +28,7 @@ public class IntroductoryActivity extends AppCompatActivity {
 
         logo =  findViewById(R.id.logo);
         intro =  findViewById(R.id.image);
-        lottieAnimationView =  findViewById(R.id.lottie);
+        lottieAnimationView =  findViewById(R.id.tick_lottie);
         appname = findViewById(R.id.appname);
 
         ViewPager viewPager = findViewById(R.id.pager);

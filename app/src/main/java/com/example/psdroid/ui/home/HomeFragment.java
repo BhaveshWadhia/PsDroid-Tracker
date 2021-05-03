@@ -125,7 +125,7 @@ public class HomeFragment extends Fragment {
     }
     //Creating a delay function for add user activity to load
     private void call_addUser_activity() {
-        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)),800);  // 0.8s Delay
+        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)),800);// 0.8s Delay
     }
 
 }

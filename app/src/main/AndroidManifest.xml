@@ -25,10 +25,6 @@
             android:name=".ui.login.IntroductoryActivity"
             android:label="PsDroid Tracker"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.login.ForgotPassword"
@@ -51,10 +47,19 @@
             android:label="MainScreenActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.login.AccountCreatedActivity"
+            android:label="AccountCreatedActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -62,5 +67,4 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/MAP_KEY" />
     </application>
-
 </manifest>

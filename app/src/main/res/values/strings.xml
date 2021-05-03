@@ -43,14 +43,14 @@
     <!-- NOTIFICATIONS -->
     <string name="settings_header2">Notification</string>
     <string name="allow_notification_title">Allow Notifications</string>
-    <string name="allow_notification_summary">Enable All Notifications</string>
+    <string name="allow_notification_summary">Enable all notifications from other users</string>
     <string name="emergency_alerts_title">Emergency Alerts</string>
-    <string name="alert_summary">Enable Emergency Alerts</string>
+    <string name="alert_summary">Enable emergency alerts from other users</string>
     <string name="low_battery_title">Low Battery Alert</string>
     <string name="low_battery_off">Off</string>
     <string name="low_battery_on">On</string>
-    <string name="send_sms_title">Send SMS</string>
-    <string name="send_sms_summary">Send SMS when Offline</string>
+    <string name="offline_mode_title">Offline Mode</string>
+    <string name="offline_mode_summary">Enable offline mode (reduces the accuracy and features of our application)</string>
     <!-- ABOUT -->
     <string name="settings_header3">About</string>
     <string name="version_title">Version</string>
