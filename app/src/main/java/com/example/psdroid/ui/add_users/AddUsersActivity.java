@@ -43,7 +43,7 @@ public class AddUsersActivity extends AppCompatActivity {
         contact_name = new ArrayList<>();
         contact_number = new ArrayList<>();
         contact_photo = new ArrayList<>();
-        btn = findViewById(R.id.addUser_btn);
+        btn = findViewById(R.id.btnOpenPicker);
         //Create click listener for back button
         addUser_toolbar.setNavigationOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
@@ -65,7 +65,7 @@ public class AddUsersActivity extends AppCompatActivity {
         Uri uri = data.getData();
         Cursor cur = cr.query(uri, null, null, null);
         cur.moveToFirst();
-       //Fetch details
+        //Fetch details
         String temp_name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
         String temp_number = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
         String temp_photo = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
@@ -80,8 +80,8 @@ public class AddUsersActivity extends AppCompatActivity {
         // Show a snack-bar when contact is added
         Snackbar.make(findViewById(R.id.family_friends_layout), "Contact Added",
                 Snackbar.LENGTH_LONG).setAction("X", v -> {
-                    //Do nothing
-                }).setActionTextColor(getColor(R.color.theme_blue)).show();
+            //Do nothing
+        }).setActionTextColor(getColor(R.color.theme_blue)).show();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -105,7 +105,7 @@ public class AddUsersActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
             }
             else
-                {
+            {
                 ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
             }
         }

@@ -132,7 +132,7 @@ public class VerifyOTP extends AppCompatActivity {
         String _cpass = getIntent().getStringExtra("cpass");
         UserHeplerClass heplerClass = new UserHeplerClass(_user,_mail,_mobile,_pass,_cpass);
         reference.child(_user).setValue(heplerClass);
-        Intent intent = new Intent(VerifyOTP.this, MainScreen.class);
+        Intent intent = new Intent(VerifyOTP.this, AccountCreatedActivity.class);
         intent.putExtra("user",_user);
         intent.putExtra("mob",_mobile);
         intent.putExtra("mail",_mail);
