@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,7 +31,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
 //Home Fragment
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
-
+    MediaPlayer mediaPlayer;
     public HomeFragment() {
         //Constructor
     }
@@ -58,6 +59,15 @@ public class HomeFragment extends Fragment {
                     switch (index) {
                         case 0:
                             Toast.makeText(getContext(), "Siren...", Toast.LENGTH_SHORT).show();
+                           // MediaPlayer mediaPlayer;
+                            if(mediaPlayer==null) {
+                                mediaPlayer = MediaPlayer.create(getActivity(), com.example.psdroid.R.raw.siren);
+                                mediaPlayer.start();
+                            }
+                            else{
+                                mediaPlayer.stop();
+                                mediaPlayer=null;
+                            }
                             // Call SIREN FUNCTION
                             break;
                         case 1:
