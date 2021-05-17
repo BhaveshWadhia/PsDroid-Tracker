@@ -9,12 +9,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,13 +29,21 @@ import java.util.Objects;
 
 //Add Users Activity
 public class AddUsersActivity extends AppCompatActivity {
+    //ContactPicker Counter
     public static final int PICK_CONTACT = 1;
+
     //ArrayLst to store contact details
-    ArrayList <String> contact_name;
-    ArrayList <String> contact_number;
-    ArrayList <String> contact_photo;
+    private ArrayList<String> name_array = new ArrayList<>();
+    private ArrayList<String> phone_array = new ArrayList<>();
+
+    //Layout Elements
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
     public FloatingActionButton btn;
     public Toolbar addUser_toolbar;
+    public ImageView remove_img;
+    public TextView remove_txt;
+
     //Create instance of the screen & display page content as Add users activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +52,11 @@ public class AddUsersActivity extends AppCompatActivity {
         addUser_toolbar = findViewById(R.id.addUser_toolbar);  //Set toolbar for the application
         setSupportActionBar(addUser_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
-        //Initialize array list
-        contact_name = new ArrayList<>();
-        contact_number = new ArrayList<>();
-        contact_photo = new ArrayList<>();
-        btn = findViewById(R.id.btnOpenPicker);
+        btn = findViewById(R.id.addUsers_btn);
+        //Initialize the Recycler View
+        recyclerView = findViewById(R.id.contacts_recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Create click listener for back button
         addUser_toolbar.setNavigationOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
@@ -65,17 +78,20 @@ public class AddUsersActivity extends AppCompatActivity {
         Uri uri = data.getData();
         Cursor cur = cr.query(uri, null, null, null);
         cur.moveToFirst();
+
         //Fetch details
         String temp_name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
         String temp_number = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-        String temp_photo = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
-        contact_name.add(temp_name);
-        contact_number.add(temp_number);
-        contact_photo.add(temp_photo);
         cur.close();
         System.out.println(temp_name);
         System.out.println(temp_number);
-        System.out.println(temp_photo);
+        // Assigning values to the array
+        name_array.add(temp_name);
+        phone_array.add(temp_number);
+        //Recycler View Adapter Calling
+        recyclerViewAdapter = new RecyclerViewAdapter(name_array,phone_array,this);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Show a snack-bar when contact is added
         Snackbar.make(findViewById(R.id.family_friends_layout), "Contact Added",
@@ -91,9 +107,17 @@ public class AddUsersActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if (requestCode == PICK_CONTACT) {
                 contactPicked(data);
+                //Hide elements when one contact is added
+                remove_img = findViewById(R.id.contact_img);
+                remove_img.setVisibility(View.GONE);
+                remove_txt = findViewById(R.id.contact_title);
+                remove_txt.setVisibility(View.GONE);
+                remove_txt = findViewById(R.id.contact_text);
+                remove_txt.setVisibility(View.GONE);
             }
         } else{
             Toast.makeText(this, "Failed to pick contact", Toast.LENGTH_SHORT).show();
+
         }
     }
     // Request Contacts permission

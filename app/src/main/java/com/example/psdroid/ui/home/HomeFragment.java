@@ -58,17 +58,8 @@ public class HomeFragment extends Fragment {
                 .setOnMenuSelectedListener(index -> {
                     switch (index) {
                         case 0:
-                            Toast.makeText(getContext(), "Siren...", Toast.LENGTH_SHORT).show();
-                           // MediaPlayer mediaPlayer;
-                            if(mediaPlayer==null) {
-                                mediaPlayer = MediaPlayer.create(getActivity(), com.example.psdroid.R.raw.siren);
-                                mediaPlayer.start();
-                            }
-                            else{
-                                mediaPlayer.stop();
-                                mediaPlayer=null;
-                            }
-                            // Call SIREN FUNCTION
+                            //Siren Function
+                            siren_function();
                             break;
                         case 1:
                             Toast.makeText(getContext(), "Your location is being tracked", Toast.LENGTH_SHORT).show();
@@ -92,6 +83,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
     //Create the Home Toolbar Menu
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu_1, @NonNull MenuInflater inflater_1) {
@@ -138,4 +130,21 @@ public class HomeFragment extends Fragment {
         new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)),800);// 0.8s Delay
     }
 
+    // Main Functions of the Application
+    // Siren Function
+    private void siren_function() {
+        // MediaPlayer mediaPlayer
+        if(mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(getActivity(), com.example.psdroid.R.raw.siren);
+            mediaPlayer.start();
+            Toast.makeText(getContext(), "Siren ON...", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            mediaPlayer.stop();
+            mediaPlayer=null;
+            Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//End of Code
 }

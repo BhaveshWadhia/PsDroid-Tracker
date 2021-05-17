@@ -7,22 +7,18 @@ import com.example.psdroid.R;
 
 import static android.os.Build.VERSION_CODES.R;
 
-public class Siren extends AppCompatActivity {
+public class Siren extends AppCompatActivity{
     MediaPlayer mediaPlayer;
     public void play(){
     if (mediaPlayer==null){
         mediaPlayer = MediaPlayer.create(getApplicationContext(), com.example.psdroid.R.raw.siren);
-       mediaPlayer.start();
+        mediaPlayer.start();
     }
-
-    if(mediaPlayer!=null){
+    if (mediaPlayer != null){
         mediaPlayer.stop();
         mediaPlayer= null;
+        }
     }
-    }
-
-
-
 }
 
 
