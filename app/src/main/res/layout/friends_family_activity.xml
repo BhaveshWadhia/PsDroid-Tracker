@@ -16,19 +16,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Family/Frineds"
+        app:title="@string/family_friends_str"
         app:titleTextColor="@color/white" />
 
     <ImageView
         android:id="@+id/contact_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginTop="180dp"
         android:contentDescription="@string/contact_list_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/contacts_recycler"
         app:layout_constraintStart_toStartOf="@+id/contacts_recycler"
         app:layout_constraintTop_toBottomOf="@+id/addUser_toolbar"
-        app:layout_constraintVertical_bias="0.40"
         app:srcCompat="@drawable/ic_contact_list"
         app:tint="#D21B5DA3" />
 
@@ -43,7 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_img" />
+        app:layout_constraintTop_toBottomOf="@+id/contact_img"
+        app:layout_goneMarginTop="10dp" />
 
     <TextView
         android:id="@+id/contact_text"
@@ -53,6 +54,7 @@
         android:text="@string/empty_list_desc"
         android:textAlignment="center"
         android:textColor="@android:color/tab_indicator_text"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/contacts_recycler"
         app:layout_constraintEnd_toEndOf="@+id/contact_title"
         app:layout_constraintHorizontal_bias="0.506"
@@ -64,6 +66,7 @@
         android:id="@+id/contacts_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -88,5 +91,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_adduser" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/contacts_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addUser_toolbar"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

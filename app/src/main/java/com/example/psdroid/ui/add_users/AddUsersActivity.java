@@ -8,41 +8,50 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //Add Users Activity
 public class AddUsersActivity extends AppCompatActivity {
     //ContactPicker Counter
     public static final int PICK_CONTACT = 1;
-
     //ArrayLst to store contact details
     private ArrayList<String> name_array = new ArrayList<>();
     private ArrayList<String> phone_array = new ArrayList<>();
-
     //Layout Elements
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     public FloatingActionButton btn;
     public Toolbar addUser_toolbar;
-    public ImageView remove_img;
-    public TextView remove_txt;
+    public ImageView layout_img;
+    public TextView layout_txt1,layout_txt2;
+    ProgressBar progressBar;
 
     //Create instance of the screen & display page content as Add users activity
     @Override
@@ -53,6 +62,7 @@ public class AddUsersActivity extends AppCompatActivity {
         setSupportActionBar(addUser_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         btn = findViewById(R.id.addUsers_btn);
+        progressBar = findViewById(R.id.progressBar);  //Initialize progress bar
         //Initialize the Recycler View
         recyclerView = findViewById(R.id.contacts_recycler);
         recyclerView.setHasFixedSize(true);
@@ -83,22 +93,70 @@ public class AddUsersActivity extends AppCompatActivity {
         String temp_name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
         String temp_number = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
         cur.close();
-        System.out.println(temp_name);
-        System.out.println(temp_number);
-        // Assigning values to the array
-        name_array.add(temp_name);
-        phone_array.add(temp_number);
-        //Recycler View Adapter Calling
-        recyclerViewAdapter = new RecyclerViewAdapter(name_array,phone_array,this);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (name_array.size() == 0) {
+            //Set Progress bar to load
+            progressBar.setVisibility(View.VISIBLE);
+            //Delay of 1 seconds
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
+            }, 1000);
+        }
+        if (name_array.size() == 5)
+        {
+            display_snackbar("No more contacts can be added");
+        }
+        if (name_array.size() < 5) {
+            // Assigning values to the array
+            name_array.add(temp_name);
+            phone_array.add(temp_number);
 
-        // Show a snack-bar when contact is added
-        Snackbar.make(findViewById(R.id.family_friends_layout), "Contact Added",
-                Snackbar.LENGTH_LONG).setAction("X", v -> {
-            //Do nothing
-        }).setActionTextColor(getColor(R.color.theme_blue)).show();
+            //Used for debugging
+            for (int i = 0; i < name_array.size(); i++) {
+                System.out.println(name_array.get(i));
+                System.out.println(phone_array.get(i));
+            }
+            //Recycler View Adapter Calling
+            recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
+            recyclerView.setAdapter(recyclerViewAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            display_snackbar("Contact Added");  //Display SnackBar with this text
+
+            //Check if any item is swiped to right
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    //On left swipe remove the contact from the array list
+                    name_array.remove(viewHolder.getAdapterPosition());
+                    phone_array.remove(viewHolder.getAdapterPosition());
+                    recyclerViewAdapter.notifyDataSetChanged();
+                    display_snackbar("Contact Removed");  //Display SnackBar with this text
+                    if (name_array.size() == 0) {
+                        //Set Progress bar to load
+                        progressBar.setVisibility(View.VISIBLE);
+                        //Delay of 1 seconds
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.INVISIBLE);
+                                initial_LayoutElements();   //Set to initial layout when there are 0 contacts in the list
+                            }
+                        }, 1000);
+                    }
+                }
+            }).attachToRecyclerView(recyclerView);
+        }
     }
+
+    //Functions
+    //Get contact details from the Phone's Contacts
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     // If picking a contact works, send the contact data to contactPicked()
@@ -107,17 +165,10 @@ public class AddUsersActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if (requestCode == PICK_CONTACT) {
                 contactPicked(data);
-                //Hide elements when one contact is added
-                remove_img = findViewById(R.id.contact_img);
-                remove_img.setVisibility(View.GONE);
-                remove_txt = findViewById(R.id.contact_title);
-                remove_txt.setVisibility(View.GONE);
-                remove_txt = findViewById(R.id.contact_text);
-                remove_txt.setVisibility(View.GONE);
+                change_LayoutElements();  //Change the layout elements arrangement when a contact is added
             }
         } else{
             Toast.makeText(this, "Failed to pick contact", Toast.LENGTH_SHORT).show();
-
         }
     }
     // Request Contacts permission
@@ -134,6 +185,37 @@ public class AddUsersActivity extends AppCompatActivity {
             }
         }
     }
+    //SnackBar Function
+    private void display_snackbar(String text) {
+        // Show a snack-bar when contact is added
+        Snackbar.make(findViewById(R.id.family_friends_layout), text,
+                Snackbar.LENGTH_LONG).setAction("X", v -> {
+            //Do nothing
+        }).setActionTextColor(getColor(R.color.theme_blue)).show();
+    }
+    //Function to change Layout Design when a contact is added
+    private void change_LayoutElements() {
+        //Hide elements when one contact is added
+        layout_txt2 = findViewById(R.id.contact_text);
+        layout_txt2.setVisibility(View.GONE);
+        layout_img = findViewById(R.id.contact_img);
+        layout_img.setVisibility(View.GONE);
+        //Move the contact title to the top when a contact is added to the list
+        layout_txt1 = findViewById(R.id.contact_title);
+        layout_txt1.setTextSize(30);
+    }
+    //Function to change Layout Design when all contacts are removed
+    private void initial_LayoutElements() {
+        //Unhide elements when all contact are removed & Contact list is empty
+        layout_txt2 = findViewById(R.id.contact_text);
+        layout_txt2.setVisibility(View.VISIBLE);
+        layout_img = findViewById(R.id.contact_img);
+        layout_img.setVisibility(View.VISIBLE);
+        //Move the contact title to the top when a contact is added to the list
+        layout_txt1 = findViewById(R.id.contact_title);
+        layout_txt1.setTextSize(24);
+    }
+
 }
 
 

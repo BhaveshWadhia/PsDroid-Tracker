@@ -23,14 +23,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/contact_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:elevation="2dp"
             android:src="@mipmap/ic_contact_user_round"
-            app:civ_border_color="#8A8A8A"
+            app:civ_border_color="@color/theme_lightblue"
             app:civ_border_width="1dp">
 
         </de.hdodenhof.circleimageview.CircleImageView>
@@ -42,7 +42,7 @@
             android:layout_marginStart="90dp"
             android:layout_marginTop="12dp"
             android:text="Bhavesh Wadhia"
-            android:textColor="@color/black"
+            android:textColor="@color/theme_black"
             android:textSize="16sp" />
 
         <TextView

@@ -16,47 +16,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_cancel"
-            app:tint="@color/black"
+            app:tint="@color/theme_black"
             android:padding="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text="Co\nde"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/theme_black"
             android:textSize="100sp"
-            android:textColor="@color/black"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text="Verification"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:gravity="center"
             android:textAlignment="center"
-            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/theme_black"
+            android:textSize="24sp"
+            android:textStyle="bold"
 
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter One Time Password"
-            android:textSize="16sp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"
-
-            android:textStyle="bold"
-            android:gravity="center"
             android:layout_gravity="center"
-            />
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Enter One Time Password"
+
+            android:textColor="@color/theme_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView2"
@@ -67,7 +66,7 @@
             android:gravity="center"
 
             android:text="(OPT)"
-            android:textColor="@color/black"
+            android:textColor="@color/theme_black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -81,13 +80,13 @@
             android:background="@color/white"
             android:cursorVisible="true"
             android:inputType="number"
-            app:cursorColor="@color/black"
+            app:cursorColor="@color/theme_black"
             app:hideLineWhenFilled="true"
             app:itemCount="6"
             app:itemHeight="40dp"
             app:itemRadius="5dp"
             app:itemWidth="40dp"
-            app:lineColor="@color/black" />
+            app:lineColor="@color/theme_black" />
 
         <Button
             android:id="@+id/verify"

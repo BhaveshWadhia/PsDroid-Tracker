@@ -3,6 +3,8 @@ package com.example.psdroid;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.login.AccountCreatedActivity;
 import com.example.psdroid.ui.login.IntroductoryActivity;
 
@@ -11,6 +13,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, IntroductoryActivity.class));
+        startActivity(new Intent(this,IntroductoryActivity.class));
     }
 }
