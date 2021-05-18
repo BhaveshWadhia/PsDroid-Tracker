@@ -67,8 +67,11 @@ public class AddUsersActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.contacts_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //Retrieve data from shared pref & if data exist load it on the Recycler view
+
         //Create click listener for back button
         addUser_toolbar.setNavigationOnClickListener(v -> {
+            //Store array into shared pref when back button is clicked//Contacts_SharedPref.storeInList(getApplicationContext(),name_array);
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
             finish();    //Close the activity
         });
@@ -78,6 +81,36 @@ public class AddUsersActivity extends AppCompatActivity {
             contacts.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
             startActivityForResult(contacts, PICK_CONTACT);
         });
+    }
+
+    //Get contact details from the Phone's Contacts
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    // If picking a contact works, send the contact data to contactPicked()
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if (requestCode == PICK_CONTACT) {
+                contactPicked(data);
+                change_LayoutElements();  //Change the layout elements arrangement when a contact is added
+            }
+        } else{
+            Toast.makeText(this, "Failed to pick contact", Toast.LENGTH_SHORT).show();
+        }
+    }
+    // Request Contacts permission
+    public void askForContactPermission(String permission, Integer requestCode) {
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+        {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, permission))
+            {
+                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+            }
+            else
+            {
+                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+            }
+        }
     }
 
     //Get contacts
@@ -156,35 +189,6 @@ public class AddUsersActivity extends AppCompatActivity {
     }
 
     //Functions
-    //Get contact details from the Phone's Contacts
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    // If picking a contact works, send the contact data to contactPicked()
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-            if (requestCode == PICK_CONTACT) {
-                contactPicked(data);
-                change_LayoutElements();  //Change the layout elements arrangement when a contact is added
-            }
-        } else{
-            Toast.makeText(this, "Failed to pick contact", Toast.LENGTH_SHORT).show();
-        }
-    }
-    // Request Contacts permission
-    public void askForContactPermission(String permission, Integer requestCode) {
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
-        {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, permission))
-            {
-                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
-            }
-            else
-            {
-                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
-            }
-        }
-    }
     //SnackBar Function
     private void display_snackbar(String text) {
         // Show a snack-bar when contact is added
