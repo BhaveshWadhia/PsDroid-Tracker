@@ -65,7 +65,9 @@ public class SetPassword extends AppCompatActivity {
 
                 reference.child(_user).child("pass").setValue(np);
                 reference.child(_user).child("conpass").setValue(cnp);
-                startActivity(new Intent(getApplicationContext(), PasswordChanged.class));
+                Intent intent = new Intent(getApplicationContext(),PasswordChanged.class);
+                intent.putExtra("user", _user);
+                startActivity(intent);
                 finish();
             }
         }

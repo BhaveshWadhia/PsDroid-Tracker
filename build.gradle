@@ -17,7 +17,7 @@ allprojects {
     repositories {
         maven { url "https://jitpack.io" }
         google()
-        jcenter()
+
         def githubProperties = new Properties()
         githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
         repositories {
@@ -34,6 +34,8 @@ allprojects {
                 }
             }
         }
+
+        jcenter()
     }
 }
 task clean(type: Delete) {

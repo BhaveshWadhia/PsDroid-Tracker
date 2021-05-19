@@ -8,12 +8,14 @@ import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,8 +24,20 @@ import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.hitomi.cmlibrary.CircleMenu;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import static androidx.core.content.ContextCompat.getSystemService;
@@ -32,15 +46,20 @@ import static androidx.core.content.ContextCompat.getSystemService;
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
-    public HomeFragment() {
+    String thisusername;
+    public HomeFragment(String _user) {
         //Constructor
+        thisusername = _user;
+
     }
+
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
     //When view is created load the menus
@@ -66,8 +85,8 @@ public class HomeFragment extends Fragment {
                             // Call SHARE LOCATION FUNCTION
                             break;
                         case 2:
-                            Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-
+                            //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                            wry_function();
                             break;
                         case 3:
                             Toast.makeText(getContext(), "3", Toast.LENGTH_SHORT).show();
@@ -82,6 +101,72 @@ public class HomeFragment extends Fragment {
                             break;
                     }
                 });
+    }
+
+    private void wry_function() {
+       // DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+       // DatabaseReference usersdRef = rootRef.child("users");
+        Query checkuser = FirebaseDatabase.getInstance().getReference("users").orderByChild("user");
+
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String uname = ds.child("user").getValue(String.class);
+                     Toast.makeText(getActivity(), uname, Toast.LENGTH_SHORT).show();
+                    String mob = ds.child("mobile").getValue(String.class);
+                    Toast.makeText(getActivity(), mob, Toast.LENGTH_SHORT).show();
+                    FirebaseAuth auth ;
+                    auth = FirebaseAuth.getInstance();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+                    Query username = ref.orderByChild(thisusername);
+
+                    sendrequest(auth.getUid(),""+uname,""+thisusername,""+mob,"Wants to access your location");
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        checkuser.addListenerForSingleValueEvent(eventListener);
+
+
+
+    }
+
+    private void sendrequest(String hisUid,String uname,String username,String mob,String notification) {
+        String timestamp =  ""+System.currentTimeMillis();
+        HashMap<Object, String> hashMap = new HashMap<>();
+        //hashMap.put("pId",pId);
+        hashMap.put("uname",uname);//to whom it will send
+        hashMap.put("user",username);//from whom it is send
+        hashMap.put("timestamp",timestamp);
+        hashMap.put("pUid",hisUid);
+        hashMap.put("mobile",mob);
+        hashMap.put("notification",notification);
+        //hashMap.put("sUid",myUid);
+
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+        ref.child(uname).child("Notifications").child(timestamp).setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //added successfully;
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                   //failed
+                    }
+                });
+
+
+            
+
     }
 
     //Create the Home Toolbar Menu
