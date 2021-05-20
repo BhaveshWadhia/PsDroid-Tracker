@@ -24,10 +24,6 @@ import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.hitomi.cmlibrary.CircleMenu;
 
-import java.util.Objects;
-
-import static androidx.core.content.ContextCompat.getSystemService;
-
 //Home Fragment
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
@@ -62,12 +58,11 @@ public class HomeFragment extends Fragment {
                             siren_function();
                             break;
                         case 1:
-                            Toast.makeText(getContext(), "Your location is being tracked", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "TODO: Your location is being tracked", Toast.LENGTH_SHORT).show();
                             // Call SHARE LOCATION FUNCTION
                             break;
                         case 2:
-                            Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getContext(), "TODO: Sending Request to user", Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             Toast.makeText(getContext(), "3", Toast.LENGTH_SHORT).show();
@@ -79,6 +74,7 @@ public class HomeFragment extends Fragment {
                             break;
                         case 5:
                             Toast.makeText(getContext(), "5", Toast.LENGTH_SHORT).show();
+                            call_fakeCall_activity();
                             break;
                     }
                 });
@@ -125,12 +121,8 @@ public class HomeFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-    //Creating a delay function for add user activity to load
-    private void call_addUser_activity() {
-        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)),800);// 0.8s Delay
-    }
 
-    // Main Functions of the Application
+    // Main features of the app
     // Siren Function
     private void siren_function() {
         // MediaPlayer mediaPlayer
@@ -145,6 +137,24 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //Other Functions
+    //Creating a delay function for add user activity to load
+    private void call_addUser_activity() {
+        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)),800);// 0.8s Delay
+    }
+    //Creating a delay function for fake call activity to load
+    private void call_fakeCall_activity() {
+        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)),800);// 0.8s Delay
+    }
+
+
+
+
+
+
+
+
 
 //End of Code
 }

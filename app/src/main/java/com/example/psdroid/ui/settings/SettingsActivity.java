@@ -23,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
         settings_toolbar = findViewById(R.id.settings_toolbar);
         setSupportActionBar(settings_toolbar);   //Set toolbar for the settings activity
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);    //Set back button on toolbar
+
         //Create click listener for back button
         settings_toolbar.setNavigationOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));

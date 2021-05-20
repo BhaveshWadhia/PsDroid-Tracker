@@ -43,13 +43,7 @@
             android:title="@string/tracking_request_title"
             android:summary="Allows user to receive tracking requests"
             app:useSimpleSummaryProvider="true" />
-        <ListPreference
-            android:entries="@array/fake_call_timer_entries"
-            android:entryValues="@array/fake_call_timer_values"
-            android:key="list_preference_4"
-            android:title="@string/fake_call_timer_title"
-            android:summary="Set default delay to receive fake call"
-            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
     <PreferenceCategory
         android:id="@+id/Notifications"

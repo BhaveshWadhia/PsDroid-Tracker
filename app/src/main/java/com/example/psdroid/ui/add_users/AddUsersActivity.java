@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,11 +30,8 @@ import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 //Add Users Activity
 public class AddUsersActivity extends AppCompatActivity {
@@ -58,7 +54,7 @@ public class AddUsersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friends_family_activity);      // Set content of main activity as family_friends_activity.xml
-        addUser_toolbar = findViewById(R.id.addUser_toolbar);  //Set toolbar for the application
+        addUser_toolbar = findViewById(R.id.fakecall_toolbar);  //Set toolbar for the application
         setSupportActionBar(addUser_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         btn = findViewById(R.id.addUsers_btn);
@@ -200,23 +196,23 @@ public class AddUsersActivity extends AppCompatActivity {
     //Function to change Layout Design when a contact is added
     private void change_LayoutElements() {
         //Hide elements when one contact is added
-        layout_txt2 = findViewById(R.id.contact_text);
+        layout_txt2 = findViewById(R.id.fakecall_text);
         layout_txt2.setVisibility(View.GONE);
-        layout_img = findViewById(R.id.contact_img);
+        layout_img = findViewById(R.id.fakecall_img);
         layout_img.setVisibility(View.GONE);
         //Move the contact title to the top when a contact is added to the list
-        layout_txt1 = findViewById(R.id.contact_title);
+        layout_txt1 = findViewById(R.id.fakecall_title);
         layout_txt1.setTextSize(30);
     }
     //Function to change Layout Design when all contacts are removed
     private void initial_LayoutElements() {
         //Unhide elements when all contact are removed & Contact list is empty
-        layout_txt2 = findViewById(R.id.contact_text);
+        layout_txt2 = findViewById(R.id.fakecall_text);
         layout_txt2.setVisibility(View.VISIBLE);
-        layout_img = findViewById(R.id.contact_img);
+        layout_img = findViewById(R.id.fakecall_img);
         layout_img.setVisibility(View.VISIBLE);
         //Move the contact title to the top when a contact is added to the list
-        layout_txt1 = findViewById(R.id.contact_title);
+        layout_txt1 = findViewById(R.id.fakecall_title);
         layout_txt1.setTextSize(24);
     }
 

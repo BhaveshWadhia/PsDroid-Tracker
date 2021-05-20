@@ -81,4 +81,7 @@
     <string name="reset_password_str">Reset Password</string>
     <string name="username">Username</string>
     <string name="family_friends_str" >Family/Friends</string>
+    <string name="fakecall_title">Fake Caller</string>
+    <string name="fake_call_str" >Fake Call</string>
+    <string name="fakecall_text">write description here</string>
 </resources>

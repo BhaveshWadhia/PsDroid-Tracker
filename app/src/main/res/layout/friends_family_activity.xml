@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/addUser_toolbar"
+        android:id="@+id/fakecall_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -20,20 +20,22 @@
         app:titleTextColor="@color/white" />
 
     <ImageView
-        android:id="@+id/contact_img"
+        android:id="@+id/fakecall_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="200dp"
         android:contentDescription="@string/contact_list_icon"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/contacts_recycler"
         app:layout_constraintStart_toStartOf="@+id/contacts_recycler"
-        app:layout_constraintTop_toBottomOf="@+id/addUser_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/fakecall_toolbar"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_contact_list"
         app:tint="#D21B5DA3" />
 
     <TextView
-        android:id="@+id/contact_title"
+        android:id="@+id/fakecall_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,11 +45,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_img"
+        app:layout_constraintTop_toBottomOf="@+id/fakecall_img"
         app:layout_goneMarginTop="10dp" />
 
     <TextView
-        android:id="@+id/contact_text"
+        android:id="@+id/fakecall_text"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -56,10 +58,10 @@
         android:textColor="@android:color/tab_indicator_text"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/contacts_recycler"
-        app:layout_constraintEnd_toEndOf="@+id/contact_title"
+        app:layout_constraintEnd_toEndOf="@+id/fakecall_title"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/contact_title"
-        app:layout_constraintTop_toBottomOf="@+id/contact_title"
+        app:layout_constraintStart_toStartOf="@+id/fakecall_title"
+        app:layout_constraintTop_toBottomOf="@+id/fakecall_title"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -71,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addUser_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/fakecall_toolbar"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -102,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addUser_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/fakecall_toolbar"
         app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
