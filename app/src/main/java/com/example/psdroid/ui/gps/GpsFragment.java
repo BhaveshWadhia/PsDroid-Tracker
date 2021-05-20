@@ -30,8 +30,10 @@ public class
 GpsFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap map;
     MapView mapView;
-    public GpsFragment() {
+    String thisusername;
+    public GpsFragment(String _user) {
         //Constructor
+        thisusername = _user;
     }
 
     //Inflate view & Enable menus for this fragment

@@ -80,6 +80,7 @@ public class LoginTabFragment extends Fragment {
                     assert passwordfromdatabase != null;
                     if (passwordfromdatabase.equals(userEnteredPassword)) {
                         Intent intent = new Intent(getActivity(), MainScreen.class);
+                        intent.putExtra("user", userEnteredUsername);
                         startActivity(intent);
                         progressBar.setVisibility(View.INVISIBLE);
                     } else {
