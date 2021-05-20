@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
-import java.util.Date;
+
 import android.text.format.DateFormat;
 //import java.text.DateFormat;
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     @Override
     public HolderNotification onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate view row
-        View view = LayoutInflater.from(context).inflate(R.layout.row_notification,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.notifications_content,parent,false);
 
 
         return new HolderNotification(view);
