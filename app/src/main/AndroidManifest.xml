@@ -42,6 +42,10 @@
             android:name=".ui.add_users.AddUsersActivity"
             android:label="AddUserActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.home.FakeCallerActivity"
+            android:label="FakeCallerActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".MainScreen"
             android:label="MainScreenActivity"

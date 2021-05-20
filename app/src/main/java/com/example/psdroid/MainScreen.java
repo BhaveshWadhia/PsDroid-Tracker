@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
             setContentView(R.layout.activity_mainscreen);       // Set content of main activity as activity_mainscreen.xml
             app_toolbar = findViewById(R.id.app_toolbar);  //Set toolbar for the application
             setSupportActionBar(app_toolbar);               //Set toolbar in the layout
+            app_toolbar.setTitle("Home");
             BottomNavigationView main_navbar = findViewById(R.id.nav_view);     // Set bottom navigation bar in the layout
             main_navbar.setOnNavigationItemSelectedListener(navListener);
             getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment(_user)).commit();
@@ -37,12 +38,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                     //use switch to get id
                     switch (item.getItemId()) {
                         case R.id.navHome_btn:
+                            app_toolbar.setTitle("Home");
                             selectedFragment = new HomeFragment(user);
                             break;
                         case R.id.navGps_btn:
+                            app_toolbar.setTitle("GPS Tracking");
                             selectedFragment = new GpsFragment(user);
                             break;
                         case R.id.navNotifications_btn:
+                            app_toolbar.setTitle("Notifications");
                             selectedFragment = new NotificationsFragment(user);
                             break;
                     }
