@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-light"
             android:text="Notification"
             android:textColor="@color/theme_black" />
@@ -50,8 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="monospace"
-            android:text="Time" />
+            android:text="Time"
+            android:textSize="12sp" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
