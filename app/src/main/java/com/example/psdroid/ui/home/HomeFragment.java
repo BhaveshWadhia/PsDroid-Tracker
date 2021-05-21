@@ -23,6 +23,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
+import com.example.psdroid.ui.add_users.Contacts_SharedPref;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,6 +37,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hitomi.cmlibrary.CircleMenu;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 //Home Fragment
@@ -182,6 +184,7 @@ public class HomeFragment extends Fragment {
 
     // Where are you Function
     private void wry_function() {
+
         // DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         // DatabaseReference usersdRef = rootRef.child("users");
         Query checkuser = FirebaseDatabase.getInstance().getReference("users").orderByChild("user");
@@ -196,7 +199,7 @@ public class HomeFragment extends Fragment {
                     FirebaseAuth auth;
                     auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-                    Query username = ref.orderByChild(thisusername);
+                    ref.orderByChild(thisusername);
                     sendrequest(auth.getUid(),""+uname,""+thisusername,""+mob,"Wants to access your location");
                 }
             }
@@ -216,6 +219,7 @@ public class HomeFragment extends Fragment {
         hashMap.put("pUid",hisUid);
         hashMap.put("mobile",mob);
         hashMap.put("notification",notification);
+
         //hashMap.put("sUid",myUid);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         ref.child(uname).child("Notifications").child(timestamp).setValue(hashMap)

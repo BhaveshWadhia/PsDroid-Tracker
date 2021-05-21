@@ -22,11 +22,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -39,7 +42,7 @@ public class AddUsersActivity extends AppCompatActivity {
     public static final int PICK_CONTACT = 1;
     //ArrayLst to store contact details
     private ArrayList<String> name_array = new ArrayList<>();
-    private ArrayList<String> phone_array = new ArrayList<>();
+    public ArrayList<String> phone_array = new ArrayList<>();
     //Layout Elements
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -139,20 +142,26 @@ public class AddUsersActivity extends AppCompatActivity {
         }
         if (name_array.size() < 5) {
             // Assigning values to the array
-            name_array.add(temp_name);
-            phone_array.add(temp_number);
 
-            //Used for debugging
-            for (int i = 0; i < name_array.size(); i++) {
-                System.out.println(name_array.get(i));
-                System.out.println(phone_array.get(i));
-            }
-            //Recycler View Adapter Calling
-            recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
-            recyclerView.setAdapter(recyclerViewAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            display_snackbar("Contact Added");  //Display SnackBar with this text
+                if (name_array.contains(temp_name)&&phone_array.contains(temp_number)) {
+                    display_snackbar("Added contact already exists..Please try adding another one");
+                }
+                else {
+                    name_array.add(temp_name);
+                    phone_array.add(temp_number);
 
+
+                    //Used for debugging
+                    for (int i = 0; i < name_array.size(); i++) {
+                        System.out.println(name_array.get(i));
+                        System.out.println(phone_array.get(i));
+                    }
+                    //Recycler View Adapter Calling
+                    recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    display_snackbar("Contact Added");  //Display SnackBar with this text
+                }
             //Check if any item is swiped to right
             new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 @Override
