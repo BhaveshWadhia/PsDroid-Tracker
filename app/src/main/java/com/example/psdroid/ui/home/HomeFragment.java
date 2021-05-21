@@ -3,6 +3,7 @@ package com.example.psdroid.ui.home;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
+
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.login.LoginActivity;
@@ -154,16 +157,37 @@ public class HomeFragment extends Fragment {
     // Main Functions of the Application
     // Siren Function
     private void siren_function() {
-        // MediaPlayer mediaPlayer
-        if(mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(getActivity(), com.example.psdroid.R.raw.siren);
-            mediaPlayer.start();
-            Toast.makeText(getContext(), "Siren ON...", Toast.LENGTH_SHORT).show();
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String siren = prefs.getString("list_preference_1","");
+        Toast.makeText(getContext(), siren, Toast.LENGTH_SHORT).show();
+        if(siren.equals("police")) {
+            // MediaPlayer mediaPlayer
+            if (mediaPlayer == null) {
+                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.siren);
+                mediaPlayer.start();
+                Toast.makeText(getContext(), "Siren ON...", Toast.LENGTH_SHORT).show();
+            } else {
+                mediaPlayer.stop();
+                mediaPlayer = null;
+                Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if(siren.equals("scream")){
+            // MediaPlayer mediaPlayer
+            if (mediaPlayer == null) {
+                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.scream);
+                mediaPlayer.start();
+                Toast.makeText(getContext(), "Siren ON...", Toast.LENGTH_SHORT).show();
+            } else {
+                mediaPlayer.stop();
+                mediaPlayer = null;
+                Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
+            }
         }
         else{
-            mediaPlayer.stop();
-            mediaPlayer=null;
-            Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Siren Sound not selected..Please select it from settings!", Toast.LENGTH_SHORT).show();
         }
     }
 
