@@ -46,7 +46,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
-    String thisusername;
+    public String thisusername;
     public HomeFragment(String _user) {
         //Constructor
         thisusername = _user;
@@ -177,9 +177,9 @@ public class HomeFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String uname = ds.child("user").getValue(String.class);
-                    Toast.makeText(getActivity(), uname, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), uname, Toast.LENGTH_SHORT).show();
                     String mob = ds.child("mobile").getValue(String.class);
-                    Toast.makeText(getActivity(), mob, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), mob, Toast.LENGTH_SHORT).show();
                     FirebaseAuth auth;
                     auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");

@@ -2,29 +2,38 @@ package com.example.psdroid.ui.notifications;
 
 //model class for recyclerview of notification
 public class ModelNotification {
-String pId, timestamp,pUid,notification,sUid,sUsername,sEmail;
-//for firebase 
+    String uname, user, timestamp, pUid, mobile, notification, sUid;
+
+    //for firebase
     public ModelNotification() {
 
     }
 
-    public ModelNotification( String timestamp, String notification, String sUsername, String sEmail,String sUid) {
-        //this.pId = pId;
+    public ModelNotification(String uname, String user, String timestamp, String pUid, String mobile, String notification, String sUid) {
+        this.uname = uname;
+        this.user = user;
         this.timestamp = timestamp;
-        //this.pUid = pUid;
+        this.pUid = pUid;
+        this.mobile = mobile;
         this.notification = notification;
         this.sUid = sUid;
-        this.sUsername = sUsername;
-        this.sEmail = sEmail;
     }
 
-   // public String getpId() {
-   //     return pId;
-   // }
+    public String getUname() {
+        return uname;
+    }
 
-//    public void setpId(String pId) {
-  //      this.pId = pId;
-   // }
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public String getTimestamp() {
         return timestamp;
@@ -34,14 +43,22 @@ String pId, timestamp,pUid,notification,sUid,sUsername,sEmail;
         this.timestamp = timestamp;
     }
 
-  /*  public String getpUid() {
+    public String getpUid() {
         return pUid;
     }
 
     public void setpUid(String pUid) {
         this.pUid = pUid;
     }
-*/
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     public String getNotification() {
         return notification;
     }
@@ -57,20 +74,5 @@ String pId, timestamp,pUid,notification,sUid,sUsername,sEmail;
     public void setsUid(String sUid) {
         this.sUid = sUid;
     }
-
-    public String getsUsername() {
-        return sUsername;
-    }
-
-    public void setsUsername(String sUsername) {
-        this.sUsername = sUsername;
-    }
-
-    public String getsEmail() {
-        return sEmail;
-    }
-
-    public void setsEmail(String sEmail) {
-        this.sEmail = sEmail;
-    }
 }
+
