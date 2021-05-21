@@ -9,14 +9,12 @@ import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,12 +36,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hitomi.cmlibrary.CircleMenu;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-
-import static androidx.core.content.ContextCompat.getSystemService;
 
 //Home Fragment
 public class HomeFragment extends Fragment {
@@ -54,7 +47,6 @@ public class HomeFragment extends Fragment {
         //Constructor
         thisusername = _user;
     }
-
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);   //Enable options menu for this fragment
@@ -112,13 +104,14 @@ public class HomeFragment extends Fragment {
         inflater_1.inflate(R.menu.home_menu, menu_1);
         super.onCreateOptionsMenu(menu_1, inflater_1);
     }
+
     //When any item from others menu is selected
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.home_gps_btn){
-                item.setIcon(R.drawable.ic_gps_off);
+        if (id == R.id.home_gps_btn) {
+            item.setIcon(R.drawable.ic_gps_off);
         }
-        if (id == R.id.home_wifi_btn){
+        if (id == R.id.home_wifi_btn) {
             item.setIcon(R.drawable.ic_wifi_off);
             change_wifi.setWifiEnabled(false);               // **This is not working** //
         }
@@ -126,11 +119,11 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
         }
         if (id == R.id.home_settings_btn) {
-           // Toast.makeText(getContext(), "Settings...", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getContext(), "Settings...", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getContext(), SettingsActivity.class));
         }
         if (id == R.id.home_logout_btn) {
-           //Display an alert before logging out
+            //Display an alert before logging out
             AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
             alert_builder.setMessage("Are you sure you want to logout?");
             alert_builder.setCancelable(true);
@@ -145,49 +138,45 @@ public class HomeFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
     //Creating a delay function for add user activity to load
     private void call_addUser_activity() {
-        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)),800);// 0.8s Delay
+        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)), 800);// 0.8s Delay
     }
+
     //Creating a delay function for add user activity to load
     private void call_fakeCall_activity() {
-        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)),800);// 0.8s Delay
+        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)), 800);// 0.8s Delay
     }
 
     // Main Functions of the Application
-    // Siren Function
+
+     // Siren Function
     private void siren_function() {
-
-
+        // Get user's saved settings
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String siren = prefs.getString("list_preference_1","");
-        Toast.makeText(getContext(), siren, Toast.LENGTH_SHORT).show();
-        if(siren.equals("police")) {
-            // MediaPlayer mediaPlayer
+        String siren = prefs.getString("list_preference_1", "default");
+        //If siren settings is not set by user
+        if (siren.equals("default")) {
+            Toast.makeText(getContext(), "Siren Sound not selected...\nPlease select it from settings!!", Toast.LENGTH_SHORT).show();
+        }
+        //If siren setting is set then check which one is set
+        else {
             if (mediaPlayer == null) {
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.siren);
+                if (siren.equals("police")) {
+                    mediaPlayer = MediaPlayer.create(getActivity(), com.example.psdroid.R.raw.police_siren);
+                }
+                if (siren.equals("scream")) {
+                    mediaPlayer = MediaPlayer.create(getActivity(), com.example.psdroid.R.raw.scream_siren);
+                }
                 mediaPlayer.start();
                 Toast.makeText(getContext(), "Siren ON...", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else {
                 mediaPlayer.stop();
                 mediaPlayer = null;
                 Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
             }
-        }
-        else if(siren.equals("scream")){
-            // MediaPlayer mediaPlayer
-            if (mediaPlayer == null) {
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.scream);
-                mediaPlayer.start();
-                Toast.makeText(getContext(), "Siren ON...", Toast.LENGTH_SHORT).show();
-            } else {
-                mediaPlayer.stop();
-                mediaPlayer = null;
-                Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else{
-            Toast.makeText(getContext(), "Siren Sound not selected..Please select it from settings!", Toast.LENGTH_SHORT).show();
         }
     }
 
