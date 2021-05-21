@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment {
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
     //When view is created load the menus
@@ -151,6 +152,7 @@ public class HomeFragment extends Fragment {
     }
 
     // Main Functions of the Application
+
      // Siren Function
     private void siren_function() {
         // Get user's saved settings
@@ -197,7 +199,7 @@ public class HomeFragment extends Fragment {
                     FirebaseAuth auth;
                     auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-                    ref.orderByChild(thisusername);
+                    Query username = ref.orderByChild(thisusername);
                     sendrequest(auth.getUid(),""+uname,""+thisusername,""+mob,"Wants to access your location");
                 }
             }
@@ -211,6 +213,9 @@ public class HomeFragment extends Fragment {
         String timestamp =  ""+System.currentTimeMillis();
         HashMap<Object, String> hashMap = new HashMap<>();
         //hashMap.put("pId",pId);
+        AddUsersActivity getusers = new AddUsersActivity();
+        ArrayList<String> users = getusers.phone_array;
+        Toast.makeText(getActivity(), ""+users, Toast.LENGTH_SHORT).show();
         hashMap.put("uname",uname);//to whom it will send
         hashMap.put("user",username);//from whom it is send
         hashMap.put("timestamp",timestamp);

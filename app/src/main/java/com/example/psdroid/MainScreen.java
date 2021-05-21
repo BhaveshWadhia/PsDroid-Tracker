@@ -25,7 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
         app_toolbar.setTitle("Home");
         BottomNavigationView main_navbar = findViewById(R.id.nav_view);     // Set bottom navigation bar in the layout
         main_navbar.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment(user)).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment(_user)).commit();
     user = _user;
     }
     //Bottom navigation when selected
