@@ -5,8 +5,8 @@
         <item>Scream Siren</item>
     </string-array>
     <string-array name="siren_values">
-        <item>1</item>
-        <item>2</item>
+        <item>police</item>
+        <item>scream</item>
     </string-array>
     <!-- Emergency notification Preference -->
     <string-array name="emergencynotification_entries">
@@ -14,8 +14,8 @@
         <item>Emergency Beep</item>
     </string-array>
     <string-array name="emergencynotification_values">
-        <item>1</item>
-        <item>2</item>
+        <item>default</item>
+        <item>emergency</item>
     </string-array>
     <!-- Tracking request Preference -->
     <string-array name="tracking_request_entries">
@@ -24,9 +24,9 @@
         <item>Nobody</item>
     </string-array>
     <string-array name="tracking_request_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>all</item>
+        <item>only family</item>
+        <item>nobody</item>
     </string-array>
 </resources>
 

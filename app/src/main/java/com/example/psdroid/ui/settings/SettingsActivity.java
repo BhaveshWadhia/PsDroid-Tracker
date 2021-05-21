@@ -1,10 +1,13 @@
 package com.example.psdroid.ui.settings;
 //Import Class
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 
@@ -23,7 +26,6 @@ public class SettingsActivity extends AppCompatActivity {
         settings_toolbar = findViewById(R.id.settings_toolbar);
         setSupportActionBar(settings_toolbar);   //Set toolbar for the settings activity
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);    //Set back button on toolbar
-
         //Create click listener for back button
         settings_toolbar.setNavigationOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
