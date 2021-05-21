@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
                         case 2:
                             //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
                             //wry_function();
-                            New_wry_function();
+                            call_whereareyou_activity();
                             break;
                         case 3:
                             Toast.makeText(getContext(), "3", Toast.LENGTH_SHORT).show();
@@ -232,12 +232,8 @@ public class HomeFragment extends Fragment {
                     //failed
                 });
     }
-    private void New_wry_function() {
-
-
-
-
-
+    private void call_whereareyou_activity() {
+        startActivity(new Intent(getContext(),WhereAreYourActivity.class));
     }
 //End of Code
 }

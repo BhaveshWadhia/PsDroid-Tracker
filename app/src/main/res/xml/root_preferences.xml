@@ -107,7 +107,7 @@
             android:key="terms_condition_key"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="@string/terms_conditions_title"
+            android:title="@string/terms_condition_title"
             app:defaultValue="true"
             app:icon="@drawable/ic_arrow_right">
             <intent

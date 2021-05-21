@@ -91,4 +91,6 @@
     <string name="set_call_str">SET CALL</string>
     <string name="fakecaller_inputtext_str">Name</string>
     <string name="select_timer_str">Select Timer</string>
+    <string name="where_are_you_str">Where Are You ?</string>
+    <string name="terms_condition_title"><![CDATA[Terms & Condition]]></string>
 </resources>
