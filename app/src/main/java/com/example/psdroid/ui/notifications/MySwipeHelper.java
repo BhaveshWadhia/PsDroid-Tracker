@@ -1,7 +1,6 @@
 package com.example.psdroid.ui.notifications;
-
+// Import Class
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,25 +11,19 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.ActionMode;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.rpc.context.AttributeContext;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-
 public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
 
     int buttonWidth;
@@ -73,7 +66,6 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
             }
         };
 
-
     public MySwipeHelper(Context context,RecyclerView recyclerView,int buttonWidth)
         {
         super(0, ItemTouchHelper.LEFT);
@@ -93,8 +85,6 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
             }
         };
         attachSwipe();
-
-
     }
 
     private void attachSwipe() {
@@ -102,7 +92,6 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
     }
-
 
     private synchronized void recoverSwipedItem() {
 
@@ -113,8 +102,6 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
                 recyclerView.getAdapter().notifyItemChanged(pos);
         }
     }
-
-
 
     public class MyButton {
         private String text;
@@ -129,7 +116,6 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
             this.imageresId = imageresId;
             this.textSize = textSize;
             this.color = color;
-
             this.listener = listener;
             this.context = context;
             resources = context.getResources();
@@ -156,7 +142,7 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
             float cWidth = rectF.width();
             p.setTextAlign(Paint.Align.LEFT);
             p.getTextBounds(text,0,text.length(),r);
-            float x =0, y=0;
+            float x = 0, y = 0;
             if(imageresId == 0)
             {
                 x = cWidth/2f - r.width()/2f -r.left;

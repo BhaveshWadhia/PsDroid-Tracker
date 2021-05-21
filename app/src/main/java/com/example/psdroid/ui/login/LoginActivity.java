@@ -1,11 +1,8 @@
 package com.example.psdroid.ui.login;
 //Import Class
 import android.os.Bundle;
-import android.widget.ProgressBar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import com.example.psdroid.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

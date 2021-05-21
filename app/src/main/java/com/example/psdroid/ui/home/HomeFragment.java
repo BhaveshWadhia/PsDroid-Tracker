@@ -1,5 +1,6 @@
 package com.example.psdroid.ui.home;
 //Import Class
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,14 +21,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
-
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
-import com.example.psdroid.ui.add_users.Contacts_SharedPref;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,10 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hitomi.cmlibrary.CircleMenu;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 //Home Fragment
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
@@ -222,21 +217,14 @@ public class HomeFragment extends Fragment {
         hashMap.put("pUid",hisUid);
         hashMap.put("mobile",mob);
         hashMap.put("notification",notification);
-
         //hashMap.put("sUid",myUid);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         ref.child(uname).child("Notifications").child(timestamp).setValue(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //added successfully;
-                    }
+                .addOnSuccessListener(aVoid -> {
+                    //added successfully;
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //failed
-                    }
+                .addOnFailureListener(e -> {
+                    //failed
                 });
     }
 //End of Code

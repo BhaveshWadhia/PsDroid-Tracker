@@ -3,12 +3,7 @@ package com.example.psdroid;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.psdroid.ui.add_users.AddUsersActivity;
-import com.example.psdroid.ui.home.FakeCallerActivity;
-import com.example.psdroid.ui.login.AccountCreatedActivity;
 import com.example.psdroid.ui.login.IntroductoryActivity;
-
 //Main Activity
 public class MainActivity extends AppCompatActivity {
     @Override
