@@ -42,10 +42,12 @@
             android:name=".ui.add_users.AddUsersActivity"
             android:label="AddUserActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.home.WhereAreYourActivity"
-            android:label="WhereAreYouActvitiy"
+        <activity
+            android:name=".ui.home.WhereAreYourActivity"
+            android:label="WhereAreYouActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.home.FakeCallerActivity"
+        <activity
+            android:name=".ui.home.FakeCallerActivity"
             android:label="FakeCallerActivity"
             android:screenOrientation="portrait" />
         <activity

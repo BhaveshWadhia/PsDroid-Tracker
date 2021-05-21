@@ -3,9 +3,9 @@ package com.example.psdroid.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-import android.widget.Toolbar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
@@ -17,18 +17,21 @@ import java.util.Objects;
 
 public class WhereAreYourActivity extends AppCompatActivity implements WRY_RecyclerViewAdapter.clickInterface {
     Toolbar wry_toolbar;
-    ArrayList<String> name_array,phone_array = new ArrayList<>();
+    ArrayList<String> name_array, phone_array = new ArrayList<>();
     RecyclerView recyclerView;
     RecyclerViewAdapter recyclerViewAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.whereareyou_activity);
-        setContentView(R.layout.friends_family_activity);      // Set content of main activity as family_friends_activity.xml
         wry_toolbar = findViewById(R.id.where_are_you_toolbar);  //Set toolbar for the application
-        setActionBar(wry_toolbar);
+        setSupportActionBar(wry_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
-
+        //Initialize the Recycler View
+        recyclerView = findViewById(R.id.wry_contact_recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Create click listener for back button
         wry_toolbar.setNavigationOnClickListener(v -> {
             //Store array into shared pref when back button is clicked//Contacts_SharedPref.storeInList(getApplicationContext(),name_array);
@@ -43,10 +46,10 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-    // When item is clicked send 'where are you' request to the paticular user
+    // When item is clicked send 'where are you' request to the particular user
     @Override
-    public void onClicked(int pos) {
-        //Get the data of the user which is clicked & then send it to the firebase database through a request
-        Toast.makeText(this, (String) name_array.get(pos),Toast.LENGTH_SHORT).show();
+    public void onClicked(int pos){
+            //Get the data of the user which is clicked & then send it to the firebase database through a request
+            Toast.makeText(this, (String) name_array.get(pos), Toast.LENGTH_SHORT).show();
     }
 }

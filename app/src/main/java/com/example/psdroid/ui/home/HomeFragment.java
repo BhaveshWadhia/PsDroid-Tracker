@@ -147,6 +147,11 @@ public class HomeFragment extends Fragment {
         new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)), 800);// 0.8s Delay
     }
 
+    //Creating a delay function for where are you activity to load
+    private void call_whereareyou_activity() {
+        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), WhereAreYourActivity.class)), 800);// 0.8s Delay
+    }
+
     // Main Functions of the Application
 
      // Siren Function
@@ -231,9 +236,6 @@ public class HomeFragment extends Fragment {
                 .addOnFailureListener(e -> {
                     //failed
                 });
-    }
-    private void call_whereareyou_activity() {
-        startActivity(new Intent(getContext(),WhereAreYourActivity.class));
     }
 //End of Code
 }
