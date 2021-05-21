@@ -200,6 +200,16 @@ public class HomeFragment extends Fragment {
                     auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
                     Query username = ref.orderByChild(thisusername);
+                    ArrayList<String> dummy = new ArrayList<>();
+                    dummy.add("+918850905565");
+                    dummy.add("+919820331457");
+                   // Toast.makeText(getActivity(), dummy.toString(), Toast.LENGTH_SHORT).show();
+                    for(int i=0 ;i<dummy.size();i++){
+                       // Toast.makeText(getActivity(), dummy.get(i), Toast.LENGTH_SHORT).show();
+                        if(mob.equals(dummy.get(i))) {
+                            Toast.makeText(getActivity(), mob, Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     sendrequest(auth.getUid(),""+uname,""+thisusername,""+mob,"Wants to access your location");
                 }
             }
@@ -215,7 +225,9 @@ public class HomeFragment extends Fragment {
         //hashMap.put("pId",pId);
         AddUsersActivity getusers = new AddUsersActivity();
         ArrayList<String> users = getusers.phone_array;
-        Toast.makeText(getActivity(), ""+users, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), ""+users, Toast.LENGTH_SHORT).show();
+
+
         hashMap.put("uname",uname);//to whom it will send
         hashMap.put("user",username);//from whom it is send
         hashMap.put("timestamp",timestamp);
