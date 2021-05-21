@@ -40,13 +40,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class AdapterNotification extends RecyclerView.Adapter<AdapterNotification.HolderNotification>{
-
-
     public Context context;
     private FirebaseAuth firebaseAuth;
     private ArrayList<ModelNotification> notificationsList;
-
-
 
     public AdapterNotification(Context context, ArrayList<ModelNotification> notificationsList) {
         this.context = context;
@@ -54,21 +50,16 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
-
-
     @NonNull
     @Override
     public HolderNotification onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate view row
         View view = LayoutInflater.from(context).inflate(R.layout.notifications_content,parent,false);
-
-
         return new HolderNotification(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HolderNotification holder, int position) {
-
         //get and set data to views
 
         //get data
@@ -98,24 +89,14 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                                 String not = ""+ds.child("Notifications").getValue();
                                 model.setNotification(not);
                             //add to model
-
                           //  model.setUser(name);
                          //   model.setMobile(mobile);
-
-
                             //set to views
-
                             //holder.nameTv.setText(name);
-
-
                         }
-
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
         holder.nameTv.setText(name);
@@ -147,7 +128,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
                                     }
                                 });
                     }
@@ -161,20 +141,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 return false;
             }
         });
-
-
-
-
-
-
         //click notification for actions
-
-
-
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -183,9 +151,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
 
     //holder class for views of row_notification.xml
     class HolderNotification extends RecyclerView.ViewHolder{
-
         //declare views
-
         TextView nameTv,notificationTv,timeTv;
         public HolderNotification(@NonNull View itemView) {
             super(itemView);
