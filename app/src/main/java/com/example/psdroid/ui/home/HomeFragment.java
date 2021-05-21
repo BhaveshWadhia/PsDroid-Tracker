@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.ParcelUuid;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,9 +41,13 @@ public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
     public String thisusername;
+
     public HomeFragment(String _user) {
         //Constructor
         thisusername = _user;
+    }
+    public HomeFragment() {
+        //Constructor
     }
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

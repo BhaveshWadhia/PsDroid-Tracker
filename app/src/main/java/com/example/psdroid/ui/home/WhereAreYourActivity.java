@@ -19,7 +19,7 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
     Toolbar wry_toolbar;
     ArrayList<String> name_array, phone_array = new ArrayList<>();
     RecyclerView recyclerView;
-    RecyclerViewAdapter recyclerViewAdapter;
+    WRY_RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         name_array = Contacts_SharedPref.retrieve_nameFromList(this);
         phone_array = Contacts_SharedPref.retrieve_phoneFromList(this);
         //Recycler View Adapter Calling
-        recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
+        recyclerViewAdapter = new WRY_RecyclerViewAdapter(name_array, phone_array, this,this);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
