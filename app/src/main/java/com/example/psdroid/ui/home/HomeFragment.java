@@ -77,7 +77,8 @@ public class HomeFragment extends Fragment {
                             break;
                         case 2:
                             //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-                            wry_function();
+                            //wry_function();
+                            New_wry_function();
                             break;
                         case 3:
                             Toast.makeText(getContext(), "3", Toast.LENGTH_SHORT).show();
@@ -179,7 +180,6 @@ public class HomeFragment extends Fragment {
 
     // Where are you Function
     private void wry_function() {
-
         // DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         // DatabaseReference usersdRef = rootRef.child("users");
         Query checkuser = FirebaseDatabase.getInstance().getReference("users").orderByChild("user");
@@ -188,9 +188,7 @@ public class HomeFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String uname = ds.child("user").getValue(String.class);
-                   // Toast.makeText(getActivity(), uname, Toast.LENGTH_SHORT).show();
                     String mob = ds.child("mobile").getValue(String.class);
-                   // Toast.makeText(getActivity(), mob, Toast.LENGTH_SHORT).show();
                     FirebaseAuth auth;
                     auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
@@ -198,9 +196,7 @@ public class HomeFragment extends Fragment {
                     ArrayList<String> dummy = new ArrayList<>();
                     dummy.add("+918850905565");
                     dummy.add("+919820331457");
-                   // Toast.makeText(getActivity(), dummy.toString(), Toast.LENGTH_SHORT).show();
                     for(int i=0 ;i<dummy.size();i++){
-                       // Toast.makeText(getActivity(), dummy.get(i), Toast.LENGTH_SHORT).show();
                         if(mob.equals(dummy.get(i))) {
                             Toast.makeText(getActivity(), mob, Toast.LENGTH_SHORT).show();
                         }
@@ -220,11 +216,8 @@ public class HomeFragment extends Fragment {
         //hashMap.put("pId",pId);
         AddUsersActivity getusers = new AddUsersActivity();
         ArrayList<String> users = getusers.phone_array;
-       // Toast.makeText(getActivity(), ""+users, Toast.LENGTH_SHORT).show();
-
-
-        hashMap.put("uname",uname);//to whom it will send
-        hashMap.put("user",username);//from whom it is send
+        hashMap.put("uname",uname);     // To whom it will send
+        hashMap.put("user",username);   // From whom it is send
         hashMap.put("timestamp",timestamp);
         hashMap.put("pUid",hisUid);
         hashMap.put("mobile",mob);
@@ -238,6 +231,13 @@ public class HomeFragment extends Fragment {
                 .addOnFailureListener(e -> {
                     //failed
                 });
+    }
+    private void New_wry_function() {
+
+
+
+
+
     }
 //End of Code
 }

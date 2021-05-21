@@ -1,8 +1,12 @@
 package com.example.psdroid.ui.notifications;
-
 //model class for recyclerview of notification
 public class ModelNotification {
     String uname, user, timestamp, pUid, mobile, notification, sUid;
+
+    public ModelNotification(){
+        // Constructor for FireBase (required)//
+    }
+
     // Constructor
     public ModelNotification(String uname, String user, String timestamp, String pUid, String mobile, String notification, String sUid)
     {

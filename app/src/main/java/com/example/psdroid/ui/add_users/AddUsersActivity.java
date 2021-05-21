@@ -61,7 +61,6 @@ public class AddUsersActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.contacts_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //Retrieve data from shared pref & if data exist load it on the Recycler view
 
         //Create click listener for back button
         addUser_toolbar.setNavigationOnClickListener(v -> {
@@ -69,8 +68,23 @@ public class AddUsersActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
             finish();    //Close the activity
         });
-        // Add contact clicked
+
+        //Retrieve data from shared pref & if data exist load it on the Recycler view
+        name_array = Contacts_SharedPref.retrieve_nameFromList(this);
+        phone_array = Contacts_SharedPref.retrieve_phoneFromList(this);
+        //Recycler View Adapter Calling
+        recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        add_swiperChecker();     //Adding a swipe lister if user wants to delete the already saved data
+        //After retrieving if there are contacts in the list then display the changed layout
+        if (!name_array.isEmpty()) {
+          change_LayoutElements();
+        }
+
+        //Adding more contacts into to already stored list
         btn.setOnClickListener(v -> {
+            // Add contact clicked
             Intent contacts = new Intent(Intent.ACTION_PICK);
             contacts.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
             startActivityForResult(contacts, PICK_CONTACT);
@@ -132,51 +146,24 @@ public class AddUsersActivity extends AppCompatActivity {
         }
         if (name_array.size() < 5) {
             // Assigning values to the array
-
-                if (name_array.contains(temp_name)&&phone_array.contains(temp_number)) {
-                    display_snackbar("Added contact already exists..Please try adding another one");
+            if (name_array.contains(temp_name) && phone_array.contains(temp_number)) {
+                display_snackbar("Added contact already exists..\nPlease try adding another one");
+            }
+            else {
+                name_array.add(temp_name);
+                phone_array.add(temp_number);
+                //Used for debugging
+                for (int i = 0; i < name_array.size(); i++) {
+                    System.out.println(name_array.get(i));
+                    System.out.println(phone_array.get(i));
                 }
-                else {
-                    name_array.add(temp_name);
-                    phone_array.add(temp_number);
-
-
-                    //Used for debugging
-                    for (int i = 0; i < name_array.size(); i++) {
-                        System.out.println(name_array.get(i));
-                        System.out.println(phone_array.get(i));
-                    }
-                    //Recycler View Adapter Calling
-                    recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
-                    recyclerView.setAdapter(recyclerViewAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                    display_snackbar("Contact Added");  //Display SnackBar with this text
-                }
-            //Check if any item is swiped to right
-            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-                @Override
-                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                    return false;
-                }
-
-                @Override
-                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    //On left swipe remove the contact from the array list
-                    name_array.remove(viewHolder.getAdapterPosition());
-                    phone_array.remove(viewHolder.getAdapterPosition());
-                    recyclerViewAdapter.notifyDataSetChanged();
-                    display_snackbar("Contact Removed");  //Display SnackBar with this text
-                    if (name_array.size() == 0) {
-                        //Set Progress bar to load
-                        progressBar.setVisibility(View.VISIBLE);
-                        //Delay of 1 seconds
-                        new Handler().postDelayed(() -> {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            initial_LayoutElements();   //Set to initial layout when there are 0 contacts in the list
-                        }, 1000);
-                    }
-                }
-            }).attachToRecyclerView(recyclerView);
+                //Recycler View Adapter Calling
+                recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
+                recyclerView.setAdapter(recyclerViewAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                display_snackbar("Contact Added");  //Display SnackBar with this text
+                add_swiperChecker();
+            }
         }
     }
 
@@ -210,6 +197,42 @@ public class AddUsersActivity extends AppCompatActivity {
         //Move the contact title to the top when a contact is added to the list
         layout_txt1 = findViewById(R.id.fakecall_title);
         layout_txt1.setTextSize(24);
+    }
+    //Swipe Checker Function
+    private void add_swiperChecker() {
+        //Check if any item is swiped to right
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                //On left swipe remove the contact from the array list
+                name_array.remove(viewHolder.getAdapterPosition());
+                phone_array.remove(viewHolder.getAdapterPosition());
+                recyclerViewAdapter.notifyDataSetChanged();
+                display_snackbar("Contact Removed");  //Display SnackBar with this text
+                if (name_array.size() == 0) {
+                    //Set Progress bar to load
+                    progressBar.setVisibility(View.VISIBLE);
+                    //Delay of 1 seconds
+                    new Handler().postDelayed(() -> {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        initial_LayoutElements();   //Set to initial layout when there are 0 contacts in the list
+                    }, 1000);
+                }
+            }
+        }).attachToRecyclerView(recyclerView);
+    }
+
+    //Closing Activity
+    @Override
+    protected void onPause() {
+        //When the application is closed save the array into the shared preference
+        Contacts_SharedPref.store_nameInList(getApplicationContext(), name_array);
+        Contacts_SharedPref.store_phoneInList(getApplicationContext(), phone_array);
+        super.onPause();
     }
 }
 
