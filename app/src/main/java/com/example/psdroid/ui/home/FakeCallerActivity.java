@@ -10,10 +10,8 @@ import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 
 import java.util.Objects;
-
 // Fake Caller Activity
 public class FakeCallerActivity extends AppCompatActivity {
-    Integer timer;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

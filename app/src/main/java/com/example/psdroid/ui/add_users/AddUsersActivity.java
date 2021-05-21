@@ -15,27 +15,22 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
-import com.example.psdroid.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
 //Add Users Activity
 public class AddUsersActivity extends AppCompatActivity {
     //ContactPicker Counter
@@ -129,12 +124,7 @@ public class AddUsersActivity extends AppCompatActivity {
             //Set Progress bar to load
             progressBar.setVisibility(View.VISIBLE);
             //Delay of 1 seconds
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
-            }, 1000);
+            new Handler().postDelayed(() -> progressBar.setVisibility(View.INVISIBLE), 1000);
         }
         if (name_array.size() == 5)
         {
@@ -180,12 +170,9 @@ public class AddUsersActivity extends AppCompatActivity {
                         //Set Progress bar to load
                         progressBar.setVisibility(View.VISIBLE);
                         //Delay of 1 seconds
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                initial_LayoutElements();   //Set to initial layout when there are 0 contacts in the list
-                            }
+                        new Handler().postDelayed(() -> {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            initial_LayoutElements();   //Set to initial layout when there are 0 contacts in the list
                         }, 1000);
                     }
                 }
@@ -224,7 +211,6 @@ public class AddUsersActivity extends AppCompatActivity {
         layout_txt1 = findViewById(R.id.fakecall_title);
         layout_txt1.setTextSize(24);
     }
-
 }
 
 
