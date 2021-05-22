@@ -36,7 +36,7 @@ public class AddUsersActivity extends AppCompatActivity {
     //ContactPicker Counter
     public static final int PICK_CONTACT = 1;
     //ArrayLst to store contact details
-    private ArrayList<String> name_array = new ArrayList<>();
+    public ArrayList<String> name_array = new ArrayList<>();
     public ArrayList<String> phone_array = new ArrayList<>();
     String temp_name,temp_number;
     //Layout Elements
@@ -58,6 +58,8 @@ public class AddUsersActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         btn = findViewById(R.id.addUsers_btn);
         progressBar = findViewById(R.id.progressBar);  //Initialize progress bar
+        name_array.clear();
+        phone_array.clear();
         //Initialize the Recycler View
         recyclerView = findViewById(R.id.contacts_recycler);
         recyclerView.setHasFixedSize(true);
@@ -69,20 +71,23 @@ public class AddUsersActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
             finish();    //Close the activity
         });
-
-        //Retrieve data from shared pref & if data exist load it on the Recycler view
-        name_array = Contacts_SharedPref.retrieve_nameFromList(this);
-        phone_array = Contacts_SharedPref.retrieve_phoneFromList(this);
-        //Recycler View Adapter Calling
-        recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        add_swiperChecker();     //Adding a swipe lister if user wants to delete the already saved data
-        //After retrieving if there are contacts in the list then display the changed layout
-        if (!name_array.isEmpty()) {
-          change_LayoutElements();
-        }
-
+            //Retrieve data from shared pref & if data exist load it on the Recycler view
+            name_array = Contacts_SharedPref.retrieve_nameFromList(this);
+            phone_array = Contacts_SharedPref.retrieve_phoneFromList(this);
+            if (name_array != null){
+                //Recycler View Adapter Calling
+                recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
+                recyclerView.setAdapter(recyclerViewAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                add_swiperChecker();     //Adding a swipe lister if user wants to delete the already saved data
+                //After retrieving if there are contacts in the list then display the changed layout
+                if (!name_array.isEmpty()) {
+                    change_LayoutElements();
+                }
+            }
+            else{
+                // Do nothing
+                }
         //Adding more contacts into to already stored list
         btn.setOnClickListener(v -> {
             // Add contact clicked

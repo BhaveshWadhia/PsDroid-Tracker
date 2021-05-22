@@ -42,7 +42,21 @@
         android:layout_marginTop="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/where_are_you_toolbar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/nocontacts_hidden_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your contact list is empty"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/wry_contact_recycler"
+        app:layout_constraintEnd_toEndOf="@+id/wry_contact_recycler"
+        app:layout_constraintStart_toStartOf="@+id/wry_contact_recycler"
         app:layout_constraintTop_toBottomOf="@+id/where_are_you_toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

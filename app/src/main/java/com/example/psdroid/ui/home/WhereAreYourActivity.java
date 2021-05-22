@@ -2,18 +2,17 @@ package com.example.psdroid.ui.home;
 // Import Class
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
-import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
-import com.example.psdroid.ui.add_users.RecyclerViewAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,12 +31,14 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
     RecyclerView recyclerView;
     WRY_RecyclerViewAdapter recyclerViewAdapter;
     Boolean checkerBool = true;  // Currently target user is not checked
+    TextView hidden_txt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.whereareyou_activity);
         wry_toolbar = findViewById(R.id.where_are_you_toolbar);  //Set toolbar for the application
+        hidden_txt= findViewById(R.id.nocontacts_hidden_txt);
         setSupportActionBar(wry_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         //Initialize the Recycler View
@@ -50,13 +51,20 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
             finish();    //Close the activity
         });
+
         //Retrieve data from shared pref & if data exist load it on the Recycler view
         name_array = Contacts_SharedPref.retrieve_nameFromList(this);
         phone_array = Contacts_SharedPref.retrieve_phoneFromList(this);
-        //Recycler View Adapter Calling
-        recyclerViewAdapter = new WRY_RecyclerViewAdapter(name_array, phone_array, this, this);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (name_array != null) {
+            //Recycler View Adapter Calling
+            recyclerViewAdapter = new WRY_RecyclerViewAdapter(name_array, phone_array, this, this);
+            recyclerView.setAdapter(recyclerViewAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
+        else {
+            // Do nothing display no contacts
+            hidden_txt.setVisibility(View.VISIBLE);
+        }
     }
 
     // When item is clicked send 'where are you' request to the particular user

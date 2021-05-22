@@ -10,6 +10,7 @@
     <item
         android:id="@+id/notifications_search_btn"
         android:icon="@drawable/ic_search_black_24dp"
+        android:iconTint="@color/white"
         android:title="@string/search_notifications"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always"
