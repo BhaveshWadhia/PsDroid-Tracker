@@ -64,11 +64,11 @@ public class SignupTabFragment extends Fragment {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
 
-            String txt_email = email.getText().toString();
-            String txt_mobile = mobile.getText().toString();
-            String txt_user = user.getText().toString();
-            String txt_pass = pass.getText().toString();
-            String txt_conpass = conpass.getText().toString();
+            String txt_email = email.getText().toString().trim();
+            String txt_mobile = mobile.getText().toString().trim();
+            String txt_user = user.getText().toString().trim();
+            String txt_pass = pass.getText().toString().trim();
+            String txt_conpass = conpass.getText().toString().trim();
             String npWhiteSpace = "(?=\\s+$)";
 
             if(TextUtils.isEmpty(txt_email)|| TextUtils.isEmpty(txt_mobile)|| TextUtils.isEmpty(txt_user)||TextUtils.isEmpty(txt_pass)|| TextUtils.isEmpty(txt_conpass)){

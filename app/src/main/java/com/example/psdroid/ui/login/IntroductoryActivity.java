@@ -1,5 +1,7 @@
 package com.example.psdroid.ui.login;
 //Import Class
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,6 +27,8 @@ public class IntroductoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introductory);
+
+
 
         logo =  findViewById(R.id.logo);
         intro =  findViewById(R.id.image);
