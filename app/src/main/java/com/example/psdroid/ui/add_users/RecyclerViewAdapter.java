@@ -1,5 +1,5 @@
 package com.example.psdroid.ui.add_users;
-
+// Import Class
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
 import java.util.ArrayList;
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+    // Declaration
     public static  final String TAG = "RecyclerViewAdapter";
     private ArrayList<String> name_array,phone_array;
     private Context context;
@@ -26,7 +26,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // Constructor View Holder where all the layout elements are declared
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView con_name, con_phone;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             con_name = itemView.findViewById(R.id.contact_name);
@@ -34,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    //onCreate View Holder Constructors
+    // onCreate View Holder Constructors
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(view);
     }
 
+    // Binding Function
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder function is called.");
@@ -49,10 +49,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.con_phone.setText(phone_array.get(position));
     }
 
+    // Counter
     @Override
     public int getItemCount() {
         // Tells the viewHolder know the number of items to be displayed
         return name_array.size();
     }
-    }
+}
 

@@ -38,6 +38,7 @@ public class AddUsersActivity extends AppCompatActivity {
     //ArrayLst to store contact details
     private ArrayList<String> name_array = new ArrayList<>();
     public ArrayList<String> phone_array = new ArrayList<>();
+    String temp_name,temp_number;
     //Layout Elements
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -131,9 +132,10 @@ public class AddUsersActivity extends AppCompatActivity {
         cur.moveToFirst();
 
         //Fetch details
-        String temp_name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-        String temp_number = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+        temp_name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+        temp_number = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
         cur.close();
+        dataFixer(); //Call the data fixer before performing any function
         if (name_array.size() == 0) {
             //Set Progress bar to load
             progressBar.setVisibility(View.VISIBLE);
@@ -168,6 +170,27 @@ public class AddUsersActivity extends AppCompatActivity {
     }
 
     //Functions
+    // Data Authentication & DataFixer
+    private void dataFixer() {
+        int sizeOfNumber;
+        //Remove Unwanted Spaces
+        temp_name=temp_name.trim();
+        //Remove all white spaces from the number
+        temp_number=temp_number.replaceAll("\\s","");
+        //Check the size of number
+        sizeOfNumber = temp_number.length();
+        if(sizeOfNumber >10)
+        {
+            temp_number = temp_number.substring(sizeOfNumber - 10);
+            sizeOfNumber = temp_number.length();
+            // This will take last 10 digits of the number even if +91 is there
+            //Now add +91 to it
+        }
+        //If the size of number is == 10 then add "+91" explicitly
+        if(sizeOfNumber == 10) {
+            temp_number = "+91" + temp_number;
+        }
+    }
     //SnackBar Function
     private void display_snackbar(String text) {
         // Show a snack-bar when contact is added
@@ -198,6 +221,7 @@ public class AddUsersActivity extends AppCompatActivity {
         layout_txt1 = findViewById(R.id.fakecall_title);
         layout_txt1.setTextSize(24);
     }
+
     //Swipe Checker Function
     private void add_swiperChecker() {
         //Check if any item is swiped to right
@@ -225,7 +249,6 @@ public class AddUsersActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
     }
-
     //Closing Activity
     @Override
     protected void onPause() {
