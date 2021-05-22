@@ -83,6 +83,7 @@ public class LoginTabFragment extends Fragment {
                         intent.putExtra("user", userEnteredUsername);
                         startActivity(intent);
                         progressBar.setVisibility(View.INVISIBLE);
+                        getActivity().finish();
                     } else {
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity(), "Wrong Password", Toast.LENGTH_SHORT).show();

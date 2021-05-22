@@ -96,7 +96,9 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                             Toast.makeText(context, "Notification Deleted....", Toast.LENGTH_SHORT).show();
                             Toast.makeText(context, "Request Denied!", Toast.LENGTH_SHORT).show();
                         }).addOnFailureListener(e -> Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show());
-            });builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
+            });builder.setNegativeButton("Allow", (dialogInterface, i) ->{
+
+            });
             builder.create().show();
             return false;
         });

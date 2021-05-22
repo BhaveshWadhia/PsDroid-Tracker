@@ -154,7 +154,17 @@ public class HomeFragment extends Fragment {
 
     //Creating a delay function for where are you activity to load
     private void call_whereareyou_activity() {
-        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), WhereAreYourActivity.class)), 800);// 0.8s Delay
+      //  Intent intent = new Intent(getActivity(),WhereAreYourActivity.class)
+
+        new Handler().postDelayed(() -> activity()
+                , 800);// 0.8s Delay
+    }
+
+    private void activity() {
+        Intent intent = new Intent(getActivity(),WhereAreYourActivity.class);
+        intent.putExtra("user",thisusername);
+        startActivity(intent);
+
     }
 
     // Main Functions of the Application

@@ -85,6 +85,7 @@ public class SignupTabFragment extends Fragment {
             }  else if(!user.getText().toString().isEmpty()){
 
                 String userEnteredUsername = user.getText().toString().trim();
+               // String userEnteredMob = mobile.getText().toString().trim();
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
                 Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
@@ -96,6 +97,31 @@ public class SignupTabFragment extends Fragment {
                             user.requestFocus();
                         }
                         else {
+                            Query checkmob = reference.child("user").child("mob");
+                            checkmob.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        Toast.makeText(getActivity(), "Mobile Number is already in use!", Toast.LENGTH_SHORT).show();
+                                        mobile.requestFocus();
+                                    }
+                                    else {
+                                        Intent intent = new Intent(getActivity(), VerifyOTP.class);
+
+                                        intent.putExtra("user", txt_user);
+                                        intent.putExtra("mob", txt_mobile);
+                                        intent.putExtra("mail", txt_email);
+                                        intent.putExtra("pass", txt_pass);
+                                        intent.putExtra("cpass", txt_conpass);
+                                        startActivity(intent);
+                                        getActivity().finish();
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });/*
                             Intent intent = new Intent(getActivity(), VerifyOTP.class);
 
                             intent.putExtra("user", txt_user);
@@ -104,6 +130,7 @@ public class SignupTabFragment extends Fragment {
                             intent.putExtra("pass", txt_pass);
                             intent.putExtra("cpass", txt_conpass);
                             startActivity(intent);
+                            getActivity().finish();*/
                         }
                     }
                     @Override
@@ -111,6 +138,24 @@ public class SignupTabFragment extends Fragment {
 
                     }
                 });
+
+                      /*  else {
+                            Intent intent = new Intent(getActivity(), VerifyOTP.class);
+
+                            intent.putExtra("user", txt_user);
+                            intent.putExtra("mob", txt_mobile);
+                            intent.putExtra("mail", txt_email);
+                            intent.putExtra("pass", txt_pass);
+                            intent.putExtra("cpass", txt_conpass);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });*/
                 //      registerUser(txt_email,txt_pass);
 
             /*    UserHeplerClass heplerClass = new UserHeplerClass(txt_email,txt_user,txt_mobile,txt_pass,txt_conpass);
