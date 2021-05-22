@@ -55,18 +55,16 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         //Retrieve data from shared pref & if data exist load it on the Recycler view
         name_array = Contacts_SharedPref.retrieve_nameFromList(this);
         phone_array = Contacts_SharedPref.retrieve_phoneFromList(this);
-        if (name_array != null) {
-            //Recycler View Adapter Calling
-            recyclerViewAdapter = new WRY_RecyclerViewAdapter(name_array, phone_array, this, this);
-            recyclerView.setAdapter(recyclerViewAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        }
-        else {
+        //Recycler View Adapter Calling
+        recyclerViewAdapter = new WRY_RecyclerViewAdapter(name_array, phone_array, this, this);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (name_array.size()==0)
+        {
             // Do nothing display no contacts
             hidden_txt.setVisibility(View.VISIBLE);
         }
     }
-
     // When item is clicked send 'where are you' request to the particular user
     @Override
     public void onClicked(int pos) {

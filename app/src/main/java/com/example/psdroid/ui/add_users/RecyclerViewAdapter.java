@@ -53,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         // Tells the viewHolder know the number of items to be displayed
-        return name_array.size();
+       return name_array.size();
     }
 }
 

@@ -28,7 +28,11 @@ public class Contacts_SharedPref {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<String>>(){}.getType();
         ArrayList<String> returnedList = gson.fromJson(jsonString,type);
-        return returnedList;
+        if (returnedList == null)
+        {
+            returnedList = new ArrayList<>();
+        }
+         return returnedList;
     }
     // Data STORING of Phone Number
     public static void store_phoneInList(Context context, ArrayList<String> arrayList2) {
@@ -46,6 +50,10 @@ public class Contacts_SharedPref {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<String>>(){}.getType();
         ArrayList<String> returnedList = gson.fromJson(jsonString,type);
+        if (returnedList == null)
+        {
+            returnedList = new ArrayList<>();
+        }
         return returnedList;
     }
 }

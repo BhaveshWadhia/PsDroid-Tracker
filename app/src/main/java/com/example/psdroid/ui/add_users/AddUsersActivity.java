@@ -58,8 +58,6 @@ public class AddUsersActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         btn = findViewById(R.id.addUsers_btn);
         progressBar = findViewById(R.id.progressBar);  //Initialize progress bar
-        name_array.clear();
-        phone_array.clear();
         //Initialize the Recycler View
         recyclerView = findViewById(R.id.contacts_recycler);
         recyclerView.setHasFixedSize(true);
@@ -71,10 +69,9 @@ public class AddUsersActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
             finish();    //Close the activity
         });
-            //Retrieve data from shared pref & if data exist load it on the Recycler view
+        //Retrieve data from shared pref & if data exist load it on the Recycler view
             name_array = Contacts_SharedPref.retrieve_nameFromList(this);
             phone_array = Contacts_SharedPref.retrieve_phoneFromList(this);
-            if (name_array != null){
                 //Recycler View Adapter Calling
                 recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
                 recyclerView.setAdapter(recyclerViewAdapter);
@@ -83,10 +80,6 @@ public class AddUsersActivity extends AppCompatActivity {
                 //After retrieving if there are contacts in the list then display the changed layout
                 if (!name_array.isEmpty()) {
                     change_LayoutElements();
-                }
-            }
-            else{
-                // Do nothing
                 }
         //Adding more contacts into to already stored list
         btn.setOnClickListener(v -> {
@@ -135,7 +128,6 @@ public class AddUsersActivity extends AppCompatActivity {
         Uri uri = data.getData();
         Cursor cur = cr.query(uri, null, null, null);
         cur.moveToFirst();
-
         //Fetch details
         temp_name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
         temp_number = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
