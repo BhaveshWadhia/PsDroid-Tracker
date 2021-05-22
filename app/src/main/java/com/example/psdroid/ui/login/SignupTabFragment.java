@@ -96,7 +96,8 @@ public class SignupTabFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //Toast.makeText(getActivity(), "Entering again", Toast.LENGTH_SHORT).show();
                         if (snapshot.exists()) {
-                            //Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
+                            user.setText("");
                             user.requestFocus();
                         }
                         else{
@@ -155,18 +156,19 @@ public class SignupTabFragment extends Fragment {
     }
 
     private void checkmob(String txt_email, String txt_mobile, String txt_user, String txt_pass, String txt_conpass) {
-        Toast.makeText(getActivity(), "Entering function", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Entering function", Toast.LENGTH_SHORT).show();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-        Query checkmob = ref.orderByChild("mobile");
+        Query checkmob = ref.orderByChild("user");
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     String mob = ds.child("mobile").getValue(String.class);
-                    Toast.makeText(getActivity(), ""+mob, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), ""+mob, Toast.LENGTH_SHORT).show();
                     if (mob.equals(txt_mobile)) {
                         Toast.makeText(getActivity(), "Mobile Number is already in use!", Toast.LENGTH_SHORT).show();
+                        mobile.setText("");
                         mobile.requestFocus();
                     }
                     else {
