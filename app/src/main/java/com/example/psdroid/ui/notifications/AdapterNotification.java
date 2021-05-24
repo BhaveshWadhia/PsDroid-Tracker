@@ -12,8 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -57,6 +61,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         //Get data
         final ModelNotification model = notificationsList.get(position);
         String name = model.getUser();
+        String uname = model.getUname();
         String notification = model.getNotification();
         String uid = model.getsUid();
         final String timestamp = model.getTimestamp();
@@ -65,7 +70,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(timestamp));
         String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa",calendar).toString();
-/*
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         ref.orderByChild("user").equalTo(name).addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,7 +84,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
- */
+
         holder.nameTv.setText(name);
         holder.notificationTv.setText(notification);
         holder.timeTv.setText(pTime);
@@ -89,7 +94,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             builder.setMessage("Are you sure you want to deny the request?");
             builder.setPositiveButton("Deny", (dialogInterface, i) -> {
                 DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("users");
-                ref1.child(name).child("Notifications").child(timestamp).removeValue().addOnSuccessListener(aVoid -> {
+                ref1.child(uname).child("Notifications").child(timestamp).removeValue().addOnSuccessListener(aVoid -> {
                             Toast.makeText(context, "Notification Deleted....", Toast.LENGTH_SHORT).show();
                             Toast.makeText(context, "Request Denied!", Toast.LENGTH_SHORT).show();
                         }).addOnFailureListener(e -> Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show());
