@@ -1,4 +1,4 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui.forget_password;
 //Import Class
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +39,7 @@ public class ForgotPassword extends AppCompatActivity {
         number = findViewById(R.id.mobile);
         next = findViewById(R.id.next);
         back.setOnClickListener(view -> {
-            startActivity(new Intent(ForgotPassword.this,LoginActivity.class));
+            startActivity(new Intent(ForgotPassword.this, LoginActivity.class));
             finish();
         });
         number.addTextChangedListener(new TextWatcher() {
@@ -75,7 +76,7 @@ public class ForgotPassword extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    Intent intent = new Intent(getApplicationContext(),VerifyOTP.class);
+                    Intent intent = new Intent(getApplicationContext(), VerifyOTP.class);
                     intent.putExtra("mob",valmob);
                     intent.putExtra("user",_user);
                     intent.putExtra("whatToDo","updateData");

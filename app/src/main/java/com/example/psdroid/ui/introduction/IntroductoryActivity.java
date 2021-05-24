@@ -1,7 +1,5 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui.introduction;
 //Import Class
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,6 +13,10 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.introduction.OnBoardingFragment1;
+import com.example.psdroid.ui.introduction.OnBoardingFragment2;
+import com.example.psdroid.ui.introduction.OnBoardingFragment3;
+
 // Introductory Activity
 public class IntroductoryActivity extends AppCompatActivity {
     public ImageView logo,intro;

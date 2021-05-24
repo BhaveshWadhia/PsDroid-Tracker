@@ -1,6 +1,5 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui.forget_password;
 //Import Class
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -11,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.CheckInternet;
+import com.example.psdroid.ui.login.LoginActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 // Set Password Activity
@@ -28,7 +29,7 @@ public class SetPassword extends AppCompatActivity {
         connpass = findViewById(R.id.conpass);
         cancel = findViewById(R.id.cancel);
         cancel.setOnClickListener(view -> {
-            startActivity(new Intent(SetPassword.this,LoginActivity.class));
+            startActivity(new Intent(SetPassword.this, LoginActivity.class));
             finish();
         });
     }
@@ -62,7 +63,7 @@ public class SetPassword extends AppCompatActivity {
 
                 reference.child(_user).child("pass").setValue(np);
                 reference.child(_user).child("conpass").setValue(cnp);
-                Intent intent = new Intent(getApplicationContext(),PasswordChanged.class);
+                Intent intent = new Intent(getApplicationContext(), PasswordChanged.class);
                 intent.putExtra("user", _user);
                 startActivity(intent);
                 finish();

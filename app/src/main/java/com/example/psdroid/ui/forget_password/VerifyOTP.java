@@ -1,4 +1,4 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui.forget_password;
 //Import Class
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
-import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.login.LoginActivity;
+import com.example.psdroid.ui.login.UserHeplerClass;
+import com.example.psdroid.ui.register.AccountCreatedActivity;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -47,7 +49,7 @@ public class VerifyOTP extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(VerifyOTP.this,LoginActivity.class));
+                startActivity(new Intent(VerifyOTP.this, LoginActivity.class));
                 finish();
             }
         });
@@ -116,7 +118,7 @@ public class VerifyOTP extends AppCompatActivity {
     private void updateOldUserData() {
         String _mobile = getIntent().getStringExtra("mob");
         String _user = getIntent().getStringExtra("user");
-        Intent intent = new Intent(getApplicationContext(),SetPassword.class);
+        Intent intent = new Intent(getApplicationContext(), SetPassword.class);
         intent.putExtra("mob",_mobile);
         intent.putExtra("user",_user);
         startActivity(intent);

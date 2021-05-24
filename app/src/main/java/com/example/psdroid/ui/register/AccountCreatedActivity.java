@@ -1,4 +1,4 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui.register;
 //Import Class
 import android.content.Intent;
 import android.os.Bundle;

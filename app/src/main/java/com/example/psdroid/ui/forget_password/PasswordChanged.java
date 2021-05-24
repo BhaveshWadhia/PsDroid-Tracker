@@ -1,4 +1,4 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui.forget_password;
 
 import androidx.appcompat.app.AppCompatActivity;
 

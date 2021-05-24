@@ -1,4 +1,4 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui;
 //Import Class
 import android.content.Context;
 import android.net.ConnectivityManager;
