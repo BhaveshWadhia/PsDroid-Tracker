@@ -41,15 +41,6 @@ public class SetPassword extends AppCompatActivity {
         else {
             String np = npass.getText().toString().trim();
             String cnp = connpass.getText().toString().trim();
-         /*   String _user = getIntent().getStringExtra("user");
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("users");
-            if (np.equals(cnp) && ) {
-                reference.child(_user).child("pass").setValue(np);
-                reference.child(_user).child("conpass").setValue(cnp);
-                startActivity(new Intent(getApplicationContext(), MainScreen.class));
-                finish();
-            } else */
             if((np.length()<8) && (cnp.length()<8)) {
                 Toast.makeText(this, "Password too match", Toast.LENGTH_SHORT).show();
             }

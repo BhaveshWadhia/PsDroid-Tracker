@@ -36,8 +36,7 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        String _user = getIntent().getStringExtra("user");
-        usernamehere = _user;
+        usernamehere = getIntent().getStringExtra("user");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.whereareyou_activity);
         wry_toolbar = findViewById(R.id.where_are_you_toolbar);  //Set toolbar for the application
@@ -76,7 +75,6 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         String sendToPhone = phone_array.get(pos);
        // Toast.makeText(this, sendToName, Toast.LENGTH_SHORT).show();
        // Toast.makeText(this, sendToPhone, Toast.LENGTH_SHORT).show();
-
       //  Toast.makeText(this, usernamehere, Toast.LENGTH_SHORT).show();
 
         //Check all users phone number in the database & compare if the target user exist

@@ -46,12 +46,9 @@ public class VerifyOTP extends AppCompatActivity {
         String _pass = getIntent().getStringExtra("pass");
         String _cpass = getIntent().getStringExtra("cpass");
         WhatToDo = getIntent().getStringExtra("whatToDo");
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(VerifyOTP.this, LoginActivity.class));
-                finish();
-            }
+        cancel.setOnClickListener(view -> {
+            startActivity(new Intent(VerifyOTP.this, LoginActivity.class));
+            finish();
         });
         sendVerificationCodeToUser(_mobile);
     }
@@ -146,8 +143,6 @@ public class VerifyOTP extends AppCompatActivity {
     }
 
     public void callnectscreenfromotp(View view){
-//startActivity(new Intent(getApplicationContext(), MainScreen.class));
-//finish();
         String code = pinview.getText().toString();
         if(!code.isEmpty()){
             verifyCode(code);

@@ -1,4 +1,4 @@
-package com.example.psdroid.ui.login;
+package com.example.psdroid.ui.register;
 //Import Class
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,7 +51,8 @@ public class SignupTabFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     if(validateMobile(mobile.getText().toString())){
                         button.setEnabled(true);
-                    }else {
+                    }
+                    else {
                         button.setEnabled(false);
                         mobile.setError("Invalid Mobile No");
                     }
@@ -77,17 +78,19 @@ public class SignupTabFragment extends Fragment {
             }
             else if(txt_user.matches(npWhiteSpace)){
                 Toast.makeText(getActivity(), "Invalid username", Toast.LENGTH_SHORT).show();
-            }else if ((txt_pass.length() <8 ) & (txt_conpass.length() < 8)){
+            }
+            else if ((txt_pass.length() <8 ) & (txt_conpass.length() < 8)){
                 Toast.makeText(getActivity(), "Password too short", Toast.LENGTH_SHORT).show();
-            } else if (!txt_pass.equals(txt_conpass)){
+            }
+            else if (!txt_pass.equals(txt_conpass)){
                 Toast.makeText(getActivity(), "Password did not match!", Toast.LENGTH_SHORT).show();
-            }  else if (txt_mobile.length() < 10){
+            }
+            else if (txt_mobile.length() < 10){
                 Toast.makeText(getActivity(), "Invalid mobile number!", Toast.LENGTH_SHORT).show();
-            }  else if(!user.getText().toString().isEmpty()){
-              //  Toast.makeText(getActivity(), "Entering", Toast.LENGTH_SHORT).show();
+            }
+            else if(!user.getText().toString().isEmpty()) {
 
                 String userEnteredUsername = user.getText().toString().trim();
-               // String userEnteredMob = mobile.getText().toString().trim();
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
                 Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
@@ -99,64 +102,21 @@ public class SignupTabFragment extends Fragment {
                             Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
                             user.setText("");
                             user.requestFocus();
-                        }
-                        else{
-                            //Toast.makeText(getActivity(), "Hii", Toast.LENGTH_SHORT).show();
-                            checkmob(txt_email,txt_mobile,txt_user,txt_pass,txt_conpass);
-
-
-                            /*
-                            Intent intent = new Intent(getActivity(), VerifyOTP.class);
-
-                            intent.putExtra("user", txt_user);
-                            intent.putExtra("mob", txt_mobile);
-                            intent.putExtra("mail", txt_email);
-                            intent.putExtra("pass", txt_pass);
-                            intent.putExtra("cpass", txt_conpass);
-                            startActivity(intent);
-                            getActivity().finish();*/
+                        } else {
+                            checkmob(txt_email, txt_mobile, txt_user, txt_pass, txt_conpass);
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
-
-
-                      /*  else {
-                            Intent intent = new Intent(getActivity(), VerifyOTP.class);
-
-                            intent.putExtra("user", txt_user);
-                            intent.putExtra("mob", txt_mobile);
-                            intent.putExtra("mail", txt_email);
-                            intent.putExtra("pass", txt_pass);
-                            intent.putExtra("cpass", txt_conpass);
-                            startActivity(intent);
-                            getActivity().finish();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });*/
-                //      registerUser(txt_email,txt_pass);
-
-            /*    UserHeplerClass heplerClass = new UserHeplerClass(txt_email,txt_user,txt_mobile,txt_pass,txt_conpass);
-                reference.child(txt_user).setValue(heplerClass);
-                Toast.makeText(getActivity(), "Registered successfully!", Toast.LENGTH_SHORT).show();*/
-            }/*
-            else{
-                checkmob(txt_email,txt_mobile,txt_user,txt_pass,txt_conpass);
-                Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
-            }*/
+            }
         });
         return root;
     }
 
     private void checkmob(String txt_email, String txt_mobile, String txt_user, String txt_pass, String txt_conpass) {
-        //Toast.makeText(getActivity(), "Entering function", Toast.LENGTH_SHORT).show();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         Query checkmob = ref.orderByChild("user");
 
@@ -173,7 +133,6 @@ public class SignupTabFragment extends Fragment {
                     }
                     else {
                         Intent intent = new Intent(getActivity(), VerifyOTP.class);
-
                         intent.putExtra("user", txt_user);
                         intent.putExtra("mob", txt_mobile);
                         intent.putExtra("mail", txt_email);
@@ -185,7 +144,6 @@ public class SignupTabFragment extends Fragment {
                 }}
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         };
         checkmob.addListenerForSingleValueEvent(eventListener);
@@ -196,40 +154,4 @@ public class SignupTabFragment extends Fragment {
         Matcher m = p.matcher(input);
         return m.matches();
     }
-   /* @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        email= findViewById(R.id.email);
-        mobile= findViewById(R.id.mobile);
-        pass= findViewById(R.id.pass);
-        conpass= findViewById(R.id.conpass);
-        button= findViewById(R.id.button);
-        auth = FirebaseAuth.getInstance();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String txt_email = email.getText().toString();
-                String txt_mobile = mobile.getText().toString();
-                String txt_pass = pass.getText().toString();
-                String txt_conpass = conpass.getText().toString();
-
-                if(TextUtils.isEmpty(txt_email)|| TextUtils.isEmpty(txt_mobile)|| TextUtils.isEmpty(txt_pass)|| TextUtils.isEmpty(txt_conpass)){
-                    Toast.makeText(SignupTabFragment.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
-                } else if ((txt_pass.length() <8 ) & (txt_conpass.length() < 8)){
-                    Toast.makeText(SignupTabFragment.this, "Password too short", Toast.LENGTH_SHORT).show();
-                } else if (txt_pass != txt_conpass){
-                    Toast.makeText(SignupTabFragment.this, "Password did not match!", Toast.LENGTH_SHORT).show();
-                }  else if (txt_mobile.length() < 10){
-                    Toast.makeText(SignupTabFragment.this, "Invalid mobile number!", Toast.LENGTH_SHORT).show();
-                } else{
-                    registerUser(txt_email,txt_pass);
-                }
-
-            }
-        });
-    }*/
-
 }

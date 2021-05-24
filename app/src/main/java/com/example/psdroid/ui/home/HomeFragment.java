@@ -73,7 +73,6 @@ public class HomeFragment extends Fragment {
                 .setOnMenuSelectedListener(index -> {
                     switch (index) {
                         case 0:
-                            //Siren Function
                             siren_function();
                             break;
                         case 1:
@@ -81,8 +80,6 @@ public class HomeFragment extends Fragment {
                             // Call SHARE LOCATION FUNCTION
                             break;
                         case 2:
-                            //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-                            //wry_function();
                             call_whereareyou_activity();
                             break;
                         case 3:
