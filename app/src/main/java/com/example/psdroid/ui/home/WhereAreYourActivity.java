@@ -30,13 +30,13 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
     ArrayList<String> name_array, phone_array = new ArrayList<>();
     RecyclerView recyclerView;
     WRY_RecyclerViewAdapter recyclerViewAdapter;
-    Boolean checkerBool = true;  // Currently target user is not checked
+    Boolean checkerBool = Boolean.TRUE;  // Currently target user is not checked
     TextView hidden_txt;
-    String usernamehere;
+    String sender_user,target_user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        usernamehere = getIntent().getStringExtra("user");
+        sender_user = getIntent().getStringExtra("user");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.whereareyou_activity);
         wry_toolbar = findViewById(R.id.where_are_you_toolbar);  //Set toolbar for the application
@@ -73,73 +73,55 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         //Get the data of the user which is clicked & then send it to the firebase database through a request
         String sendToName = name_array.get(pos);
         String sendToPhone = phone_array.get(pos);
-       // Toast.makeText(this, sendToName, Toast.LENGTH_SHORT).show();
-       // Toast.makeText(this, sendToPhone, Toast.LENGTH_SHORT).show();
-      //  Toast.makeText(this, usernamehere, Toast.LENGTH_SHORT).show();
-
+        System.out.println("SendToPhone = "+sendToPhone);
         //Check all users phone number in the database & compare if the target user exist
         Query checkuser = FirebaseDatabase.getInstance().getReference("users").orderByChild("user");
-        //
-        //
-        //                           WRITE CODE HERE
-        //
-        //
-
-        //If user exist & any username is returned then set the checkerBool to 'false' & use that username in else function
-        // to send request to that user
-
-        //If checkerBool value is true then user does not exist
-     //   if (checkerBool) {
-            //Display that the user which is clicked does not have a PsDroid Account
-     //       Toast.makeText(this, "The user doesn't exist...\nTry to invite them", Toast.LENGTH_SHORT).show();
-     //   }
-        // If the user exist then send the request
-   //     else {
-            Query confirmuser = FirebaseDatabase.getInstance().getReference("users").orderByChild("user");
-            ValueEventListener eventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        //Get details of the user which is selected
-                        String uname = ds.child("user").getValue(String.class);
-                        String mob = ds.child("mobile").getValue(String.class);
-                        FirebaseAuth auth;
-                        auth = FirebaseAuth.getInstance();
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-                        // Query username = ref.orderByChild("Senders Username Here");
-                        ref.child(sendToName);
-                        //Toast.makeText(WhereAreYourActivity.this, "" + mob, Toast.LENGTH_SHORT).show();
-                       if(mob.equals(sendToPhone)) {
-                            //Sending request to paticular user in database
-                            sendrequest(auth.getUid(), "" + uname, "" + usernamehere, "" + mob, "Wants to access your location");
-                            break;
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "The user doesn't exist...\nTry to invite them", Toast.LENGTH_SHORT).show();
-
-
-                    }
+        ValueEventListener eventListener_1 = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    //Get details of the user which is selected
+                    String uname = ds.child("user").getValue(String.class);
+                    String mob = ds.child("mobile").getValue(String.class);
+                    System.out.println("Uname = "+uname);
+                    System.out.println("Mob = "+mob);
+                    FirebaseAuth auth;
+                    auth = FirebaseAuth.getInstance();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+                    assert mob != null;
+                    if (mob.equals(sendToPhone)) {
+                        //Set boolean to true when phone number is matched & get username of that user
+                        checkerBool =false;
+                        target_user = uname;
+                        System.out.println("targetusername = "+target_user);
+                        //Send request to that particular user
+                        sendrequest(auth.getUid(), "" + target_user, "" + sender_user, "" + mob, "Wants to access your location");
+                        Toast.makeText(getApplicationContext(), "Tracking request has been made\nPlease wait until user accepts request", Toast.LENGTH_SHORT).show();
+                        break;
                     }
                 }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // If operation cancelled
+                //If checkerBool value is true then user does not exist
+                if (checkerBool) {
+                    //Display that the user which is clicked does not have a PsDroid Account
+                    Toast.makeText(getApplicationContext(), "The user doesn't exist...\nTry to invite them", Toast.LENGTH_SHORT).show();
                 }
-            };
-            confirmuser.addListenerForSingleValueEvent(eventListener);
-      //  }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // If operation cancelled
+            }
+        };
+        checkuser.addListenerForSingleValueEvent(eventListener_1);
+
+
     }
 
     //Function
     // Send Request Function
     private void sendrequest(String hisUid, String uname, String username, String mob, String notification) {
-
         // Get Timestamp
         String timestamp = "" + System.currentTimeMillis();
         HashMap<Object, String> hashMap = new HashMap<>();
-        //hashMap.put("pId",pId);
-        //Toast.makeText(this, ""+username, Toast.LENGTH_SHORT).show();
-        // SET all data into the particular User -> 'Notification'
         hashMap.put("user", username);   // Requesting users name
         hashMap.put("uname", uname);     // Target Users name
         hashMap.put("timestamp", timestamp);
@@ -148,7 +130,7 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         hashMap.put("notification", notification);
         //hashMap.put("sUid",myUid);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-        ref.child(uname).child("Notifications").child(timestamp).setValue(hashMap)
+        ref.child(target_user).child("Notifications").child(timestamp).setValue(hashMap)
                 .addOnSuccessListener(aVoid -> {
                     //Added successfully;
                 }).addOnFailureListener(e -> {
