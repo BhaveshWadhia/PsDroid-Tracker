@@ -27,7 +27,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     private FirebaseAuth firebaseAuth;
     private ArrayList<ModelNotification> notificationsList;
 
-    //Constructor for Adapter
+    // Constructor for Adapter
     public AdapterNotification(Context context, ArrayList<ModelNotification> notificationsList) {
         this.context = context;
         this.notificationsList = notificationsList;
@@ -36,12 +36,12 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     //OnCreate of View
     @NonNull @Override
     public HolderNotification onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Inflate view row
+        // Inflate view row
         View view = LayoutInflater.from(context).inflate(R.layout.notifications_content,parent,false);
         return new HolderNotification(view);
     }
 
-    //View Holder function for notifications_content.xml
+    // View Holder function for notifications_content.xml
     class HolderNotification extends RecyclerView.ViewHolder{
         //declare views
         TextView nameTv,notificationTv,timeTv;
@@ -57,8 +57,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     // Data Binding Function
     @Override
     public void onBindViewHolder(@NonNull HolderNotification holder, int position) {
-        //Get and Set data to views
-        //Get data
+        // Get and Set data to views
+        // Get data
         final ModelNotification model = notificationsList.get(position);
         String name = model.getUser();
         String uname = model.getUname();

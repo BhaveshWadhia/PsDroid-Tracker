@@ -152,20 +152,16 @@ public class HomeFragment extends Fragment {
     //Creating a delay function for where are you activity to load
     private void call_whereareyou_activity() {
       //  Intent intent = new Intent(getActivity(),WhereAreYourActivity.class)
-
-        new Handler().postDelayed(() -> activity()
-                , 800);// 0.8s Delay
+        new Handler().postDelayed(() -> activity(), 800);// 0.8s Delay
     }
-
+    // Send username of current application user to the Where Are You Activity
     private void activity() {
         Intent intent = new Intent(getActivity(),WhereAreYourActivity.class);
         intent.putExtra("user",thisusername);
         startActivity(intent);
-
     }
 
     // Main Functions of the Application
-
      // Siren Function
     private void siren_function() {
         // Get user's saved settings
@@ -193,61 +189,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    // Where are you Function
-    private void wry_function() {
-        // DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        // DatabaseReference usersdRef = rootRef.child("users");
-        Query checkuser = FirebaseDatabase.getInstance().getReference("users").orderByChild("user");
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String uname = ds.child("user").getValue(String.class);
-                    String mob = ds.child("mobile").getValue(String.class);
-                    FirebaseAuth auth;
-                    auth = FirebaseAuth.getInstance();
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-                    Query username = ref.orderByChild(thisusername);
-                    ArrayList<String> dummy = new ArrayList<>();
-                    dummy.add("+918850905565");
-                    dummy.add("+919820331457");
-                    for(int i=0 ;i<dummy.size();i++){
-                        if(mob.equals(dummy.get(i))) {
-                            Toast.makeText(getActivity(), mob, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    sendrequest(auth.getUid(),""+uname,""+thisusername,""+mob,"Wants to access your location");
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        };
-        checkuser.addListenerForSingleValueEvent(eventListener);
-    }
-
-    private void sendrequest(String hisUid,String uname,String username,String mob,String notification) {
-        String timestamp =  ""+System.currentTimeMillis();
-        HashMap<Object, String> hashMap = new HashMap<>();
-        //hashMap.put("pId",pId);
-        AddUsersActivity getusers = new AddUsersActivity();
-        ArrayList<String> users = getusers.phone_array;
-        hashMap.put("uname",uname);     // To whom it will send
-        hashMap.put("user",username);   // From whom it is send
-        hashMap.put("timestamp",timestamp);
-        hashMap.put("pUid",hisUid);
-        hashMap.put("mobile",mob);
-        hashMap.put("notification",notification);
-        //hashMap.put("sUid",myUid);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-        ref.child(uname).child("Notifications").child(timestamp).setValue(hashMap)
-                .addOnSuccessListener(aVoid -> {
-                    //added successfully;
-                })
-                .addOnFailureListener(e -> {
-                    //failed
-                });
     }
 //End of Code
 }

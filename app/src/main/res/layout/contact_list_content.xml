@@ -32,7 +32,6 @@
             android:src="@mipmap/ic_contact_user_round"
             app:civ_border_color="@color/theme_lightblue"
             app:civ_border_width="1dp">
-
         </de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
