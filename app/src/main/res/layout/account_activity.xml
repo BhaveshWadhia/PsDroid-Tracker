@@ -2,214 +2,250 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="#000000">
+    android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appbar"
+      android:layout_width="match_parent"
+      android:layout_height="220dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/accounts_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/account_title_str"
+        app:titleTextColor="@color/white" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/accounts_image"
+        android:layout_width="100dp"
+
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:src="@drawable/account_image"
+        app:civ_border_color="#4E4E4E"
+        app:civ_border_width="2dp" />
 
     <TextView
-        android:id="@+id/account_title"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="@string/account_title"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="wadhiabhavesh@gmail.com"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <TextView
+      android:id="@+id/account_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:text="@string/account_subtitle"
+      android:textColor="@color/theme_black"
+      android:textSize="25sp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toTopOf="@+id/fullname_card"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/fullname_card"
+      android:layout_width="0dp"
+      android:layout_height="70dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginEnd="10dp"
+      android:elevation="50dp"
+      app:cardBackgroundColor="#FFFFFF"
+      app:cardCornerRadius="10dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/appbar"
+      app:layout_constraintVertical_bias="0.15">
+
+    <ImageView
+        android:id="@+id/fullname_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_account_fullname" />
+
+    <TextView
+        android:id="@+id/fullname_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/fullname_title"
         android:textColor="@color/theme_black"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fullname_card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/fullname_card"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:elevation="50dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12">
+    <TextView
+        android:id="@+id/fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="Bhavesh Wadhia" />
 
-        <ImageView
-            android:id="@+id/fullname_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:elevation="2dp"
-            app:srcCompat="@drawable/ic_account_fullname"></ImageView>
+  </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/fullname_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/fullname_title"
-            android:textColor="@color/theme_black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+  <androidx.cardview.widget.CardView
+      android:id="@+id/name_card"
+      android:layout_width="0dp"
+      android:layout_height="70dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="10dp"
+      android:elevation="50dp"
+      app:cardBackgroundColor="#FFFFFF"
+      app:cardCornerRadius="10dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/fullname_card"
+      app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/fullname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginBottom="8dp"
-            android:text="Bhavesh Wadhia" />
+    <ImageView
+        android:id="@+id/name_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_accounts_name"
+        app:tint="@color/theme_blue" />
 
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/name_title"
+        android:textColor="@color/theme_black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/name_card"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:elevation="50dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullname_card"
-        app:layout_constraintVertical_bias="0.0">
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="bhavesh123" />
+  </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/name_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:elevation="2dp"
-            app:srcCompat="@drawable/ic_accounts_name"
-            app:tint="@color/theme_blue"></ImageView>
+  <androidx.cardview.widget.CardView
+      android:id="@+id/email_card"
+      android:layout_width="0dp"
+      android:layout_height="70dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="10dp"
+      android:elevation="50dp"
+      app:cardBackgroundColor="#FFFFFF"
+      app:cardCornerRadius="10dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/name_card"
+      app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/name_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/name_title"
-            android:textColor="@color/theme_black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/email_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_accounts_email" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginBottom="8dp"
-            android:text="bhavesh123" />
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/email_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/email_title"
+        android:textColor="@color/theme_black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/email_card"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:elevation="50dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_card"
-        app:layout_constraintVertical_bias="0.0">
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="wadhiabhavesh@gmail.com" />
+  </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/email_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:elevation="2dp"
-            app:srcCompat="@drawable/ic_accounts_email"></ImageView>
+  <androidx.cardview.widget.CardView
+      android:id="@+id/phone_card"
+      android:layout_width="0dp"
+      android:layout_height="70dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="10dp"
+      android:elevation="50dp"
+      app:cardBackgroundColor="#FFFFFF"
+      app:cardCornerRadius="10dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/email_card"
+      app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/email_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/email_title"
-            android:textColor="@color/theme_black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/phone_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_accounts_phone" />
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginBottom="8dp"
-            android:text="wadhiabhavesh@gmail.com" />
+    <TextView
+        android:id="@+id/phone_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/phone_title"
+        android:textColor="@color/theme_black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="+91 8850905565" />
+  </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/phone_card"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:elevation="50dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_card"
-        app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/phone_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:elevation="2dp"
-            app:srcCompat="@drawable/ic_accounts_phone"></ImageView>
-
-        <TextView
-            android:id="@+id/phone_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/phone_title"
-            android:textColor="@color/theme_black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginBottom="8dp"
-            android:text="+91 8850905565" />
-
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

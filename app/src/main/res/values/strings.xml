@@ -95,9 +95,10 @@
     <string name="terms_condition_title"><![CDATA[Terms & Condition]]></string>
     <string name="unknown_str">Unknown</string>
 <!--    Account strings-->
-    <string name="account_title">Account Info</string>
+    <string name="account_subtitle">Account Info</string>
     <string name="name_title">Username</string>
     <string name="fullname_title">Full Name</string>
     <string name="email_title">Email ID</string>
     <string name="phone_title">Mobile Number</string>
+    <string name="account_title_str">Accounts</string>
 </resources>

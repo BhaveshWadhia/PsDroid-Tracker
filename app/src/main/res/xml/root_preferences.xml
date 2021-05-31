@@ -91,6 +91,20 @@
             android:title="@string/version_title"
             app:defaultValue="true" />
         <Preference
+            android:id="@+id/accounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="account_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/account_title_str"
+            app:defaultValue="true"
+            app:icon="@drawable/ic_arrow_right">
+            <intent
+                android:targetClass="com.example.psdroid.ui.settings.AccountsdActivity"
+                android:targetPackage="com.example.psdroid" />
+        </Preference>
+        <Preference
             android:id="@+id/feedback"
             android:key="feedback_key"
             android:selectAllOnFocus="true"

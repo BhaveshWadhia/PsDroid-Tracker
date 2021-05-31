@@ -45,6 +45,11 @@
             android:label="Settings"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.settings.AccountsActivity"
+            android:label="AccountsActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
             android:name=".ui.add_users.AddUsersActivity"
             android:label="AddUserActivity"
             android:screenOrientation="portrait" />

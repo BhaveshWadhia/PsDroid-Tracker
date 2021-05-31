@@ -30,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.settings, new SettingsFragment()).commit();
         }
     }
-    //Set content of root file to settings_activity Fragment
+    //Set content of root file to settings_activity FrameLayout
     public static class SettingsFragment extends PreferenceFragmentCompat
     {
         @Override
