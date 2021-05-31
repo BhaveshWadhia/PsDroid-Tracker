@@ -196,9 +196,7 @@ public class HomeFragment extends Fragment {
     // Main Functions of the Application
      // Track Me Function
     private void trakMe_function() {
-        Toast.makeText(getContext(), "Your location will be tracked shortly", Toast.LENGTH_SHORT).show();
         smsPermission();  //Get permission for SMS
-        sendSMS();
         sendLocation();
         // Call SHARE LOCATION FUNCTION
     }
@@ -258,7 +256,8 @@ public class HomeFragment extends Fragment {
     // Check permission for SMS
     private void smsPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-            //DO NOTHING
+            sendSMS();
+            Toast.makeText(getContext(), "Your location will be tracked shortly", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -272,7 +271,8 @@ public class HomeFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //Check condition for sending SMS
         if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        } else {
+        }
+        else {
             Toast.makeText(getActivity(), "Please give the permission for SMS from your phone's settings", Toast.LENGTH_SHORT).show();
         }
     }
