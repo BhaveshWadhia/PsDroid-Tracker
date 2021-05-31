@@ -13,8 +13,7 @@ import com.example.psdroid.ui.register.SignupTabFragment;
 import java.util.Objects;
 //Accounts Activity
 public class AccountsActivity extends AppCompatActivity {
-    public Toolbar account_toolbar;
-    String st;
+    public Toolbar account_toolbar;;
     TextView textView;
     SignupTabFragment getDetails = new SignupTabFragment();
     //Create a instance of the state and replace the current fragment with the settings_activity Fragment
@@ -34,6 +33,8 @@ public class AccountsActivity extends AppCompatActivity {
         // Display Details
         textView=findViewById(R.id.fullname);
         textView.setText(getDetails.txt_user);
+        textView=findViewById(R.id.accounts_email);
+        textView.setText(getDetails.txt_email);
         textView=findViewById(R.id.name);
         textView.setText(getDetails.txt_user);
         textView=findViewById(R.id.email);
