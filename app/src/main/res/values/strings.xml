@@ -96,11 +96,12 @@
     <string name="unknown_str">Unknown</string>
 <!--    Account strings-->
     <string name="account_title">Account Info</string>
-    <string name="name_title">NAME</string>
+    <string name="name_title">Username</string>
+    <string name="fullname_title">Full Name</string>
     <string name="id_name_str">ABC</string>
-    <string name="email_title">EMAIL</string>
+    <string name="email_title">Email ID</string>
     <string name="id_email_str">ABC@gmail.com</string>
-    <string name="phone_title">PHONE</string>
-    <string name="id_phone_str">987654321</string>
+    <string name="phone_title">Mobile Number</string>
+    <string name="id_phone_str">+91 987654321</string>
 
 </resources>

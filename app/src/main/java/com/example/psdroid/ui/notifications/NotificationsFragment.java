@@ -54,7 +54,6 @@ public class NotificationsFragment extends Fragment {
         super.onCreateOptionsMenu(menu_1, inflater_1);
     }
 
-
     private void getAllNotifications() {
         notificationsList = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");

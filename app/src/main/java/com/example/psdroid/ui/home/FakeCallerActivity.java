@@ -24,7 +24,7 @@ public class FakeCallerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fake_caller_activity);
+        setContentView(R.layout.activity_fake_caller);
         Toolbar fakeCaller_toolbar = findViewById(R.id.fakecall_toolbar);  //Set toolbar for the application
         setSupportActionBar(fakeCaller_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
