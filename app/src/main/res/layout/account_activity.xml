@@ -63,7 +63,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="36dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/id_name_str" />
+            android:text="Bhavesh Wadhia" />
 
     </androidx.cardview.widget.CardView>
 
@@ -112,7 +112,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="36dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/id_name_str" />
+            android:text="bhavesh123" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -160,7 +160,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="36dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/id_email_str" />
+            android:text="wadhiabhavesh@gmail.com" />
 
     </androidx.cardview.widget.CardView>
 
@@ -209,7 +209,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="36dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/id_phone_str" />
+            android:text="+91 8850905565" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
