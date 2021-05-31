@@ -28,8 +28,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView con_name, con_phone;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            con_name = itemView.findViewById(R.id.contact_name);
-            con_phone = itemView.findViewById(R.id.contact_phone);
+            con_name = itemView.findViewById(R.id.email_title);
+            con_phone = itemView.findViewById(R.id.name);
         }
     }
 

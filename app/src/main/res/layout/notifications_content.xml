@@ -10,7 +10,7 @@
     app:contentPadding="3dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/parent_card"
+        android:id="@+id/email_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"

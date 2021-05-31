@@ -94,4 +94,13 @@
     <string name="where_are_you_str">Where Are You ?</string>
     <string name="terms_condition_title"><![CDATA[Terms & Condition]]></string>
     <string name="unknown_str">Unknown</string>
+<!--    Account strings-->
+    <string name="account_title">Account Info</string>
+    <string name="name_title">NAME</string>
+    <string name="id_name_str">ABC</string>
+    <string name="email_title">EMAIL</string>
+    <string name="id_email_str">ABC@gmail.com</string>
+    <string name="phone_title">PHONE</string>
+    <string name="id_phone_str">987654321</string>
+
 </resources>
