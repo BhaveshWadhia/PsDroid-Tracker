@@ -89,8 +89,7 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
 
                     System.out.println("Uname = "+uname);
                     System.out.println("Mob = "+mob);
-                    FirebaseAuth auth;
-                    auth = FirebaseAuth.getInstance();
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
                     assert mob != null;
                     if (mob.equals(sendToPhone)) {

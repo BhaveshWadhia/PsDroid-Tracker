@@ -28,6 +28,9 @@ import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -258,6 +261,7 @@ public class AddUsersActivity extends AppCompatActivity {
         //When the application is closed save the array into the shared preference
         Contacts_SharedPref.store_nameInList(getApplicationContext(), name_array);
         Contacts_SharedPref.store_phoneInList(getApplicationContext(), phone_array);
+        // If possible store information in Firebase Database
         super.onPause();
     }
 }
