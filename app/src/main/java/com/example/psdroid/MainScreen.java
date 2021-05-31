@@ -45,7 +45,6 @@ import dalvik.system.PathClassLoader;
         main_navbar.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment(_user)).commit();
         user = _user;
-        getPermissions();
     }
 
     //Bottom navigation when selected
@@ -72,24 +71,4 @@ import dalvik.system.PathClassLoader;
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                 return true;
             };
-
-
-
-    //Getting all permissions from the user
-    private void getPermissions() {
-        //Get user permissions for sending SMS
-        if (ContextCompat.checkSelfPermission(MainScreen.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) { } else {
-            //If permission is not granted then ask for permission
-            ActivityCompat.requestPermissions(MainScreen.this, new String[]{Manifest.permission.SEND_SMS}, 100);
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //Check condition for sending SMS
-        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { }
-        else {
-            Toast.makeText(this, "Please give the permission for SMS from your phone's settings", Toast.LENGTH_SHORT).show();
-        }
-    }
 }

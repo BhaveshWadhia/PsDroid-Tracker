@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
@@ -22,11 +23,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import com.example.psdroid.MainActivity;
+import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
@@ -68,7 +71,6 @@ public class HomeFragment extends Fragment {
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
-
     }
 
     //When view is created load the menus
@@ -117,7 +119,6 @@ public class HomeFragment extends Fragment {
         inflater_1.inflate(R.menu.home_menu, menu_1);
         super.onCreateOptionsMenu(menu_1, inflater_1);
     }
-
 
     //When any item from others menu is selected
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -196,15 +197,16 @@ public class HomeFragment extends Fragment {
      // Track Me Function
     private void trakMe_function() {
         Toast.makeText(getContext(), "Your location will be tracked shortly", Toast.LENGTH_SHORT).show();
-        //sendSMS(); Commented for now
+        smsPermission();  //Get permission for SMS
+        sendSMS();
         sendLocation();
         // Call SHARE LOCATION FUNCTION
     }
+
     // Send Location
     private void sendLocation() {
         //Get location of current user  send to database
     }
-
     // Send SMS function
     private void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();  //Get the sms manager to send the SMS
@@ -250,6 +252,28 @@ public class HomeFragment extends Fragment {
                 mediaPlayer = null;
                 Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    // Check permission for SMS
+    private void smsPermission() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            //DO NOTHING
+        }
+        else
+        {
+            //If permission is not granted then ask for permission
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 100);
+        }
+    }
+    //Get Permission Result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //Check condition for sending SMS
+        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        } else {
+            Toast.makeText(getActivity(), "Please give the permission for SMS from your phone's settings", Toast.LENGTH_SHORT).show();
         }
     }
 //End of Code
