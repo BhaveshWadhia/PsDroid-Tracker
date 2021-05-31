@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.forget_password.VerifyOTP;
+import com.example.psdroid.ui.settings.AccountsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,7 @@ public class SignupTabFragment extends Fragment {
     private EditText mobile,user,email,pass,conpass;
     private Button button;
     FirebaseDatabase rootNode;
+    public String txt_user,txt_email,txt_mobile,txt_pass,txt_conpass,npWhiteSpace;
     DatabaseReference reference;
     private FirebaseAuth auth;
 
@@ -66,12 +68,12 @@ public class SignupTabFragment extends Fragment {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
 
-            String txt_email = email.getText().toString().trim();
-            String txt_mobile = mobile.getText().toString().trim();
-            String txt_user = user.getText().toString().trim();
-            String txt_pass = pass.getText().toString().trim();
-            String txt_conpass = conpass.getText().toString().trim();
-            String npWhiteSpace = "(?=\\s+$)";
+           txt_email = email.getText().toString().trim();
+           txt_mobile = mobile.getText().toString().trim();
+           txt_user = user.getText().toString().trim();
+           txt_pass = pass.getText().toString().trim();
+           txt_conpass = conpass.getText().toString().trim();
+           npWhiteSpace = "(?=\\s+$)";
 
             if(TextUtils.isEmpty(txt_email)|| TextUtils.isEmpty(txt_mobile)|| TextUtils.isEmpty(txt_user)||TextUtils.isEmpty(txt_pass)|| TextUtils.isEmpty(txt_conpass)){
                 Toast.makeText(getActivity(), "Empty Credentials!", Toast.LENGTH_SHORT).show();

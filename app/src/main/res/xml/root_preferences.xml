@@ -101,7 +101,7 @@
             app:defaultValue="true"
             app:icon="@drawable/ic_arrow_right">
             <intent
-                android:targetClass="com.example.psdroid.ui.settings.AccountsdActivity"
+                android:targetClass="com.example.psdroid.ui.settings.AccountsActivity"
                 android:targetPackage="com.example.psdroid" />
         </Preference>
         <Preference
