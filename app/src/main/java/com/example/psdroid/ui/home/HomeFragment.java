@@ -27,6 +27,7 @@ import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,8 +37,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.hitomi.cmlibrary.CircleMenu;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static android.content.Context.MODE_PRIVATE;
+
 //Home Fragment
 public class HomeFragment extends Fragment {
+
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
     public String thisusername;
@@ -51,6 +56,7 @@ public class HomeFragment extends Fragment {
     }
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Toast.makeText(getActivity(), ""+thisusername, Toast.LENGTH_SHORT).show();
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
@@ -105,6 +111,8 @@ public class HomeFragment extends Fragment {
         super.onCreateOptionsMenu(menu_1, inflater_1);
     }
 
+
+
     //When any item from others menu is selected
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -129,7 +137,11 @@ public class HomeFragment extends Fragment {
             alert_builder.setCancelable(true);
             alert_builder.setPositiveButton("Exit", (dialog, which) -> {
                 // Toast.makeText(getContext(), "Logging-Out Soon...", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 //LOG OUT from app and return to login page
             });
             alert_builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
@@ -141,13 +153,27 @@ public class HomeFragment extends Fragment {
 
     //Creating a delay function for add user activity to load
     private void call_addUser_activity() {
-        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)), 800);// 0.8s Delay
+        new Handler().postDelayed(() -> activitytoadduser(), 800);// 0.8s Delay
+      //  new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)), 800);// 0.8s Delay
+    }
+
+    private void activitytoadduser() {
+        Intent intent = new Intent(getActivity(),AddUsersActivity.class);
+        intent.putExtra("user",thisusername);
+        startActivity(intent);
     }
 
     //Creating a delay function for add user activity to load
     private void call_fakeCall_activity() {
-        new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)), 800);// 0.8s Delay
+        new Handler().postDelayed(() -> activitytofakecall(), 800);// 0.8s Delay
+       // new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)), 800);// 0.8s Delay
     }
+    private void activitytofakecall() {
+        Intent intent = new Intent(getActivity(),FakeCallerActivity.class);
+        intent.putExtra("user",thisusername);
+        startActivity(intent);
+    }
+
 
     //Creating a delay function for where are you activity to load
     private void call_whereareyou_activity() {

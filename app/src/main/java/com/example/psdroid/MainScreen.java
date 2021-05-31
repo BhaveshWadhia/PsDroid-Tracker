@@ -1,23 +1,36 @@
 package com.example.psdroid;
 //Import class
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import com.example.psdroid.ui.gps.GpsFragment;
 import com.example.psdroid.ui.home.HomeFragment;
+import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 //Main Screen Activity
     public class MainScreen extends AppCompatActivity {
+private FirebaseAuth firebaseAuth;
+
   public Toolbar  app_toolbar;
   private String user;
+
+
+
     // String _user = getIntent().getStringExtra("user");
     //Create instance of the main screen & display fist page as Home
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
         String _user = getIntent().getStringExtra("user");
         setContentView(R.layout.activity_mainscreen);       // Set content of main activity as activity_mainscreen.xml
         app_toolbar = findViewById(R.id.app_toolbar);  //Set toolbar for the application

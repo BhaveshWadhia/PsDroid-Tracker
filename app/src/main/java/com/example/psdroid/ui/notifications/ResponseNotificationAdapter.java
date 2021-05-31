@@ -1,7 +1,9 @@
 package com.example.psdroid.ui.notifications;
 //Import Class
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,15 +25,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 // Notification Adapter
-public class AdapterNotification extends RecyclerView.Adapter<AdapterNotification.HolderNotification>{
+public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNotificationAdapter.HolderNotification>{
     public Context context;
     private FirebaseAuth firebaseAuth;
     private ArrayList<ModelNotification> notificationsList;
-    public AdapterNotification(){
+    public ResponseNotificationAdapter(){
 
     }
     // Constructor for Adapter
-    public AdapterNotification(Context context, ArrayList<ModelNotification> notificationsList) {
+    public ResponseNotificationAdapter(Context context, ArrayList<ModelNotification> notificationsList) {
         this.context = context;
         this.notificationsList = notificationsList;
         firebaseAuth = FirebaseAuth.getInstance();
@@ -40,7 +42,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     @NonNull @Override
     public HolderNotification onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate view row
-        View view = LayoutInflater.from(context).inflate(R.layout.notifications_content,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.reponsenotificationscontent,parent,false);
         return new HolderNotification(view);
     }
 
@@ -80,10 +82,10 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    String not = (String) ds.child("Notifications").getValue();
-                  // String res = (String) ds.child("Location").getValue();
+                    String not = (String) ds.child("Location").getValue();
+                    // String res = (String) ds.child("Location").getValue();
                     model.setNotification(not);
-                  //  model.setNotification(res);
+                    //  model.setNotification(res);
                 }
             }
             @Override
@@ -95,25 +97,32 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         holder.nameTv.setText(name);
         holder.notificationTv.setText(notification);
         holder.timeTv.setText(pTime);
-        holder.itemView.setOnLongClickListener(view -> {
+       holder.itemView.setOnLongClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Deny");
-            builder.setMessage("Are you sure you want to deny the request?");
-            builder.setPositiveButton("Deny", (dialogInterface, i) -> {
+            builder.setTitle("Delete");
+            builder.setMessage("Are you sure you want to delete this notification?");
+            builder.setPositiveButton("Delete", (dialogInterface, i) -> {
                 DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("users");
-                ref1.child(uname).child("Notifications").child(timestamp).removeValue().addOnSuccessListener(aVoid -> {
-                            Toast.makeText(context, "Notification Deleted....", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(context, "Request Denied!", Toast.LENGTH_SHORT).show();
-                        }).addOnFailureListener(e -> Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show());
+                ref1.child(uname).child("Location").child(timestamp).removeValue().addOnSuccessListener(aVoid -> {
+                    Toast.makeText(context, "Notification Deleted", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Request Denied!", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show());
             });
-            builder.setNegativeButton("Allow", (dialogInterface, i) ->{
+            builder.setNegativeButton("Cancel", (dialogInterface, i) ->{
 
-                sendrequest(auth.getUid(), "" + name, "" + uname, ""+"123", "Has allowed you request for location");//uname=sender,name=target_user
+                //   sendrequest(auth.getUid(), "" + name, "" + uname, ""+"123", "Has allowed you request for location");//uname=sender,name=target_user
 
 
             });
             builder.create().show();
             return false;
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Redirecting to Map Fragment", Toast.LENGTH_SHORT).show();
+                
+            }
         });
         //Click notification for actions
     }
@@ -121,7 +130,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     public int getItemCount() {
         return notificationsList.size();
     }
-
+/*
     private void sendrequest(String hisUid, String uname, String username,String mob ,String notification) {  //uname=target_user,username=sender
         // Get Timestamp
         String timestamp = "" + System.currentTimeMillis();
@@ -140,5 +149,5 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 }).addOnFailureListener(e -> {
             //Failed
         });
-    }
+    }*/
 }

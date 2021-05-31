@@ -1,20 +1,25 @@
 package com.example.psdroid;
 //Import Class
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.ui.introduction.IntroductoryActivity;
 import com.example.psdroid.ui.login.LoadingActivity;
 import com.example.psdroid.ui.login.LoginActivity;
+//import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 //Main Activity
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         SharedPreferences preferences = getSharedPreferences("PREFERENCE",MODE_PRIVATE);
         String FirstTime = preferences.getString("FirstTimeInstall","");
@@ -30,7 +35,13 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("FirstTimeInstall","No");
             editor.apply();
             startActivity(new Intent(this, IntroductoryActivity.class));
+
+
+
         }
 
+
+
     }
+
 }
