@@ -1,16 +1,19 @@
 package com.example.psdroid.ui.home;
 //Import Class
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelUuid;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,10 +23,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+
+import com.example.psdroid.MainActivity;
+import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
+import com.example.psdroid.ui.add_users.Contacts_SharedPref;
+import com.example.psdroid.ui.gps.LocationTracker;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +56,8 @@ public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
     public String thisusername;
+    public String trackMe_status;
+    final int SEND_SMS_PERMISSION_CODE = 1;
 
     public HomeFragment(String _user) {
         //Constructor
@@ -61,7 +73,6 @@ public class HomeFragment extends Fragment {
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
-
     }
 
     //When view is created load the menus
@@ -82,25 +93,25 @@ public class HomeFragment extends Fragment {
                             siren_function();
                             break;
                         case 1:
-                            Toast.makeText(getContext(), "Your location is being tracked", Toast.LENGTH_SHORT).show();
-                            // Call SHARE LOCATION FUNCTION
+                            trakMe_function();
                             break;
                         case 2:
                             call_whereareyou_activity();
                             break;
                         case 3:
-                            Toast.makeText(getContext(), "3", Toast.LENGTH_SHORT).show();
-                            // SEND ALERT SIGNALS TO ALL CONTACT
+                            Toast.makeText(getContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
+                            // Not implemented yet
                             break;
                         case 4:
-                            call_addUser_activity();  // View/Update contacts page
+                            call_addUser_activity();  // View/Update contacts activity
                             break;
                         case 5:
-                            call_fakeCall_activity();
+                            call_fakeCall_activity();  //Fake Caller page activity
                             break;
                     }
                 });
     }
+
 
     //Create the Home Toolbar Menu
     @Override
@@ -110,8 +121,6 @@ public class HomeFragment extends Fragment {
         inflater_1.inflate(R.menu.home_menu, menu_1);
         super.onCreateOptionsMenu(menu_1, inflater_1);
     }
-
-
 
     //When any item from others menu is selected
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -154,7 +163,6 @@ public class HomeFragment extends Fragment {
     //Creating a delay function for add user activity to load
     private void call_addUser_activity() {
         new Handler().postDelayed(() -> activitytoadduser(), 800);// 0.8s Delay
-      //  new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)), 800);// 0.8s Delay
     }
 
     private void activitytoadduser() {
@@ -166,7 +174,6 @@ public class HomeFragment extends Fragment {
     //Creating a delay function for add user activity to load
     private void call_fakeCall_activity() {
         new Handler().postDelayed(() -> activitytofakecall(), 800);// 0.8s Delay
-       // new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)), 800);// 0.8s Delay
     }
     private void activitytofakecall() {
         Intent intent = new Intent(getActivity(),FakeCallerActivity.class);
@@ -174,21 +181,57 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-
     //Creating a delay function for where are you activity to load
     private void call_whereareyou_activity() {
       //  Intent intent = new Intent(getActivity(),WhereAreYourActivity.class)
-        new Handler().postDelayed(() -> activity(), 800);// 0.8s Delay
+        new Handler().postDelayed(() -> wry_activity(), 800);// 0.8s Delay
     }
     // Send username of current application user to the Where Are You Activity
-    private void activity() {
+    private void wry_activity() {
         Intent intent = new Intent(getActivity(),WhereAreYourActivity.class);
         intent.putExtra("user",thisusername);
         startActivity(intent);
     }
 
     // Main Functions of the Application
-     // Siren Function
+     // Track Me Function
+    private void trakMe_function() {
+        trackMe_status = "start"; // This is when Track_Me is clicked first time
+        smsPermission();  //Get permission for SMS
+        sendLocation();
+        // Call SHARE LOCATION FUNCTION
+    }
+
+    // Send Location
+    private void sendLocation() {
+        //Get location of current user  send to database
+        System.out.println("Inside Send Location");
+        Intent intent = new Intent(getActivity(),LocationTracker.class);
+        intent.putExtra("user", thisusername);
+        intent.putExtra("status",trackMe_status);
+        getActivity().startService(intent);
+    }
+
+    // Send SMS function
+    private void sendSMS() {
+        SmsManager smsManager = SmsManager.getDefault();  //Get the sms manager to send the SMS
+        ArrayList<String> phone_array = new ArrayList<>();
+        phone_array = Contacts_SharedPref.retrieve_phoneFromList(getContext());   //Get all the contacts from the list
+        // Message to be send
+        String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking so that you can easily track them & help when needed";
+        for (String number: phone_array)
+        {
+            try {
+                smsManager.sendTextMessage(number,null,message,null,null); //Send SMS
+            }
+            catch (Exception exception)
+            {
+             Toast.makeText(getActivity(),"SMS Service Failed",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    //Siren Function
     private void siren_function() {
         // Get user's saved settings
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -214,6 +257,30 @@ public class HomeFragment extends Fragment {
                 mediaPlayer = null;
                 Toast.makeText(getContext(), "Siren OFF...", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    // Check permission for SMS
+    private void smsPermission() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+           // sendSMS(); //Send SMS if permission is granted
+            Toast.makeText(getContext(), "Your location will be tracked shortly", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            //If permission is not granted then ask for permission
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 100);
+        }
+    }
+    //Get Permission Result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //Check condition for sending SMS
+        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        }
+        else {
+            Toast.makeText(getActivity(), "Please give the permission for SMS from your phone's settings", Toast.LENGTH_SHORT).show();
         }
     }
 //End of Code

@@ -1,6 +1,8 @@
 package com.example.psdroid.ui.register;
 //Import Class
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -15,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.forget_password.VerifyOTP;
-import com.example.psdroid.ui.settings.AccountsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +35,7 @@ public class SignupTabFragment extends Fragment {
     public String txt_user,txt_email,txt_mobile,txt_pass,txt_conpass,npWhiteSpace;
     DatabaseReference reference;
     private FirebaseAuth auth;
+    SharedPreferences sp;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_signup,container,false);
@@ -42,7 +44,7 @@ public class SignupTabFragment extends Fragment {
         user= root.findViewById(R.id.user);
         pass= root.findViewById(R.id.pass);
         conpass= root.findViewById(R.id.conpass);
-        button= root.findViewById(R.id.reset);
+        button= root.findViewById(R.id.signupBtn);
 
         mobile.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,7 +69,6 @@ public class SignupTabFragment extends Fragment {
         button.setOnClickListener(v -> {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
-
            txt_email = email.getText().toString().trim();
            txt_mobile = mobile.getText().toString().trim();
            txt_user = user.getText().toString().trim();
@@ -128,6 +129,7 @@ public class SignupTabFragment extends Fragment {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     String mob = ds.child("mobile").getValue(String.class);
                    // Toast.makeText(getActivity(), ""+mob, Toast.LENGTH_SHORT).show();
+                    assert mob != null;
                     if (mob.equals(txt_mobile)) {
                         Toast.makeText(getActivity(), "Mobile Number is already in use!", Toast.LENGTH_SHORT).show();
                         mobile.setText("");
@@ -140,6 +142,14 @@ public class SignupTabFragment extends Fragment {
                         intent.putExtra("mail", txt_email);
                         intent.putExtra("pass", txt_pass);
                         intent.putExtra("cpass", txt_conpass);
+                        sp = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.clear();
+                        editor.putString("user", txt_user);
+                        editor.putString("email", txt_email);
+                        editor.putString("mob", txt_mobile);
+                        editor.apply();
+
                         startActivity(intent);
                         getActivity().finish();
                     }

@@ -14,12 +14,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.psdroid.MainActivity;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.forget_password.ForgotPassword;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +39,7 @@ public class LoginTabFragment extends Fragment {
         username = root.findViewById(R.id.username);
         pass = root.findViewById(R.id.pass);
         forget = root.findViewById(R.id.forget);
-        login = root.findViewById(R.id.reset);
+        login = root.findViewById(R.id.signupBtn);
         progressBar = root.findViewById(R.id.login_progressBar);
 
         username.setTranslationX(800);
