@@ -104,7 +104,7 @@
   </androidx.cardview.widget.CardView>
 
   <androidx.cardview.widget.CardView
-      android:id="@+id/name_card"
+      android:id="@+id/username_card"
       android:layout_width="0dp"
       android:layout_height="70dp"
       android:layout_marginStart="10dp"
@@ -120,7 +120,7 @@
       app:layout_constraintVertical_bias="0.0">
 
     <ImageView
-        android:id="@+id/name_image"
+        android:id="@+id/username_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="15dp"
@@ -130,7 +130,7 @@
         app:tint="@color/theme_blue" />
 
     <TextView
-        android:id="@+id/name_title"
+        android:id="@+id/username_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -142,7 +142,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -165,7 +165,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/name_card"
+      app:layout_constraintTop_toBottomOf="@+id/username_card"
       app:layout_constraintVertical_bias="0.0">
 
     <ImageView

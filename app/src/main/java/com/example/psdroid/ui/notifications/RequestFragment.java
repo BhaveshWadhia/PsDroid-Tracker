@@ -83,27 +83,4 @@ public class RequestFragment extends Fragment {
             }
         });
     }
-
-   /* private void getresponseNotifications() {
-        notificationsList = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-        ref.child(thisusername).child("Location").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //notificationsList.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    //Get data
-                    ModelNotification model = ds.getValue(ModelNotification.class);
-                    //Add to list
-                    notificationsList.add(model);
-                }
-                //Calling Adapter
-                adapterNotification = new AdapterNotification(getActivity(), notificationsList);
-                notificationRv.setAdapter(adapterNotification);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }*/
 }

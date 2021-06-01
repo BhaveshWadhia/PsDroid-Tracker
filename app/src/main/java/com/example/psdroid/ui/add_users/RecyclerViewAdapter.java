@@ -29,7 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             con_name = itemView.findViewById(R.id.email_title);
-            con_phone = itemView.findViewById(R.id.name);
+            con_phone = itemView.findViewById(R.id.username);
         }
     }
 

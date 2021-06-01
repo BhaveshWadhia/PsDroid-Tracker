@@ -16,9 +16,7 @@ import java.util.Objects;
 public class AccountsActivity extends AppCompatActivity {
     public Toolbar account_toolbar;;
     TextView textView;
-    String fullname,name,email,phone;
-    SignupTabFragment getDetails = new SignupTabFragment();
-    //Create a instance of the state and replace the current fragment with the settings_activity Fragment
+    String fullname,username,email,phone;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,20 +34,21 @@ public class AccountsActivity extends AppCompatActivity {
     }
 
     private void fetchDetails() {
-        SharedPreferences sp = getSharedPreferences("ACCOUNT_SHARED_PREF",MODE_PRIVATE);
-        name = sp.getString("user","");
-        email = sp.getString("email","");
-        phone= sp.getString("mob","");
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF",MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
 
         // Display Details
         textView=findViewById(R.id.fullname);
-        textView.setText(name);
+        textView.setText(fullname);
 
         textView=findViewById(R.id.accounts_email);
         textView.setText(email);
 
-        textView=findViewById(R.id.name);
-        textView.setText(name);
+        textView=findViewById(R.id.username);
+        textView.setText(username);
 
         textView=findViewById(R.id.email);
         textView.setText(email);

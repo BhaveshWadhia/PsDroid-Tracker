@@ -1,6 +1,5 @@
 package com.example.psdroid.ui.register;
 //Import Class
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,10 +29,10 @@ import java.util.regex.Pattern;
 //Signup Tab Fragment
 public class SignupTabFragment extends Fragment {
 
-    private EditText mobile,user,email,pass,conpass,Name;
+    private EditText mobile,user,email,pass,conpass,name;
     private Button button;
     FirebaseDatabase rootNode;
-    public String txt_user,txt_email,txt_mobile,txt_pass,txt_conpass,npWhiteSpace,txt_Name;
+    public String txt_user,txt_email,txt_mobile,txt_pass,txt_conpass,npWhiteSpace,txt_name;
     DatabaseReference reference;
     private FirebaseAuth auth;
     ProgressBar progressBar;
@@ -47,7 +46,7 @@ public class SignupTabFragment extends Fragment {
         pass= root.findViewById(R.id.pass);
         conpass= root.findViewById(R.id.conpass);
         button= root.findViewById(R.id.signupBtn);
-        Name = root.findViewById(R.id.name);
+        name = root.findViewById(R.id.username);
         progressBar = root.findViewById(R.id.signup_progressBar);
 
         mobile.addTextChangedListener(new TextWatcher() {
@@ -74,7 +73,7 @@ public class SignupTabFragment extends Fragment {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
            txt_email = email.getText().toString().trim();
-           txt_Name = Name.getText().toString().trim();
+           txt_name = name.getText().toString().trim();
            txt_mobile = mobile.getText().toString().trim();
            txt_user = user.getText().toString().trim();
            txt_pass = pass.getText().toString().trim();
@@ -84,15 +83,15 @@ public class SignupTabFragment extends Fragment {
             if(TextUtils.isEmpty(txt_email)|| TextUtils.isEmpty(txt_mobile)|| TextUtils.isEmpty(txt_user)||TextUtils.isEmpty(txt_pass)|| TextUtils.isEmpty(txt_conpass)){
                 Toast.makeText(getActivity(), "Empty Credentials!", Toast.LENGTH_SHORT).show();
             }
-            else if(txt_Name.length()==0)
+            else if(txt_name.length()==0)
             {
-                Name.requestFocus();
-                Name.setError("FIELD CANNOT BE EMPTY");
+                name.requestFocus();
+                name.setError("FIELD CANNOT BE EMPTY");
             }
-            else if(!txt_Name.matches("[a-zA-Z ]+"))
+            else if(!txt_name.matches("[a-zA-Z ]+"))
             {
-                Name.requestFocus();
-                Name.setError("ENTER ONLY ALPHABETICAL CHARACTER");
+                name.requestFocus();
+                name.setError("ENTER ONLY ALPHABETICAL CHARACTER");
             }
             else if(txt_user.matches(npWhiteSpace)){
                 Toast.makeText(getActivity(), "Invalid username", Toast.LENGTH_SHORT).show();
@@ -155,19 +154,11 @@ public class SignupTabFragment extends Fragment {
                     else {
                         Intent intent = new Intent(getActivity(), VerifyOTP.class);
                         intent.putExtra("user", txt_user);
-                        intent.putExtra("name", txt_Name);
+                        intent.putExtra("name", txt_name);
                         intent.putExtra("mob", txt_mobile);
                         intent.putExtra("mail", txt_email);
                         intent.putExtra("pass", txt_pass);
                         intent.putExtra("cpass", txt_conpass);
-                        sp = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.clear();
-                        editor.putString("user", txt_user);
-                        editor.putString("email", txt_email);
-                        editor.putString("mob", txt_mobile);
-                        editor.apply();
-
                         startActivity(intent);
                         progressBar.setVisibility(View.INVISIBLE);
                         getActivity().finish();

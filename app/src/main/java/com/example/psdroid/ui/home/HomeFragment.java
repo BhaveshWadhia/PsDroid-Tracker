@@ -58,8 +58,8 @@ public class HomeFragment extends Fragment {
 
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
-    public String thisusername;
     public String trackMe_status;
+    public String thisusername,fullname,mobile,email;
     final int SEND_SMS_PERMISSION_CODE = 1;
 
     public HomeFragment(String _user) {
@@ -78,27 +78,13 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    //When view is created load the menus
+    //When view is created
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
-
-        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Toast.makeText(getContext(), "Hii", Toast.LENGTH_SHORT).show();
-                String name = (String)snapshot.child("name").getValue();
-                String mob = (String)snapshot.child("mobile").getValue();
-                String email = (String) snapshot.child("email").getValue();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        loadUserDetails(); // Load user details from firebase
+        saveUserDetails(); //Store details of user in shared preference
+        // Load the circle menu
         CircleMenu home_circleMenu = requireView().findViewById(R.id.circle_menu);
         home_circleMenu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.cm_ic_start, R.drawable.cm_ic_cancel)
                 .addSubMenu(Color.parseColor("#258CFF"), R.drawable.cm_ic_siren)
@@ -178,6 +164,33 @@ public class HomeFragment extends Fragment {
             alertDialog.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+    //Function to store details of user in shared preference
+    private void loadUserDetails() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
+        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                fullname = (String)snapshot.child("name").getValue();
+                mobile = (String)snapshot.child("mobile").getValue();
+                email = (String) snapshot.child("email").getValue();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    // Function to Load user details from firebase
+    private void saveUserDetails() {
+        SharedPreferences acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = acctDetails.edit();
+        editor.clear();
+        editor.putString("fullname",fullname);
+        editor.putString("username", thisusername);
+        editor.putString("email", email);
+        editor.putString("mob", mobile);
+        editor.apply();
     }
 
     //Creating a delay function for add user activity to load

@@ -129,8 +129,6 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
             builder.setNegativeButton("Cancel", (dialogInterface, i) ->{
 
                   // sendrequest(auth.getUid(), "" + name, "" + uname, ""+"123", "Has allowed you request for location");//uname=sender,name=target_user
-
-
             });
             builder.create().show();
             return false;
@@ -149,20 +147,8 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
                 ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,fragment).commit();
             }
         });
-
         //Click notification for actions
     }
-
-
-
- /*   private void getLocation() {
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-
-            }
-        });
-    }*/
 
     private void sendrequest(String hisUid, String uname, String username,String mob ,String notification) {  //uname=target_user,username=sender
         // Get Timestamp

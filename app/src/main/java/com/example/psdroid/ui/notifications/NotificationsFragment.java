@@ -32,7 +32,6 @@ public class NotificationsFragment extends Fragment {
     String thisusername;
 
     //Constructor
-
     public NotificationsFragment() {
 
     }
@@ -43,9 +42,7 @@ public class NotificationsFragment extends Fragment {
 
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         myFragment =  inflater.inflate(R.layout.fragment_notifications, container, false);
-
         viewPager = myFragment.findViewById(R.id.viewpager);
         tabLayout = myFragment.findViewById(R.id.tablayout);
         return myFragment;
