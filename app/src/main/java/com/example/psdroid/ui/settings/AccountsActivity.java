@@ -4,17 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
-import com.example.psdroid.ui.register.SignupTabFragment;
-
 import java.util.Objects;
 //Accounts Activity
 public class AccountsActivity extends AppCompatActivity {
-    public Toolbar account_toolbar;;
+    public Toolbar account_toolbar;
     TextView textView;
     String fullname,username,email,phone;
     @Override
