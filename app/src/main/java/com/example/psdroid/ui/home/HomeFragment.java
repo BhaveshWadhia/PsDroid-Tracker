@@ -59,6 +59,8 @@ public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
     public String trackMe_status;
+    public  SharedPreferences acctDetails;
+    public SharedPreferences.Editor editor;
     public String thisusername,fullname,mobile,email;
     final int SEND_SMS_PERMISSION_CODE = 1;
 
@@ -72,6 +74,36 @@ public class HomeFragment extends Fragment {
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Toast.makeText(getActivity(), ""+thisusername, Toast.LENGTH_SHORT).show();
+
+        //Load user account details from firebase
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
+        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                fullname = (String)snapshot.child("name").getValue();
+                mobile = (String)snapshot.child("mobile").getValue();
+                email = (String) snapshot.child("email").getValue();
+                System.out.println(fullname);
+                System.out.println(mobile);
+                System.out.println(email);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+       // Store data in shared preference
+        acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        editor = acctDetails.edit();
+        System.out.println("FullName: "+fullname);
+        System.out.println("Mobile: "+mobile);
+        System.out.println("Email: "+email);
+        editor.putString("fullname",fullname);
+        editor.putString("username", thisusername);
+        editor.putString("email", email);
+        editor.putString("mob", mobile);
+        editor.apply();
+
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
@@ -82,8 +114,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loadUserDetails(); // Load user details from firebase
-        saveUserDetails(); //Store details of user in shared preference
         // Load the circle menu
         CircleMenu home_circleMenu = requireView().findViewById(R.id.circle_menu);
         home_circleMenu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.cm_ic_start, R.drawable.cm_ic_cancel)
@@ -164,33 +194,6 @@ public class HomeFragment extends Fragment {
             alertDialog.show();
         }
         return super.onOptionsItemSelected(item);
-    }
-    //Function to store details of user in shared preference
-    private void loadUserDetails() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
-        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fullname = (String)snapshot.child("name").getValue();
-                mobile = (String)snapshot.child("mobile").getValue();
-                email = (String) snapshot.child("email").getValue();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
-    // Function to Load user details from firebase
-    private void saveUserDetails() {
-        SharedPreferences acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = acctDetails.edit();
-        editor.clear();
-        editor.putString("fullname",fullname);
-        editor.putString("username", thisusername);
-        editor.putString("email", email);
-        editor.putString("mob", mobile);
-        editor.apply();
     }
 
     //Creating a delay function for add user activity to load

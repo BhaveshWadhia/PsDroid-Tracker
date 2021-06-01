@@ -39,7 +39,6 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         //Constructor
         thisusername = _user;
     }
-
     //Inflate view & Enable menus for this fragment
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,16 +72,10 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-
-
-            return;
-        }
+        { return; }
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername).child("Location").child(timestamp);
-
         ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,22 +83,13 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
                 String Lat = (String)snapshot.child("lat").getValue();
                 String Lon = (String)snapshot.child("lon").getValue();
                 String u = (String) snapshot.child("uname").getValue();
-
-
-
-              /*  Toast.makeText(getContext(), "" + timestamp, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "" + u, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "" + Lat + Lon, Toast.LENGTH_SHORT).show();*/
                 LatLng location = new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon));
-
               //  LatLng location = new LatLng(Lat,Lon);
                 map.addMarker(new MarkerOptions().position(location).title(responsesenderusername+"'s Location"));
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(location,14F));
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         map.setMyLocationEnabled(true);

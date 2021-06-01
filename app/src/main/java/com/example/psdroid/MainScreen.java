@@ -29,8 +29,6 @@ import dalvik.system.PathClassLoader;
     private FirebaseAuth firebaseAuth;
     public Toolbar app_toolbar;
     private String user;
-
-    // String _user = getIntent().getStringExtra("user");
     //Create instance of the main screen & display fist page as Home
     @Override
     protected void onCreate(Bundle savedInstanceState) {

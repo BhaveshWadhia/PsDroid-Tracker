@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
-        android:drawableStart="@drawable/ic_login_tab_1"
+        android:drawableStart="@drawable/ic_accounts_name"
         android:drawablePadding="10dp"
         android:hint="@string/username"
         android:importantForAutofill="no"
@@ -32,22 +32,21 @@
         android:id="@+id/pass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_bg"
-        android:drawableStart="@drawable/ic_login_tab_2"
+        android:drawableStart="@drawable/ic_password"
         android:drawablePadding="10dp"
         android:hint="@string/password_str"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username"
         app:layout_constraintVertical_bias="0"
-        app:layout_constraintWidth_percent=".8">
-    </EditText>
+        app:layout_constraintWidth_percent=".8"></EditText>
 
     <Button
         android:id="@+id/signupBtn"
