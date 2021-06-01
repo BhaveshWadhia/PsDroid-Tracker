@@ -1,6 +1,7 @@
 package com.example.psdroid.ui.settings;
 //Import Class
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import java.util.Objects;
 public class AccountsActivity extends AppCompatActivity {
     public Toolbar account_toolbar;;
     TextView textView;
+    String fullname,name,email,phone;
     SignupTabFragment getDetails = new SignupTabFragment();
     //Create a instance of the state and replace the current fragment with the settings_activity Fragment
     @Override
@@ -25,21 +27,34 @@ public class AccountsActivity extends AppCompatActivity {
         account_toolbar = findViewById(R.id.accounts_toolbar);
         setSupportActionBar(account_toolbar);   //Set toolbar for the settings activity
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);    //Set back button on toolbar
+        fetchDetails();
         //Create click listener for back button
         account_toolbar.setNavigationOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
             finish();       //Close the activity
         });
+    }
+
+    private void fetchDetails() {
+        SharedPreferences sp = getSharedPreferences("ACCOUNT_SHARED_PREF",MODE_PRIVATE);
+        name = sp.getString("user","");
+        email = sp.getString("email","");
+        phone= sp.getString("mob","");
+
         // Display Details
         textView=findViewById(R.id.fullname);
-        textView.setText(getDetails.txt_user);
+        textView.setText(name); //Idhar badme full name dalna abhi karn ne vo nhi kiya
+
         textView=findViewById(R.id.accounts_email);
-        textView.setText(getDetails.txt_email);
+        textView.setText(email);   // ye vo image ke niche wala hai
+
         textView=findViewById(R.id.name);
-        textView.setText(getDetails.txt_user);
+        textView.setText(name);
+
         textView=findViewById(R.id.email);
-        textView.setText(getDetails.txt_email);
+        textView.setText(email);
+
         textView=findViewById(R.id.phone);
-        textView.setText(getDetails.txt_mobile);
+        textView.setText(phone);
     }
 }

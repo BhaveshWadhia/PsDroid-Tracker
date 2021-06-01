@@ -1,6 +1,8 @@
 package com.example.psdroid.ui.register;
 //Import Class
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -34,6 +36,7 @@ public class SignupTabFragment extends Fragment {
     public String txt_user,txt_email,txt_mobile,txt_pass,txt_conpass,npWhiteSpace;
     DatabaseReference reference;
     private FirebaseAuth auth;
+    SharedPreferences sp;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_signup,container,false);
@@ -43,6 +46,16 @@ public class SignupTabFragment extends Fragment {
         pass= root.findViewById(R.id.pass);
         conpass= root.findViewById(R.id.conpass);
         button= root.findViewById(R.id.reset);
+        sp = this.getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        button.setOnClickListener(view -> {
+            txt_user = user.getText().toString();
+            txt_email = email.getText().toString();
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("user", txt_user);
+            editor.putString("mail", txt_email);
+            editor.putString("mob", txt_mobile);
+            editor.commit();
+        });
 
         mobile.addTextChangedListener(new TextWatcher() {
             @Override
