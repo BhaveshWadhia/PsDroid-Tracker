@@ -1,9 +1,16 @@
 package com.example.psdroid.ui.notifications;
 //Import Class
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +18,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.gps.GpsFragment;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,15 +35,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 // Notification Adapter
-public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNotificationAdapter.HolderNotification>{
+public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNotificationAdapter.HolderNotification> {
     public Context context;
     private FirebaseAuth firebaseAuth;
     private ArrayList<ModelNotification> notificationsList;
+    FusedLocationProviderClient fusedLocationProviderClient;
     public ResponseNotificationAdapter(){
 
     }
@@ -110,27 +128,42 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
             });
             builder.setNegativeButton("Cancel", (dialogInterface, i) ->{
 
-                //   sendrequest(auth.getUid(), "" + name, "" + uname, ""+"123", "Has allowed you request for location");//uname=sender,name=target_user
+                  // sendrequest(auth.getUid(), "" + name, "" + uname, ""+"123", "Has allowed you request for location");//uname=sender,name=target_user
 
 
             });
             builder.create().show();
             return false;
         });
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Redirecting to Map Fragment", Toast.LENGTH_SHORT).show();
-                
+                Toast.makeText(context, "Redirecting to Map Fragment "+name, Toast.LENGTH_SHORT).show();
+              //  sendLocation();
+                Bundle bundle = new Bundle();
+                bundle.putString("key",name);
+                bundle.putString("time",timestamp);
+                GpsFragment fragment = new GpsFragment(uname);
+                fragment.setArguments(bundle);
+                ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,fragment).commit();
             }
         });
+
         //Click notification for actions
     }
-    @Override
-    public int getItemCount() {
-        return notificationsList.size();
-    }
-/*
+
+
+
+ /*   private void getLocation() {
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+
+            }
+        });
+    }*/
+
     private void sendrequest(String hisUid, String uname, String username,String mob ,String notification) {  //uname=target_user,username=sender
         // Get Timestamp
         String timestamp = "" + System.currentTimeMillis();
@@ -149,5 +182,10 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
                 }).addOnFailureListener(e -> {
             //Failed
         });
-    }*/
+    }
+    @Override
+    public int getItemCount() {
+        return notificationsList.size();
+    }
+
 }

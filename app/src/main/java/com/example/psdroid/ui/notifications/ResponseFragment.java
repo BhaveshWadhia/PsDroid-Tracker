@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 //Notification Fragment
-public class ResponseFragment extends Fragment {
+public class ResponseFragment extends Fragment  {
     //Recyclerview
     String thisusername;
     RecyclerView notificationRv;
@@ -58,6 +58,7 @@ public class ResponseFragment extends Fragment {
         menu_1.clear();
         inflater_1.inflate(R.menu.notificaitons_menu, menu_1);
         super.onCreateOptionsMenu(menu_1, inflater_1);
+
     }
 
 /*
