@@ -12,4 +12,5 @@
         android:id="@+id/navNotifications_btn"
         android:icon="@drawable/ic_navbar_notifications"
         android:title="@string/navbar_notifications" />
+
 </menu>

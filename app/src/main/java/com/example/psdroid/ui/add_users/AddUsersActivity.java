@@ -28,11 +28,15 @@ import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Objects;
 //Add Users Activity
 public class AddUsersActivity extends AppCompatActivity {
+
     //ContactPicker Counter
     public static final int PICK_CONTACT = 1;
     //ArrayLst to store contact details
@@ -52,6 +56,8 @@ public class AddUsersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String sender_user = getIntent().getStringExtra("user");
         setContentView(R.layout.friends_family_activity);      // Set content of main activity as family_friends_activity.xml
         addUser_toolbar = findViewById(R.id.fakecall_toolbar);  //Set toolbar for the application
         setSupportActionBar(addUser_toolbar);
@@ -66,7 +72,10 @@ public class AddUsersActivity extends AppCompatActivity {
         //Create click listener for back button
         addUser_toolbar.setNavigationOnClickListener(v -> {
             //Store array into shared pref when back button is clicked//Contacts_SharedPref.storeInList(getApplicationContext(),name_array);
-            startActivity(new Intent(getApplicationContext(), MainScreen.class));
+           // startActivity(new Intent(getApplicationContext(), MainScreen.class));
+            Intent intent = new Intent(getApplicationContext(),MainScreen.class);
+            intent.putExtra("user",sender_user);
+            startActivity(intent);
             finish();    //Close the activity
         });
         //Retrieve data from shared pref & if data exist load it on the Recycler view
@@ -252,6 +261,7 @@ public class AddUsersActivity extends AppCompatActivity {
         //When the application is closed save the array into the shared preference
         Contacts_SharedPref.store_nameInList(getApplicationContext(), name_array);
         Contacts_SharedPref.store_phoneInList(getApplicationContext(), phone_array);
+        // If possible store information in Firebase Database
         super.onPause();
     }
 }

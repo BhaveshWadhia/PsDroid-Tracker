@@ -1,23 +1,41 @@
 package com.example.psdroid;
 //Import class
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.psdroid.ui.gps.GpsFragment;
 import com.example.psdroid.ui.home.HomeFragment;
+import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import dalvik.system.PathClassLoader;
+
 //Main Screen Activity
     public class MainScreen extends AppCompatActivity {
-  public Toolbar  app_toolbar;
-  private String user;
+    private FirebaseAuth firebaseAuth;
+    public Toolbar app_toolbar;
+    private String user;
+
     // String _user = getIntent().getStringExtra("user");
     //Create instance of the main screen & display fist page as Home
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
         String _user = getIntent().getStringExtra("user");
         setContentView(R.layout.activity_mainscreen);       // Set content of main activity as activity_mainscreen.xml
         app_toolbar = findViewById(R.id.app_toolbar);  //Set toolbar for the application
@@ -26,8 +44,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
         BottomNavigationView main_navbar = findViewById(R.id.nav_view);     // Set bottom navigation bar in the layout
         main_navbar.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment(_user)).commit();
-    user = _user;
+        user = _user;
     }
+
     //Bottom navigation when selected
     @SuppressLint("NonConstantResourceId")
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -52,4 +71,4 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                 return true;
             };
-    }
+}

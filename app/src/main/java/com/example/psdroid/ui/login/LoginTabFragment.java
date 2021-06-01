@@ -15,9 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.psdroid.MainActivity;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.forget_password.ForgotPassword;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,10 +34,11 @@ public class LoginTabFragment extends Fragment {
     ProgressBar progressBar;
     Button login;
     float v = 0;
+    private FirebaseAuth firebaseAuth;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_login, container, false);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         username = root.findViewById(R.id.username);
         pass = root.findViewById(R.id.pass);
         forget = root.findViewById(R.id.forget);
@@ -67,6 +71,8 @@ public class LoginTabFragment extends Fragment {
         forget.setOnClickListener(v -> callforget());
         return root;
     }
+
+
 
     private void isUser() {
         progressBar.setVisibility(View.VISIBLE);
@@ -103,6 +109,9 @@ public class LoginTabFragment extends Fragment {
         });
 
     }
+
+
+
     private void callforget() {
         String userEnteredUsername = username.getText().toString().trim();
         Intent intent = new Intent(getActivity(), ForgotPassword.class);

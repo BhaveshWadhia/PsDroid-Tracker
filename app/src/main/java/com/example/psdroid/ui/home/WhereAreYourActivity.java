@@ -50,7 +50,10 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         //Create click listener for back button
         wry_toolbar.setNavigationOnClickListener(v -> {
             //Store array into shared pref when back button is clicked//Contacts_SharedPref.storeInList(getApplicationContext(),name_array);
-            startActivity(new Intent(getApplicationContext(), MainScreen.class));
+            //startActivity(new Intent(getApplicationContext(), MainScreen.class));
+            Intent intent = new Intent(getApplicationContext(),MainScreen.class);
+            intent.putExtra("user",sender_user);
+            startActivity(intent);
             finish();    //Close the activity
         });
 
@@ -83,10 +86,10 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
                     //Get details of the user which is selected
                     String uname = ds.child("user").getValue(String.class);
                     String mob = ds.child("mobile").getValue(String.class);
+
                     System.out.println("Uname = "+uname);
                     System.out.println("Mob = "+mob);
-                    FirebaseAuth auth;
-                    auth = FirebaseAuth.getInstance();
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
                     assert mob != null;
                     if (mob.equals(sendToPhone)) {
