@@ -68,7 +68,6 @@ public class AddUsersActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.contacts_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         //Create click listener for back button
         addUser_toolbar.setNavigationOnClickListener(v -> {
             //Store array into shared pref when back button is clicked//Contacts_SharedPref.storeInList(getApplicationContext(),name_array);

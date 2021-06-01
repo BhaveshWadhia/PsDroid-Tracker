@@ -33,6 +33,7 @@ import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
+import com.example.psdroid.ui.gps.LocationTracker;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
     public String thisusername;
+    public String trackMe_status;
     final int SEND_SMS_PERMISSION_CODE = 1;
 
     public HomeFragment(String _user) {
@@ -161,7 +163,6 @@ public class HomeFragment extends Fragment {
     //Creating a delay function for add user activity to load
     private void call_addUser_activity() {
         new Handler().postDelayed(() -> activitytoadduser(), 800);// 0.8s Delay
-      //  new Handler().postDelayed(() -> startActivity(new Intent(getContext(), AddUsersActivity.class)), 800);// 0.8s Delay
     }
 
     private void activitytoadduser() {
@@ -173,7 +174,6 @@ public class HomeFragment extends Fragment {
     //Creating a delay function for add user activity to load
     private void call_fakeCall_activity() {
         new Handler().postDelayed(() -> activitytofakecall(), 800);// 0.8s Delay
-       // new Handler().postDelayed(() -> startActivity(new Intent(getContext(), FakeCallerActivity.class)), 800);// 0.8s Delay
     }
     private void activitytofakecall() {
         Intent intent = new Intent(getActivity(),FakeCallerActivity.class);
@@ -184,10 +184,10 @@ public class HomeFragment extends Fragment {
     //Creating a delay function for where are you activity to load
     private void call_whereareyou_activity() {
       //  Intent intent = new Intent(getActivity(),WhereAreYourActivity.class)
-        new Handler().postDelayed(() -> activity(), 800);// 0.8s Delay
+        new Handler().postDelayed(() -> wry_activity(), 800);// 0.8s Delay
     }
     // Send username of current application user to the Where Are You Activity
-    private void activity() {
+    private void wry_activity() {
         Intent intent = new Intent(getActivity(),WhereAreYourActivity.class);
         intent.putExtra("user",thisusername);
         startActivity(intent);
@@ -196,6 +196,7 @@ public class HomeFragment extends Fragment {
     // Main Functions of the Application
      // Track Me Function
     private void trakMe_function() {
+        trackMe_status = "start"; // This is when Track_Me is clicked first time
         smsPermission();  //Get permission for SMS
         sendLocation();
         // Call SHARE LOCATION FUNCTION
@@ -204,7 +205,13 @@ public class HomeFragment extends Fragment {
     // Send Location
     private void sendLocation() {
         //Get location of current user  send to database
+        System.out.println("Inside Send Location");
+        Intent intent = new Intent(getActivity(),LocationTracker.class);
+        intent.putExtra("user", thisusername);
+        intent.putExtra("status",trackMe_status);
+        getActivity().startService(intent);
     }
+
     // Send SMS function
     private void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();  //Get the sms manager to send the SMS
@@ -256,7 +263,7 @@ public class HomeFragment extends Fragment {
     // Check permission for SMS
     private void smsPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-            sendSMS();
+           // sendSMS(); //Send SMS if permission is granted
             Toast.makeText(getContext(), "Your location will be tracked shortly", Toast.LENGTH_SHORT).show();
         }
         else

@@ -121,7 +121,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <Button
-        android:id="@+id/reset"
+        android:id="@+id/signupBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"

@@ -43,10 +43,10 @@ public class AccountsActivity extends AppCompatActivity {
 
         // Display Details
         textView=findViewById(R.id.fullname);
-        textView.setText(name); //Idhar badme full name dalna abhi karn ne vo nhi kiya
+        textView.setText(name);
 
         textView=findViewById(R.id.accounts_email);
-        textView.setText(email);   // ye vo image ke niche wala hai
+        textView.setText(email);
 
         textView=findViewById(R.id.name);
         textView.setText(name);

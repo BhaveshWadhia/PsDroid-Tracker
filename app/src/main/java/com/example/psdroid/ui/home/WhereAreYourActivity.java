@@ -49,8 +49,6 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Create click listener for back button
         wry_toolbar.setNavigationOnClickListener(v -> {
-            //Store array into shared pref when back button is clicked//Contacts_SharedPref.storeInList(getApplicationContext(),name_array);
-            //startActivity(new Intent(getApplicationContext(), MainScreen.class));
             Intent intent = new Intent(getApplicationContext(),MainScreen.class);
             intent.putExtra("user",sender_user);
             startActivity(intent);
