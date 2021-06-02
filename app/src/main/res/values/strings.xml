@@ -48,7 +48,7 @@
     <string name="low_battery_off">Off</string>
     <string name="low_battery_on">On</string>
     <string name="offline_mode_title">Offline Mode</string>
-    <string name="offline_mode_summary">Enable offline mode (reduces the accuracy and features of the application)</string>
+    <string name="offline_mode_summary">COMING SOON</string>
     <!-- ABOUT -->
     <string name="settings_header3">About</string>
     <string name="version_title">Version</string>

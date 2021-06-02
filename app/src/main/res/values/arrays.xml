@@ -19,12 +19,10 @@
     </string-array>
     <!-- Tracking request Preference -->
     <string-array name="tracking_request_entries">
-        <item>All users</item>
         <item>Only Family Members</item>
         <item>Nobody</item>
     </string-array>
     <string-array name="tracking_request_values">
-        <item>all</item>
         <item>only family</item>
         <item>nobody</item>
     </string-array>

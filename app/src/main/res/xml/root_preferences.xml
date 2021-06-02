@@ -75,7 +75,8 @@
             android:key="check_box_preference_3"
             android:summary="@string/offline_mode_summary"
             android:title="@string/offline_mode_title"
-            app:defaultValue="false" />
+            app:defaultValue="false"
+            app:enabled="false"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:id="@+id/About"

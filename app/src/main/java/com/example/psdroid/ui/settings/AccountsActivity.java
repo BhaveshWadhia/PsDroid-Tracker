@@ -14,8 +14,7 @@ public class AccountsActivity extends AppCompatActivity {
     TextView textView;
     String fullname,username,email,phone;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_activity);
         account_toolbar = findViewById(R.id.accounts_toolbar);
@@ -28,7 +27,6 @@ public class AccountsActivity extends AppCompatActivity {
             finish();       //Close the activity
         });
     }
-
     private void fetchDetails() {
         SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF",MODE_PRIVATE);
         fullname = getaccountDetails.getString("fullname","");
