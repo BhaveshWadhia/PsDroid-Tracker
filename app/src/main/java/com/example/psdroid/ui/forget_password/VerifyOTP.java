@@ -20,8 +20,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 // Verify OPT Activity
@@ -37,7 +40,6 @@ public class VerifyOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_o_t_p);
-
         pinview = findViewById(R.id.pinview);
         cancel = findViewById(R.id.cross);
         String _user = getIntent().getStringExtra("user");
@@ -55,7 +57,6 @@ public class VerifyOTP extends AppCompatActivity {
     }
 
     private void sendVerificationCodeToUser(String mobile) {
-
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
@@ -104,8 +105,8 @@ public class VerifyOTP extends AppCompatActivity {
                         else{
                             storeNewUser();
                         }
-
-                    } else {
+                    }
+                    else {
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             Toast.makeText(VerifyOTP.this, "Verification Not Completed! Try again.", Toast.LENGTH_SHORT).show();
                         }
@@ -125,26 +126,64 @@ public class VerifyOTP extends AppCompatActivity {
         finish();
     }
     private void storeNewUser() {
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("users");
-        String _user = getIntent().getStringExtra("user");
-        String _name = getIntent().getStringExtra("name");
-        String _mail = getIntent().getStringExtra("mail");
-        String _mobile = getIntent().getStringExtra("mob");
-        String _pass = getIntent().getStringExtra("pass");
-        String _cpass = getIntent().getStringExtra("cpass");
-        UserHeplerClass heplerClass = new UserHeplerClass(_user,_name,_mail,_mobile,_pass,_cpass);
-        reference.child(_user).setValue(heplerClass);
-        Intent intent = new Intent(VerifyOTP.this, AccountCreatedActivity.class);
-        intent.putExtra("user",_user);
-        intent.putExtra("mob",_mobile);
-        intent.putExtra("name",_name);
-        intent.putExtra("mail",_mail);
-        intent.putExtra("pass",_pass);
-        intent.putExtra("cpass",_cpass);
-        startActivity(intent);
-        Toast.makeText(VerifyOTP.this, "Verification Completed!", Toast.LENGTH_SHORT).show();
-        finish();
+        DatabaseReference nouser_reference = FirebaseDatabase.getInstance().getReference();
+        nouser_reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.hasChild("users")) {
+                    rootNode = FirebaseDatabase.getInstance();
+                    reference = rootNode.getReference();
+                    String _user = getIntent().getStringExtra("user");
+                    String _name = getIntent().getStringExtra("name");
+                    String _mail = getIntent().getStringExtra("mail");
+                    String _mobile = getIntent().getStringExtra("mob");
+                    String _pass = getIntent().getStringExtra("pass");
+                    String _cpass = getIntent().getStringExtra("cpass");
+                    System.out.println("Storing Data");
+                    UserHeplerClass heplerClass = new UserHeplerClass(_user,_name,_mail,_mobile,_pass,_cpass);
+                    reference.child("users").child(_user).setValue(heplerClass);
+                    Intent intent = new Intent(VerifyOTP.this, AccountCreatedActivity.class);
+                    System.out.println("After storing");
+                    intent.putExtra("user",_user);
+                    intent.putExtra("mob",_mobile);
+                    intent.putExtra("name",_name);
+                    intent.putExtra("mail",_mail);
+                    intent.putExtra("pass",_pass);
+                    intent.putExtra("cpass",_cpass);
+                    startActivity(intent);
+                    Toast.makeText(VerifyOTP.this, "Verification Completed!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else
+                {
+                    rootNode = FirebaseDatabase.getInstance();
+                    reference = rootNode.getReference("users");
+                    String _user = getIntent().getStringExtra("user");
+                    String _name = getIntent().getStringExtra("name");
+                    String _mail = getIntent().getStringExtra("mail");
+                    String _mobile = getIntent().getStringExtra("mob");
+                    String _pass = getIntent().getStringExtra("pass");
+                    String _cpass = getIntent().getStringExtra("cpass");
+                    System.out.println("Storing Data");
+                    UserHeplerClass heplerClass = new UserHeplerClass(_user,_name,_mail,_mobile,_pass,_cpass);
+                    reference.child(_user).setValue(heplerClass);
+                    Intent intent = new Intent(VerifyOTP.this, AccountCreatedActivity.class);
+                    System.out.println("After storing");
+                    intent.putExtra("user",_user);
+                    intent.putExtra("mob",_mobile);
+                    intent.putExtra("name",_name);
+                    intent.putExtra("mail",_mail);
+                    intent.putExtra("pass",_pass);
+                    intent.putExtra("cpass",_cpass);
+                    startActivity(intent);
+                    Toast.makeText(VerifyOTP.this, "Verification Completed!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     public void callnectscreenfromotp(View view){

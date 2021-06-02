@@ -12,6 +12,7 @@ public class AccountCreatedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("Inside AccountCreated");
         setContentView(R.layout.account_created);
         Button startBtn = findViewById(R.id.startButton);
         String _user = getIntent().getStringExtra("user");

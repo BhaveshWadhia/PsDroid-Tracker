@@ -145,7 +145,6 @@ public class SignupTabFragment extends Fragment {
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Toast.makeText(getActivity(), "Entering again", Toast.LENGTH_SHORT).show();
                 if (snapshot.exists()) {
                     progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
