@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
     public String trackMe_status;
     public  SharedPreferences acctDetails;
     public SharedPreferences.Editor editor;
-    public String thisusername,fullname,mobile,email;
+    public String thisusername,fullname,mobile,email,user;
     final int SEND_SMS_PERMISSION_CODE = 1;
 
     public HomeFragment(String _user) {
@@ -82,9 +82,11 @@ public class HomeFragment extends Fragment {
                 fullname = (String)snapshot.child("name").getValue();
                 mobile = (String)snapshot.child("mobile").getValue();
                 email = (String) snapshot.child("email").getValue();
+
                 System.out.println(fullname);
                 System.out.println(mobile);
                 System.out.println(email);
+
                 // Store data in shared preference
                 acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
                 editor = acctDetails.edit();

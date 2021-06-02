@@ -1,14 +1,18 @@
 package com.example.psdroid.ui.notifications;
 //Import class
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,7 +50,14 @@ public class RequestFragment extends Fragment {
         //Initialize recyclerview
         notificationRv = view.findViewById(R.id.notificationRv);
         auth = FirebaseAuth.getInstance();
-        getAllNotifications();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Boolean yes = prefs.getBoolean("check_box_preference_2",false);
+        if(!yes) {
+            Toast.makeText(getContext(), "You may have not allowed to show the notification", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            getAllNotifications();
+        }
         // getresponseNotifications();
         return view;
     }

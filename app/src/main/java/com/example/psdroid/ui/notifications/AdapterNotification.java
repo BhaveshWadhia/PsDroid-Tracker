@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.login.UserHeplerClass;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -216,6 +217,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         hashMap.put("lon", lon);
         hashMap.put("notification", notification);
         //hashMap.put("sUid",myUid);
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         ref.child(uname).child("Location").child(timestamp).setValue(hashMap)
                 .addOnSuccessListener(aVoid -> {
@@ -223,6 +225,10 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 }).addOnFailureListener(e -> {
             //Failed
         });
+        /*
+
+        NotificationHelperClass notificationHelperClass = new NotificationHelperClass(username,uname,timestamp,hisUid,lat,lon,notification);
+        ref.child(uname).child("Location").child(timestamp).setValue(notificationHelperClass);*/
     }
     private void sendLocationtoFirebase() {
     }
