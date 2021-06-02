@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
+import com.example.psdroid.ui.login.UserHeplerClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -137,5 +138,9 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
                 }).addOnFailureListener(e -> {
             //Failed
         });
+        /*
+        WRYHelperClass wryHelperClass = new WRYHelperClass(username,uname,timestamp,hisUid,mob,notification);
+        ref.child(target_user).child("Notifications").child(timestamp).setValue(wryHelperClass);*/
+
     }
 }

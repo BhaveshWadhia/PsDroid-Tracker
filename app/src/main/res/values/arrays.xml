@@ -8,6 +8,7 @@
         <item>police</item>
         <item>scream</item>
     </string-array>
+
     <!-- Emergency notification Preference -->
     <string-array name="emergencynotification_entries">
         <item>Default</item>
@@ -26,6 +27,8 @@
         <item>only family</item>
         <item>nobody</item>
     </string-array>
+
+
 </resources>
 
 

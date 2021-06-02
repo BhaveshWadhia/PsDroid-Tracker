@@ -23,7 +23,10 @@ public class AccountsActivity extends AppCompatActivity {
         fetchDetails();
         //Create click listener for back button
         account_toolbar.setNavigationOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+            intent.putExtra("user",username);
+            startActivity(intent);
+           // startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
             finish();       //Close the activity
         });
     }
