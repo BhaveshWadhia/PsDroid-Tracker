@@ -85,23 +85,24 @@ public class HomeFragment extends Fragment {
                 System.out.println(fullname);
                 System.out.println(mobile);
                 System.out.println(email);
+                // Store data in shared preference
+                acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+                editor = acctDetails.edit();
+                System.out.println("FullName: "+fullname);
+                System.out.println("Mobile: "+mobile);
+                System.out.println("Email: "+email);
+                editor.putString("fullname",fullname);
+                editor.putString("user", thisusername);
+                editor.putString("email", email);
+                editor.putString("mob", mobile);
+                editor.apply();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-       // Store data in shared preference
-        acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
-        editor = acctDetails.edit();
-        System.out.println("FullName: "+fullname);
-        System.out.println("Mobile: "+mobile);
-        System.out.println("Email: "+email);
-        editor.putString("fullname",fullname);
-        editor.putString("username", thisusername);
-        editor.putString("email", email);
-        editor.putString("mob", mobile);
-        editor.apply();
+
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //

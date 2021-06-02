@@ -102,9 +102,9 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
             });
         }
         else
-            {
-                // DO NOTHING
-            }
+        {
+            // DO NOTHING
+        }
         map.setMyLocationEnabled(true);
     }
 }

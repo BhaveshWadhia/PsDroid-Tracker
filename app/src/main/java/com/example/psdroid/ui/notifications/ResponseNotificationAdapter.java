@@ -47,6 +47,7 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
     private FirebaseAuth firebaseAuth;
     private ArrayList<ModelNotification> notificationsList;
     FusedLocationProviderClient fusedLocationProviderClient;
+    Boolean value=false;
     public ResponseNotificationAdapter(){
 
     }
@@ -142,6 +143,7 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
                 Bundle bundle = new Bundle();
                 bundle.putString("key",name);
                 bundle.putString("time",timestamp);
+               // bundle.putBoolean("true",value);
                 GpsFragment fragment = new GpsFragment(uname);
                 fragment.setArguments(bundle);
                 ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,fragment).commit();
