@@ -91,7 +91,7 @@ public class SignupTabFragment extends Fragment {
             else if(!txt_name.matches("[a-zA-Z ]+"))
             {
                 name.requestFocus();
-                name.setError("ENTER ONLY ALPHABETICAL CHARACTER");
+                name.setError("Enter valid full name");
             }
             else if(txt_user.matches(npWhiteSpace)){
                 Toast.makeText(getActivity(), "Invalid username", Toast.LENGTH_SHORT).show();
@@ -106,27 +106,31 @@ public class SignupTabFragment extends Fragment {
                 Toast.makeText(getActivity(), "Invalid mobile number!", Toast.LENGTH_SHORT).show();
             }
             else if(!user.getText().toString().isEmpty()) {
-            progressBar.setVisibility(View.VISIBLE);
-                String userEnteredUsername = user.getText().toString().trim();
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-
-                Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
-                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                progressBar.setVisibility(View.VISIBLE);
+                DatabaseReference nouser_reference = FirebaseDatabase.getInstance().getReference();
+                nouser_reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //Toast.makeText(getActivity(), "Entering again", Toast.LENGTH_SHORT).show();
-                        if (snapshot.exists()) {
+                        if(!snapshot.hasChild("users")) {
+                            Intent intent = new Intent(getActivity(), VerifyOTP.class);
+                            intent.putExtra("user", txt_user);
+                            intent.putExtra("name", txt_name);
+                            intent.putExtra("mob", txt_mobile);
+                            intent.putExtra("mail", txt_email);
+                            intent.putExtra("pass", txt_pass);
+                            intent.putExtra("cpass", txt_conpass);
+                            startActivity(intent);
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
-                            user.setText("");
-                            user.requestFocus();
-                        } else {
-                            checkmob(txt_email, txt_mobile, txt_user, txt_pass, txt_conpass);
+                            getActivity().finish();
+                        }
+                        else
+                        {
+                            checkUsername();
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
             }
@@ -134,10 +138,33 @@ public class SignupTabFragment extends Fragment {
         return root;
     }
 
+    private void checkUsername() {
+        String userEnteredUsername = user.getText().toString().trim();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Toast.makeText(getActivity(), "Entering again", Toast.LENGTH_SHORT).show();
+                if (snapshot.exists()) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
+                    user.setText("");
+                    user.requestFocus();
+                }
+                else {
+                    checkmob(txt_email, txt_mobile, txt_user, txt_pass, txt_conpass);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
     private void checkmob(String txt_email, String txt_mobile, String txt_user, String txt_pass, String txt_conpass) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         Query checkmob = ref.orderByChild("user");
-
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

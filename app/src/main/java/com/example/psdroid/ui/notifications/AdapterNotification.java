@@ -95,7 +95,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     String not = (String) ds.child("Notifications").getValue();
-                  // String res = (String) ds.child("Location").getValue();
                     model.setNotification(not);
                   //  model.setNotification(res);
                 }

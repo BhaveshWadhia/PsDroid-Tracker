@@ -34,19 +34,24 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
     private FirebaseAuth auth;
     MapView mapView;
     String thisusername;
-    String responsesenderusername,timestamp;
+    Boolean LoadedfromNotification = false;
+    String responsesenderusername, timestamp;
+
     public GpsFragment(String _user) {
         //Constructor
         thisusername = _user;
     }
+
     //Inflate view & Enable menus for this fragment
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true); // Enable Menu for this fragment
         Bundle bundle = this.getArguments();
-        responsesenderusername = bundle.getString("key");
-        timestamp = bundle.getString("time");
-        Toast.makeText(getContext(), "" + responsesenderusername, Toast.LENGTH_SHORT).show();
+        if (bundle != null) {
+            LoadedfromNotification = true;
+            responsesenderusername = bundle.getString("key");
+            timestamp = bundle.getString("time");
+        }
         auth = FirebaseAuth.getInstance();
         return inflater.inflate(R.layout.fragment_gps, container, false);
     }
@@ -69,29 +74,37 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
             mapView.getMapAsync(this);
         }
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        { return; }
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        if(LoadedfromNotification)
+        {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername).child("Location").child(timestamp);
+            ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String Lat = (String) snapshot.child("lat").getValue();
+                    String Lon = (String) snapshot.child("lon").getValue();
+                    String u = (String) snapshot.child("uname").getValue();
+                    LatLng location = new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon));
+                    //  LatLng location = new LatLng(Lat,Lon);
+                    map.addMarker(new MarkerOptions().position(location).title(responsesenderusername + "'s Location"));
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14F));
+                }
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername).child("Location").child(timestamp);
-        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-               // Toast.makeText(getContext(), "Hii", Toast.LENGTH_SHORT).show();
-                String Lat = (String)snapshot.child("lat").getValue();
-                String Lon = (String)snapshot.child("lon").getValue();
-                String u = (String) snapshot.child("uname").getValue();
-                LatLng location = new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon));
-              //  LatLng location = new LatLng(Lat,Lon);
-                map.addMarker(new MarkerOptions().position(location).title(responsesenderusername+"'s Location"));
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(location,14F));
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
+        else
+            {
+                // DO NOTHING
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
         map.setMyLocationEnabled(true);
     }
 }

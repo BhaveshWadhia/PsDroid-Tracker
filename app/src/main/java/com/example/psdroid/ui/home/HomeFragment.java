@@ -74,7 +74,6 @@ public class HomeFragment extends Fragment {
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Toast.makeText(getActivity(), ""+thisusername, Toast.LENGTH_SHORT).show();
-
         //Load user account details from firebase
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
         ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
@@ -103,7 +102,6 @@ public class HomeFragment extends Fragment {
         editor.putString("email", email);
         editor.putString("mob", mobile);
         editor.apply();
-
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
@@ -172,8 +170,9 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
         }
         if (id == R.id.home_settings_btn) {
-            // Toast.makeText(getContext(), "Settings...", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getContext(), SettingsActivity.class));
+            Intent intent = new Intent(getContext(),SettingsActivity.class);
+            intent.putExtra("user",thisusername);
+            startActivity(intent);
         }
         if (id == R.id.home_logout_btn) {
             //Display an alert before logging out
