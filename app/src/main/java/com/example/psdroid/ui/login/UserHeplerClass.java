@@ -1,15 +1,24 @@
 package com.example.psdroid.ui.login;
 //User Helper Class
 public class UserHeplerClass {
-    String email,user,mobile,pass,conpass;
+    String email,user,mobile,pass,conpass,name;
 
   //Constructor
-    public UserHeplerClass( String user,String email,String mobile,String pass,String conpass ) {
+    public UserHeplerClass( String user,String name,String email,String mobile,String pass,String conpass ) {
         this.email = email;
+        this.name = name;
         this.user = user;
         this.mobile = mobile;
         this.pass = pass;
         this.conpass = conpass;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     //Getter & Setter Function

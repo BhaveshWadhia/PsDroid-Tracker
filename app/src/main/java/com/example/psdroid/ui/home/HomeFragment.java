@@ -36,6 +36,9 @@ import com.example.psdroid.ui.add_users.Contacts_SharedPref;
 import com.example.psdroid.ui.gps.LocationTracker;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -79,6 +82,23 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
+
+        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Toast.makeText(getContext(), "Hii", Toast.LENGTH_SHORT).show();
+                String name = (String)snapshot.child("name").getValue();
+                String mob = (String)snapshot.child("mobile").getValue();
+                String email = (String) snapshot.child("email").getValue();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         CircleMenu home_circleMenu = requireView().findViewById(R.id.circle_menu);
         home_circleMenu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.cm_ic_start, R.drawable.cm_ic_cancel)
                 .addSubMenu(Color.parseColor("#258CFF"), R.drawable.cm_ic_siren)

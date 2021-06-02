@@ -4,6 +4,27 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:drawableStart="@drawable/name"
+        android:drawablePadding="10dp"
+        android:hint="Full Name"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".05"
+        app:layout_constraintWidth_percent=".8" />
 
     <com.bachors.prefixinput.EditText
         android:id="@+id/mobile"
@@ -16,17 +37,17 @@
         android:hint="@string/mobile_number_str"
         android:importantForAutofill="no"
         android:inputType="phone"
-        android:text="+91"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
         android:paddingBottom="10dp"
+        android:text="+91"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintVertical_bias=".034"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".1"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
@@ -135,5 +156,17 @@
         app:layout_constraintTop_toBottomOf="@+id/conpass"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintWidth_percent=".8" />
+    <ProgressBar
+        android:id="@+id/signup_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupBtn"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

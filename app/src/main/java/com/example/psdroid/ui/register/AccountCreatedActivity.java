@@ -16,12 +16,14 @@ public class AccountCreatedActivity extends AppCompatActivity {
         Button startBtn = findViewById(R.id.startButton);
         String _user = getIntent().getStringExtra("user");
         String _mail = getIntent().getStringExtra("mail");
+        String _name = getIntent().getStringExtra("name");
         String _mobile = getIntent().getStringExtra("mob");
         String _pass = getIntent().getStringExtra("pass");
         String _cpass = getIntent().getStringExtra("cpass");
         startBtn.setOnClickListener(view -> {
             Intent intent = new Intent(AccountCreatedActivity.this, MainScreen.class);
             intent.putExtra("user",_user);
+            intent.putExtra("name",_name);
             intent.putExtra("mob",_mobile);
             intent.putExtra("mail",_mail);
             intent.putExtra("pass",_pass);

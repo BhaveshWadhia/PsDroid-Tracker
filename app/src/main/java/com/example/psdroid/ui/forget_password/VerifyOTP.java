@@ -41,6 +41,7 @@ public class VerifyOTP extends AppCompatActivity {
         pinview = findViewById(R.id.pinview);
         cancel = findViewById(R.id.cross);
         String _user = getIntent().getStringExtra("user");
+        String _name = getIntent().getStringExtra("name");
         String _mail = getIntent().getStringExtra("mail");
         String _mobile = getIntent().getStringExtra("mob");
         String _pass = getIntent().getStringExtra("pass");
@@ -115,8 +116,10 @@ public class VerifyOTP extends AppCompatActivity {
     private void updateOldUserData() {
         String _mobile = getIntent().getStringExtra("mob");
         String _user = getIntent().getStringExtra("user");
+        String _name = getIntent().getStringExtra("name");
         Intent intent = new Intent(getApplicationContext(), SetPassword.class);
         intent.putExtra("mob",_mobile);
+        intent.putExtra("name",_name);
         intent.putExtra("user",_user);
         startActivity(intent);
         finish();
@@ -125,15 +128,17 @@ public class VerifyOTP extends AppCompatActivity {
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
         String _user = getIntent().getStringExtra("user");
+        String _name = getIntent().getStringExtra("name");
         String _mail = getIntent().getStringExtra("mail");
         String _mobile = getIntent().getStringExtra("mob");
         String _pass = getIntent().getStringExtra("pass");
         String _cpass = getIntent().getStringExtra("cpass");
-        UserHeplerClass heplerClass = new UserHeplerClass(_user,_mail,_mobile,_pass,_cpass);
+        UserHeplerClass heplerClass = new UserHeplerClass(_user,_name,_mail,_mobile,_pass,_cpass);
         reference.child(_user).setValue(heplerClass);
         Intent intent = new Intent(VerifyOTP.this, AccountCreatedActivity.class);
         intent.putExtra("user",_user);
         intent.putExtra("mob",_mobile);
+        intent.putExtra("name",_name);
         intent.putExtra("mail",_mail);
         intent.putExtra("pass",_pass);
         intent.putExtra("cpass",_cpass);

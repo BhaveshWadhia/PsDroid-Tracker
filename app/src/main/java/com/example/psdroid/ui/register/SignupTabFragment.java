@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,12 +30,13 @@ import java.util.regex.Pattern;
 //Signup Tab Fragment
 public class SignupTabFragment extends Fragment {
 
-    private EditText mobile,user,email,pass,conpass;
+    private EditText mobile,user,email,pass,conpass,Name;
     private Button button;
     FirebaseDatabase rootNode;
-    public String txt_user,txt_email,txt_mobile,txt_pass,txt_conpass,npWhiteSpace;
+    public String txt_user,txt_email,txt_mobile,txt_pass,txt_conpass,npWhiteSpace,txt_Name;
     DatabaseReference reference;
     private FirebaseAuth auth;
+    ProgressBar progressBar;
     SharedPreferences sp;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class SignupTabFragment extends Fragment {
         pass= root.findViewById(R.id.pass);
         conpass= root.findViewById(R.id.conpass);
         button= root.findViewById(R.id.signupBtn);
+        Name = root.findViewById(R.id.name);
+        progressBar = root.findViewById(R.id.signup_progressBar);
 
         mobile.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,6 +74,7 @@ public class SignupTabFragment extends Fragment {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
            txt_email = email.getText().toString().trim();
+           txt_Name = Name.getText().toString().trim();
            txt_mobile = mobile.getText().toString().trim();
            txt_user = user.getText().toString().trim();
            txt_pass = pass.getText().toString().trim();
@@ -78,6 +83,16 @@ public class SignupTabFragment extends Fragment {
 
             if(TextUtils.isEmpty(txt_email)|| TextUtils.isEmpty(txt_mobile)|| TextUtils.isEmpty(txt_user)||TextUtils.isEmpty(txt_pass)|| TextUtils.isEmpty(txt_conpass)){
                 Toast.makeText(getActivity(), "Empty Credentials!", Toast.LENGTH_SHORT).show();
+            }
+            else if(txt_Name.length()==0)
+            {
+                Name.requestFocus();
+                Name.setError("FIELD CANNOT BE EMPTY");
+            }
+            else if(!txt_Name.matches("[a-zA-Z ]+"))
+            {
+                Name.requestFocus();
+                Name.setError("ENTER ONLY ALPHABETICAL CHARACTER");
             }
             else if(txt_user.matches(npWhiteSpace)){
                 Toast.makeText(getActivity(), "Invalid username", Toast.LENGTH_SHORT).show();
@@ -92,7 +107,7 @@ public class SignupTabFragment extends Fragment {
                 Toast.makeText(getActivity(), "Invalid mobile number!", Toast.LENGTH_SHORT).show();
             }
             else if(!user.getText().toString().isEmpty()) {
-
+            progressBar.setVisibility(View.VISIBLE);
                 String userEnteredUsername = user.getText().toString().trim();
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -102,6 +117,7 @@ public class SignupTabFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //Toast.makeText(getActivity(), "Entering again", Toast.LENGTH_SHORT).show();
                         if (snapshot.exists()) {
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(getActivity(), "Username is already in use!", Toast.LENGTH_SHORT).show();
                             user.setText("");
                             user.requestFocus();
@@ -131,6 +147,7 @@ public class SignupTabFragment extends Fragment {
                    // Toast.makeText(getActivity(), ""+mob, Toast.LENGTH_SHORT).show();
                     assert mob != null;
                     if (mob.equals(txt_mobile)) {
+                        progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity(), "Mobile Number is already in use!", Toast.LENGTH_SHORT).show();
                         mobile.setText("");
                         mobile.requestFocus();
@@ -138,6 +155,7 @@ public class SignupTabFragment extends Fragment {
                     else {
                         Intent intent = new Intent(getActivity(), VerifyOTP.class);
                         intent.putExtra("user", txt_user);
+                        intent.putExtra("name", txt_Name);
                         intent.putExtra("mob", txt_mobile);
                         intent.putExtra("mail", txt_email);
                         intent.putExtra("pass", txt_pass);
@@ -151,6 +169,7 @@ public class SignupTabFragment extends Fragment {
                         editor.apply();
 
                         startActivity(intent);
+                        progressBar.setVisibility(View.INVISIBLE);
                         getActivity().finish();
                     }
                 }}
