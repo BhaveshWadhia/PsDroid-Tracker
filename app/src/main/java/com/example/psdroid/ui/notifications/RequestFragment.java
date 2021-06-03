@@ -1,10 +1,12 @@
 package com.example.psdroid.ui.notifications;
 //Import class
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ public class RequestFragment extends Fragment {
     String thisusername;
     RecyclerView notificationRv;
     private FirebaseAuth auth;
+
     private ArrayList<ModelNotification> notificationsList;
     private AdapterNotification adapterNotification;
 
@@ -46,6 +49,7 @@ public class RequestFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
+
         View view = inflater.inflate(R.layout.fragment_request, container, false);
         //Initialize recyclerview
         notificationRv = view.findViewById(R.id.notificationRv);
@@ -61,7 +65,25 @@ public class RequestFragment extends Fragment {
         // getresponseNotifications();
         return view;
     }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.notifications_help_btn)
+        {
+            AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
+            alert_builder.setTitle("Notifications");
+            alert_builder.setMessage("This page will be notifying you if any of the users of app has requested to access your location.\nYou can allow or deny their request.");
+            alert_builder.setCancelable(true);
+            alert_builder.setPositiveButton("OK", (dialog, which) -> {
 
+                dialog.cancel();
+
+            });
+            AlertDialog alertDialog = alert_builder.create();
+            alertDialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     //Create the Notification Toolbar Menu
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu_1, @NonNull MenuInflater inflater_1) {

@@ -1,11 +1,13 @@
 package com.example.psdroid.ui.gps;
 //Import class
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -64,6 +66,25 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         super.onCreateOptionsMenu(menu_1, inflater_1);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.gps_help_btn)
+        {
+            AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
+            alert_builder.setTitle("GPS Tracking");
+            alert_builder.setMessage("While you're here, you can check out the location of your contacts added if they have allowed your request for their location.\n You can also see your own location");
+            alert_builder.setCancelable(true);
+            alert_builder.setPositiveButton("OK", (dialog, which) -> {
+
+                dialog.cancel();
+
+            });
+            AlertDialog alertDialog = alert_builder.create();
+            alertDialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
