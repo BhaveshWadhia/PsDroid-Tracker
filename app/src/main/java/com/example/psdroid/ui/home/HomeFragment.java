@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Toast.makeText(getActivity(), ""+thisusername, Toast.LENGTH_SHORT).show();
         //Load user account details from firebase
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
         ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

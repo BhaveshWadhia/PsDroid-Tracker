@@ -35,13 +35,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("FirstTimeInstall","No");
             editor.apply();
             startActivity(new Intent(this, IntroductoryActivity.class));
-
-
-
         }
-
-
-
     }
 
 }

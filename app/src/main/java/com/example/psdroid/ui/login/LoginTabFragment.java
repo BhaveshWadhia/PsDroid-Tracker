@@ -1,6 +1,8 @@
 package com.example.psdroid.ui.login;
 //Import Class
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,14 +35,21 @@ public class LoginTabFragment extends Fragment {
     float v = 0;
     private FirebaseAuth firebaseAuth;
 
+
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_login, container, false);
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         username = root.findViewById(R.id.username);
         pass = root.findViewById(R.id.pass);
         forget = root.findViewById(R.id.forget);
         login = root.findViewById(R.id.signupBtn);
         progressBar = root.findViewById(R.id.login_progressBar);
+
+
 
         username.setTranslationX(800);
         pass.setTranslationX(800);

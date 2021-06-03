@@ -1,9 +1,12 @@
 package com.example.psdroid.ui.notifications;
 //Import class
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.psdroid.R;
+import com.example.psdroid.ui.login.LoginActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +34,8 @@ public class NotificationsFragment extends Fragment {
     ViewPager viewPager;
     TabLayout tabLayout;
     String thisusername;
+
+
 
     //Constructor
     public NotificationsFragment() {
@@ -47,6 +53,7 @@ public class NotificationsFragment extends Fragment {
         tabLayout = myFragment.findViewById(R.id.tablayout);
         return myFragment;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

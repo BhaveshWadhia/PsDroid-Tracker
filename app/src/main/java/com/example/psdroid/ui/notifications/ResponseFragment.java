@@ -1,10 +1,12 @@
 package com.example.psdroid.ui.notifications;
 //Import class
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -72,6 +74,25 @@ public class ResponseFragment extends Fragment  {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.notifications_help_btn)
+        {
+            AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
+            alert_builder.setTitle("Notifications");
+            alert_builder.setMessage("If any of the users of app you have requested for location, this page will be notifying you if they have allowed your request.\nIf allowed, you can see their current location by click on that particular notification");
+            alert_builder.setCancelable(true);
+            alert_builder.setPositiveButton("OK", (dialog, which) -> {
+
+                dialog.cancel();
+
+            });
+            AlertDialog alertDialog = alert_builder.create();
+            alertDialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
    private void getresponseNotifications() {
         notificationsList = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
