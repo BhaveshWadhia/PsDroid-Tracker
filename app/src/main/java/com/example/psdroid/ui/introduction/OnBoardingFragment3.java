@@ -33,4 +33,5 @@ public class OnBoardingFragment3 extends Fragment {
         });
         return root;
     }
+    //End of Code
 }

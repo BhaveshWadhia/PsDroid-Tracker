@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.R;
-//Fake Call
+//Fake Call Activity
 public class FakeCall extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -49,4 +49,6 @@ public class FakeCall extends AppCompatActivity {
             finish();
         },45000);
     }
+    //End of Code
 }
+

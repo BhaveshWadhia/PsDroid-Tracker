@@ -1,6 +1,5 @@
 package com.example.psdroid.ui.home;
 //Import Class
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.ParcelUuid;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,32 +25,20 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
-
-import com.example.psdroid.MainActivity;
-import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
 import com.example.psdroid.ui.gps.LocationTracker;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hitomi.cmlibrary.CircleMenu;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static android.content.Context.MODE_PRIVATE;
-
 //Home Fragment
 public class HomeFragment extends Fragment {
 
@@ -183,7 +169,7 @@ public class HomeFragment extends Fragment {
 
     //Creating a delay function for add user activity to load
     private void call_addUser_activity() {
-        new Handler().postDelayed(() -> activitytoadduser(), 800);// 0.8s Delay
+        new Handler().postDelayed(this::activitytoadduser, 800);// 0.8s Delay
     }
 
     private void activitytoadduser() {
@@ -194,7 +180,7 @@ public class HomeFragment extends Fragment {
 
     //Creating a delay function for add user activity to load
     private void call_fakeCall_activity() {
-        new Handler().postDelayed(() -> activitytofakecall(), 800);// 0.8s Delay
+        new Handler().postDelayed(this::activitytofakecall, 800);// 0.8s Delay
     }
     private void activitytofakecall() {
         Intent intent = new Intent(getActivity(),FakeCallerActivity.class);
@@ -205,7 +191,7 @@ public class HomeFragment extends Fragment {
     //Creating a delay function for where are you activity to load
     private void call_whereareyou_activity() {
       //  Intent intent = new Intent(getActivity(),WhereAreYourActivity.class)
-        new Handler().postDelayed(() -> wry_activity(), 800);// 0.8s Delay
+        new Handler().postDelayed(this::wry_activity, 800);// 0.8s Delay
     }
     // Send username of current application user to the Where Are You Activity
     private void wry_activity() {
@@ -230,13 +216,13 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(getActivity(),LocationTracker.class);
         intent.putExtra("user", thisusername);
         intent.putExtra("status",trackMe_status);
-        getActivity().startService(intent);
+        requireActivity().startService(intent);
     }
 
     // Send SMS function
     private void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();  //Get the sms manager to send the SMS
-        ArrayList<String> phone_array = new ArrayList<>();
+        ArrayList<String> phone_array;
         phone_array = Contacts_SharedPref.retrieve_phoneFromList(getContext());   //Get all the contacts from the list
         // Message to be send
         String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking so that you can easily track them & help when needed";
@@ -270,6 +256,7 @@ public class HomeFragment extends Fragment {
                 if (siren.equals("scream")) {
                     mediaPlayer = MediaPlayer.create(getActivity(), com.example.psdroid.R.raw.scream_siren);
                 }
+                assert mediaPlayer != null;
                 mediaPlayer.start();
                 Toast.makeText(getContext(), "Siren ON...", Toast.LENGTH_SHORT).show();
             }

@@ -1,8 +1,6 @@
 package com.example.psdroid.ui.login;
 //Import Class
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +10,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.forget_password.ForgotPassword;
@@ -35,9 +31,6 @@ public class LoginTabFragment extends Fragment {
     float v = 0;
     private FirebaseAuth firebaseAuth;
 
-
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_login, container, false);
 
@@ -48,8 +41,6 @@ public class LoginTabFragment extends Fragment {
         forget = root.findViewById(R.id.forget);
         login = root.findViewById(R.id.signupBtn);
         progressBar = root.findViewById(R.id.login_progressBar);
-
-
 
         username.setTranslationX(800);
         pass.setTranslationX(800);
@@ -116,14 +107,13 @@ public class LoginTabFragment extends Fragment {
 
     }
 
-
-
     private void callforget() {
         String userEnteredUsername = username.getText().toString().trim();
         Intent intent = new Intent(getActivity(), ForgotPassword.class);
         intent.putExtra("user", userEnteredUsername);
         startActivity(intent);
     }
+    //End of Code
 }
 
 

@@ -1,15 +1,12 @@
 package com.example.psdroid.ui.gps;
-// Imports
+// Import class
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.example.psdroid.MainScreen;
-import com.example.psdroid.ui.home.HomeFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -18,9 +15,12 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
-
+// Location Tracking Services
 public class LocationTracker extends Service {
     private FusedLocationProviderClient mLocationProviderClient;
     private LocationCallback locationUpdatesCallback;
@@ -79,7 +79,7 @@ public class LocationTracker extends Service {
     private void setUpLocationUpdatesCallback() {
         locationUpdatesCallback = new LocationCallback(){
             @Override
-            public void onLocationResult(LocationResult locationResult) {
+            public void onLocationResult(@NotNull LocationResult locationResult) {
                 if(locationResult!=null){
                     Location lastLocation = locationResult.getLastLocation();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -100,5 +100,6 @@ public class LocationTracker extends Service {
             }
         };
     }
+    //End of Code
 }
 

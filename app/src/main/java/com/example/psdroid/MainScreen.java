@@ -1,29 +1,15 @@
 package com.example.psdroid;
 //Import class
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.psdroid.ui.gps.GpsFragment;
 import com.example.psdroid.ui.home.HomeFragment;
-import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import dalvik.system.PathClassLoader;
-
 //Main Screen Activity
     public class MainScreen extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
@@ -69,4 +55,5 @@ import dalvik.system.PathClassLoader;
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                 return true;
             };
+    //End of Code
 }

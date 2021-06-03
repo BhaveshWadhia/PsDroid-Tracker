@@ -35,4 +35,5 @@ public class AccountCreatedActivity extends AppCompatActivity {
             finish();
         });
     }
+    //End of Code
 }

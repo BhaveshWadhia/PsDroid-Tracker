@@ -61,7 +61,7 @@ public class SetPassword extends AppCompatActivity {
             }
         }
     }
-
+    //Show dialog when not connected to the internet
     private void showCustomDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(SetPassword.this);
         builder.setMessage("Please connect to the internet to proceed further")
@@ -69,4 +69,5 @@ public class SetPassword extends AppCompatActivity {
                 .setPositiveButton("Connect", (dialogInterface, i) -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS)))
                 .setNegativeButton("Cancel", (dialogInterface, i) -> startActivity(new Intent(getApplicationContext(),LoginActivity.class)));
     }
+//End of Code
 }

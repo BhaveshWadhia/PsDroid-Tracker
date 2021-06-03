@@ -10,7 +10,6 @@ import com.example.psdroid.ui.register.SignupTabFragment;
 import org.jetbrains.annotations.NotNull;
 //Login Fragment Pager Adapter Class
 public class LoginAdapter extends FragmentPagerAdapter {
-
     private final Context context;
     int totalTabs;
 
@@ -34,5 +33,6 @@ public class LoginAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
+    //End of Code
 }
 

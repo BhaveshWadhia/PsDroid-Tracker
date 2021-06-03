@@ -53,14 +53,13 @@ public class ResponseFragment extends Fragment  {
         notificationRv = view.findViewById(R.id.notificationRv);
         auth = FirebaseAuth.getInstance();
        // getAllNotifications();
-        Boolean yes = prefs.getBoolean("check_box_preference_2",false);
+        boolean yes = prefs.getBoolean("check_box_preference_2",false);
         if(!yes) {
             Toast.makeText(getContext(), "You may have not allowed to show the notification", Toast.LENGTH_SHORT).show();
         }
         else{
             getresponseNotifications();
         }
-
         return view;
     }
 
@@ -71,7 +70,6 @@ public class ResponseFragment extends Fragment  {
         menu_1.clear();
         inflater_1.inflate(R.menu.notificaitons_menu, menu_1);
         super.onCreateOptionsMenu(menu_1, inflater_1);
-
     }
 
     @Override
@@ -79,21 +77,12 @@ public class ResponseFragment extends Fragment  {
         int id = item.getItemId();
         if(id==R.id.notifications_help_btn)
         {
-            AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
-            alert_builder.setTitle("Notifications");
-            alert_builder.setMessage("If any of the users of app you have requested for location, this page will be notifying you if they have allowed your request.\nIf allowed, you can see their current location by click on that particular notification");
-            alert_builder.setCancelable(true);
-            alert_builder.setPositiveButton("OK", (dialog, which) -> {
-
-                dialog.cancel();
-
-            });
-            AlertDialog alertDialog = alert_builder.create();
-            alertDialog.show();
+           help_message();
         }
         return super.onOptionsItemSelected(item);
     }
-   private void getresponseNotifications() {
+
+    private void getresponseNotifications() {
         notificationsList = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         ref.child(thisusername).child("Location").addValueEventListener(new ValueEventListener() {
@@ -115,4 +104,18 @@ public class ResponseFragment extends Fragment  {
             }
         });
     }
+
+    //Help message function for ths activity
+    private void help_message() {
+        AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
+        alert_builder.setTitle("Notifications");
+        alert_builder.setMessage("If any of the users of app you have requested for location, this page will be notifying you if they have allowed your request.\nIf allowed, you can see their current location by click on that particular notification");
+        alert_builder.setCancelable(true);
+        alert_builder.setPositiveButton("OK", (dialog, which) -> {
+            dialog.cancel();
+        });
+        AlertDialog alertDialog = alert_builder.create();
+        alertDialog.show();
+    }
+    //End of Code
 }

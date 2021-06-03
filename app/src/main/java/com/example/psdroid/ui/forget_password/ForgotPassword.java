@@ -34,7 +34,6 @@ public class ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_forgot_password);
-
         back = findViewById(R.id.backtologin);
         number = findViewById(R.id.mobile);
         next = findViewById(R.id.next);
@@ -93,4 +92,5 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
     }
+    //End of Code
 }

@@ -1,7 +1,6 @@
 package com.example.psdroid.ui.register;
 //Import Class
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -24,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 //Signup Tab Fragment
@@ -201,4 +201,5 @@ public class SignupTabFragment extends Fragment {
         Matcher m = p.matcher(input);
         return m.matches();
     }
+    //End of Code
 }

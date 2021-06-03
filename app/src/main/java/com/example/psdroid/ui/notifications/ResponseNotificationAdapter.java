@@ -1,15 +1,7 @@
 package com.example.psdroid.ui.notifications;
 //Import Class
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -19,27 +11,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.gps.GpsFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 // Notification Adapter
 public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNotificationAdapter.HolderNotification> {
@@ -49,7 +34,7 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
     FusedLocationProviderClient fusedLocationProviderClient;
     Boolean value=false;
     public ResponseNotificationAdapter(){
-
+    //Constructor
     }
     // Constructor for Adapter
     public ResponseNotificationAdapter(Context context, ArrayList<ModelNotification> notificationsList) {
@@ -135,19 +120,16 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
             return false;
         });
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Redirecting to Map Fragment "+name, Toast.LENGTH_SHORT).show();
-              //  sendLocation();
-                Bundle bundle = new Bundle();
-                bundle.putString("key",name);
-                bundle.putString("time",timestamp);
-               // bundle.putBoolean("true",value);
-                GpsFragment fragment = new GpsFragment(uname);
-                fragment.setArguments(bundle);
-                ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,fragment).commit();
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Toast.makeText(context, "Redirecting to Map Fragment "+name, Toast.LENGTH_SHORT).show();
+          //  sendLocation();
+            Bundle bundle = new Bundle();
+            bundle.putString("key",name);
+            bundle.putString("time",timestamp);
+           // bundle.putBoolean("true",value);
+            GpsFragment fragment = new GpsFragment(uname);
+            fragment.setArguments(bundle);
+            ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,fragment).commit();
         });
         //Click notification for actions
     }
@@ -175,5 +157,5 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
     public int getItemCount() {
         return notificationsList.size();
     }
-
+//End of Code
 }

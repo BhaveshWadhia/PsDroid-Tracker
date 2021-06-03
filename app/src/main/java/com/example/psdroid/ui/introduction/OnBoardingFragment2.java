@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.psdroid.R;
 import com.example.psdroid.ui.login.LoginActivity;
-
 // OnBoarding Fragment_1
 public class OnBoardingFragment2 extends Fragment {
     TextView skip;
@@ -26,4 +25,5 @@ public class OnBoardingFragment2 extends Fragment {
         });
         return root;
     }
+    //End of Code
 }

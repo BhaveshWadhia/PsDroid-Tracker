@@ -1,5 +1,5 @@
 package com.example.psdroid.ui.home;
-
+//Import Class
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,13 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
 import java.util.ArrayList;
-
+//Where are you recycler adapter
 public class WRY_RecyclerViewAdapter extends RecyclerView.Adapter<WRY_RecyclerViewAdapter.ViewHolder> {
     //Declaration
     public static  final String TAG = "RecyclerViewAdapter";
-    private ArrayList<String> name_array,phone_array = new ArrayList<>();
-    private Context context;
-    private clickInterface mClickInterfaceListener;
+    private final ArrayList<String> name_array;
+    private ArrayList<String> phone_array = new ArrayList<>();
+    private final Context context;
+    private final clickInterface mClickInterfaceListener;
 
     // Constructor for RecyclerViewAdapter
     public WRY_RecyclerViewAdapter(ArrayList<String> name_array, ArrayList<String> phone_array, Context context, clickInterface onclickListener) {
@@ -65,5 +66,6 @@ public class WRY_RecyclerViewAdapter extends RecyclerView.Adapter<WRY_RecyclerVi
     public  interface clickInterface {
         void onClicked(int pos);
     }
+    //End of Code
 }
 

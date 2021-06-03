@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.psdroid.R;
 import com.example.psdroid.ui.login.LoginActivity;
-
 // OnBoarding Fragment_1
 public class OnBoardingFragment1 extends Fragment {
     TextView skip;
+
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_onboarding1,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_onboarding1, container, false);
         skip = root.findViewById(R.id.skip);
         skip.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -27,4 +27,5 @@ public class OnBoardingFragment1 extends Fragment {
         });
         return root;
     }
+//End of Code
 }

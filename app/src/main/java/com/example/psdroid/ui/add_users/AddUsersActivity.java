@@ -28,9 +28,6 @@ import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -43,7 +40,6 @@ public class AddUsersActivity extends AppCompatActivity {
     public ArrayList<String> name_array = new ArrayList<>();
     public ArrayList<String> phone_array = new ArrayList<>();
     String temp_name,temp_number;
-
     //Layout Elements
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -264,6 +260,7 @@ public class AddUsersActivity extends AppCompatActivity {
         // If possible store information in Firebase Database
         super.onPause();
     }
+    //End of Code
 }
 
 

@@ -13,10 +13,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.psdroid.R;
-import com.example.psdroid.ui.introduction.OnBoardingFragment1;
-import com.example.psdroid.ui.introduction.OnBoardingFragment2;
-import com.example.psdroid.ui.introduction.OnBoardingFragment3;
-
 // Introductory Activity
 public class IntroductoryActivity extends AppCompatActivity {
     public ImageView logo,intro;
@@ -29,8 +25,6 @@ public class IntroductoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introductory);
-
-
 
         logo =  findViewById(R.id.logo);
         intro =  findViewById(R.id.image);
@@ -72,4 +66,5 @@ public class IntroductoryActivity extends AppCompatActivity {
             return NUM_PAGES;
         }
     }
+//End of Code
 }

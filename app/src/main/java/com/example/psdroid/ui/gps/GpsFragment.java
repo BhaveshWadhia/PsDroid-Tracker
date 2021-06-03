@@ -10,8 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -29,6 +27,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 //GPS Fragment
 public class GpsFragment extends Fragment implements OnMapReadyCallback {
@@ -71,20 +71,11 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         int id = item.getItemId();
         if(id==R.id.gps_help_btn)
         {
-            AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
-            alert_builder.setTitle("GPS Tracking");
-            alert_builder.setMessage("While you're here, you can check out the location of your contacts added if they have allowed your request for their location.\n You can also see your own location");
-            alert_builder.setCancelable(true);
-            alert_builder.setPositiveButton("OK", (dialog, which) -> {
-
-                dialog.cancel();
-
-            });
-            AlertDialog alertDialog = alert_builder.create();
-            alertDialog.show();
+            help_message();
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -97,7 +88,7 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NotNull GoogleMap googleMap) {
         map = googleMap;
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -128,4 +119,17 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         }
         map.setMyLocationEnabled(true);
     }
+    // Help message function for ths activity
+    private void help_message() {
+        AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
+        alert_builder.setTitle("GPS Tracking");
+        alert_builder.setMessage("While you're here, you can check out the location of your contacts added if they have allowed your request for their location.\n You can also see your own location");
+        alert_builder.setCancelable(true);
+        alert_builder.setPositiveButton("OK", (dialog, which) -> {
+            dialog.cancel();
+        });
+        AlertDialog alertDialog = alert_builder.create();
+        alertDialog.show();
+    }
+    //End of Code
 }

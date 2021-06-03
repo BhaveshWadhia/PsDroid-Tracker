@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="Theme.PsDroidNew" parent="Theme.AppCompat.Light.NoActionBar">
         // Primary brand color
         <item name="colorPrimary">@color/theme_blue</item>

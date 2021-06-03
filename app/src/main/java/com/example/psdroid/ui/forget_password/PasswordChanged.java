@@ -1,5 +1,5 @@
 package com.example.psdroid.ui.forget_password;
-
+//Import Class
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
-
+// Password Changer Activity
 public class PasswordChanged extends AppCompatActivity {
 
     @Override
@@ -20,8 +20,9 @@ public class PasswordChanged extends AppCompatActivity {
             Intent intent = new Intent(PasswordChanged.this, MainScreen.class);
             startActivity(intent);
             //startActivity(new Intent(getApplicationContext(), MainScreen.class));
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_in_right);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_right);
             finish();
         });
     }
+//End of Code
 }

@@ -18,18 +18,14 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.R;
-import com.example.psdroid.ui.login.UserHeplerClass;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,6 +39,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     private ArrayList<ModelNotification> notificationsList;
     FusedLocationProviderClient fusedLocationProviderClient;
     public AdapterNotification(){
+
 
     }
     // Constructor for Adapter
@@ -89,7 +86,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(timestamp));
         String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa",calendar).toString();
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         ref.orderByChild("user").equalTo(name).addValueEventListener(new ValueEventListener() {
             @Override
@@ -127,38 +123,27 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                     //When Permission is granted
                     // getLocation();
                     fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
-                    fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Location> task) {
-                            Location location = task.getResult();
-                            if(location!=null){
-                                try {
-                                    Geocoder geocoder = new Geocoder(context,Locale.getDefault());
-
-                                    List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                                    Toast.makeText(context, ""+addresses.get(0).getLatitude(), Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(context, ""+addresses.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
-                                    Double lat = addresses.get(0).getLatitude();
-                                    Double lon = addresses.get(0).getLongitude();
-                                    sendrequest(auth.getUid(), "" + name, "" + uname,""+lat,""+lon, "Has allowed you request for location");//uname=sender,name=target_user
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                    fusedLocationProviderClient.getLastLocation().addOnCompleteListener(task -> {
+                        Location location = task.getResult();
+                        if(location!=null){
+                            try {
+                                Geocoder geocoder = new Geocoder(context,Locale.getDefault());
+                                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                                Toast.makeText(context, ""+addresses.get(0).getLatitude(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+addresses.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
+                                double lat = addresses.get(0).getLatitude();
+                                double lon = addresses.get(0).getLongitude();
+                                sendrequest(auth.getUid(), "" + name, "" + uname,""+lat,""+lon, "Has allowed you request for location");//uname=sender,name=target_user
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         }
                     });
                 }
-
-
                 else{
-                    //when permission is denied
+                    //When permission is denied
                     ActivityCompat.requestPermissions((Activity) context,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
                 }
-
-
-               //sendrequest(auth.getUid(), "" + name, "" + uname, ""+"123", "Has allowed you request for location");//uname=sender,name=target_user
-
-
             });
             builder.create().show();
             return false;
@@ -169,41 +154,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     public int getItemCount() {
         return notificationsList.size();
     }
-
-/*
-    private void checkLocation() {
-        //Check permission
-        if(ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            //When Permission is granted
-            // getLocation();
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
-            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                @Override
-                public void onComplete(@NonNull Task<Location> task) {
-                    Location location = task.getResult();
-                    if(location!=null){
-                        try {
-                            Geocoder geocoder = new Geocoder(context,Locale.getDefault());
-
-                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                            Toast.makeText(context, ""+addresses.get(0).getLatitude(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(context, ""+addresses.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
-                            sendLocationtoFirebase();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-        }
-
-
-        else{
-            //when permission is denied
-            ActivityCompat.requestPermissions((Activity) context,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
-        }
-
-    }*/
 
     private void sendrequest(String hisUid, String uname, String username,String lat,String lon ,String notification) {  //uname=target_user,username=sender
         // Get Timestamp
@@ -216,8 +166,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         hashMap.put("lat", lat);
         hashMap.put("lon", lon);
         hashMap.put("notification", notification);
-        //hashMap.put("sUid",myUid);
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         ref.child(uname).child("Location").child(timestamp).setValue(hashMap)
                 .addOnSuccessListener(aVoid -> {
@@ -225,12 +173,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 }).addOnFailureListener(e -> {
             //Failed
         });
-        /*
-
-        NotificationHelperClass notificationHelperClass = new NotificationHelperClass(username,uname,timestamp,hisUid,lat,lon,notification);
-        ref.child(uname).child("Location").child(timestamp).setValue(notificationHelperClass);*/
     }
-    private void sendLocationtoFirebase() {
-    }
-
+//End of Code
 }

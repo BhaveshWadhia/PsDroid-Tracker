@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
-import com.example.psdroid.ui.login.UserHeplerClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,10 +21,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-
+//Where are you activity
 public class WhereAreYourActivity extends AppCompatActivity implements WRY_RecyclerViewAdapter.clickInterface {
     Toolbar wry_toolbar;
     ArrayList<String> name_array, phone_array = new ArrayList<>();
@@ -109,7 +110,7 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
                 }
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
                 // If operation cancelled
             }
         };
@@ -138,9 +139,6 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
                 }).addOnFailureListener(e -> {
             //Failed
         });
-        /*
-        WRYHelperClass wryHelperClass = new WRYHelperClass(username,uname,timestamp,hisUid,mob,notification);
-        ref.child(target_user).child("Notifications").child(timestamp).setValue(wryHelperClass);*/
-
     }
+    //End of Code
 }

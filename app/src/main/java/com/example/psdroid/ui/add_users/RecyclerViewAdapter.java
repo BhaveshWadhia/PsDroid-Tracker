@@ -13,8 +13,9 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     // Declaration
     public static  final String TAG = "RecyclerViewAdapter";
-    private ArrayList<String> name_array,phone_array;
-    private Context context;
+    private final ArrayList<String> name_array;
+    private final ArrayList<String> phone_array;
+    private final Context context;
 
     // Constructor for RecyclerViewAdapter
     public RecyclerViewAdapter(ArrayList<String> name_array, ArrayList<String> phone_array, Context context) {
@@ -55,5 +56,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         // Tells the viewHolder know the number of items to be displayed
        return name_array.size();
     }
+    //End of Code
 }
 
