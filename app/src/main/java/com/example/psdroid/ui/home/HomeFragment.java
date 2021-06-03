@@ -75,7 +75,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Toast.makeText(getActivity(), ""+thisusername, Toast.LENGTH_SHORT).show();
         //Load user account details from firebase
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
         ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -83,28 +82,11 @@ public class HomeFragment extends Fragment {
                 fullname = (String)snapshot.child("name").getValue();
                 mobile = (String)snapshot.child("mobile").getValue();
                 email = (String) snapshot.child("email").getValue();
-
-                System.out.println(fullname);
-                System.out.println(mobile);
-                System.out.println(email);
-
-                // Store data in shared preference
-                acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
-                editor = acctDetails.edit();
-                System.out.println("FullName: "+fullname);
-                System.out.println("Mobile: "+mobile);
-                System.out.println("Email: "+email);
-                editor.putString("fullname",fullname);
-                editor.putString("user", thisusername);
-                editor.putString("email", email);
-                editor.putString("mob", mobile);
-                editor.apply();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
 
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
@@ -322,5 +304,19 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getActivity(), "Please give the permission for SMS from your phone's settings", Toast.LENGTH_SHORT).show();
         }
     }
-//End of Code
+    // Store users data onPause
+    @Override
+    public void onPause() {
+        // Store data in shared preference
+        acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        editor = acctDetails.edit();
+        editor.clear();  //Clear old data
+        editor.putString("fullname",fullname);
+        editor.putString("user", thisusername);
+        editor.putString("email", email);
+        editor.putString("mob", mobile);
+        editor.apply();
+        super.onPause();
+    }
+    //End of Code
 }

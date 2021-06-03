@@ -43,6 +43,7 @@ public class AddUsersActivity extends AppCompatActivity {
     public ArrayList<String> name_array = new ArrayList<>();
     public ArrayList<String> phone_array = new ArrayList<>();
     String temp_name,temp_number;
+
     //Layout Elements
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
