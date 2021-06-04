@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -25,12 +27,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+
+import com.airbnb.lottie.model.layer.NullLayer;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
-import com.example.psdroid.ui.gps.LocationTracker;
 import com.example.psdroid.ui.login.LoginActivity;
 import com.example.psdroid.ui.settings.SettingsActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,34 +46,38 @@ import com.hitomi.cmlibrary.CircleMenu;
 import java.util.ArrayList;
 //Home Fragment
 public class HomeFragment extends Fragment {
-
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
-    public String trackMe_status;
-    public  SharedPreferences acctDetails;
+    public SharedPreferences acctDetails;
     public SharedPreferences.Editor editor;
-    public String thisusername,fullname,mobile,email,user;
+    public String thisusername, fullname, mobile, email, user;
     final int SEND_SMS_PERMISSION_CODE = 1;
-
+    public boolean gps_switch, wifi_switch = true;
+    FusedLocationProviderClient client;
+    public double latitude, longitude;
+    public SmsManager smsManager;
+    //Constructor
     public HomeFragment(String _user) {
-        //Constructor
         thisusername = _user;
     }
+
     public HomeFragment() {
         //Constructor
     }
+
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Toast.makeText(getActivity(), ""+thisusername, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "" + thisusername, Toast.LENGTH_SHORT).show();
         //Load user account details from firebase
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
         ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fullname = (String)snapshot.child("name").getValue();
-                mobile = (String)snapshot.child("mobile").getValue();
+                fullname = (String) snapshot.child("name").getValue();
+                mobile = (String) snapshot.child("mobile").getValue();
                 email = (String) snapshot.child("email").getValue();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -76,6 +85,7 @@ public class HomeFragment extends Fragment {
 
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
+        client = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
@@ -132,21 +142,34 @@ public class HomeFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.home_gps_btn) {
-            item.setIcon(R.drawable.ic_gps_off);
+            if (gps_switch) {
+                item.setIcon(R.drawable.ic_gps_off);
+                gps_switch = false;
+            } else {
+                item.setIcon(R.drawable.ic_gps_on);
+                gps_switch = true;
+            }
         }
         if (id == R.id.home_wifi_btn) {
-            item.setIcon(R.drawable.ic_wifi_off);
-            change_wifi.setWifiEnabled(false);               // **This is not working** //
+            if (wifi_switch) {
+                item.setIcon(R.drawable.ic_wifi_off);
+                change_wifi.setWifiEnabled(false);               // **This is not working** //
+                wifi_switch = false;
+            } else {
+                item.setIcon(R.drawable.ic_wifi_on);
+                wifi_switch = true;
+            }
+
         }
         if (id == R.id.home_help_btn) {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(),help_home.class);
-            intent.putExtra("user",thisusername);
+            Intent intent = new Intent(getActivity(), Home_Help.class);
+            intent.putExtra("user", thisusername);
             startActivity(intent);
         }
         if (id == R.id.home_settings_btn) {
-            Intent intent = new Intent(getContext(),SettingsActivity.class);
-            intent.putExtra("user",thisusername);
+            Intent intent = new Intent(getContext(), SettingsActivity.class);
+            intent.putExtra("user", thisusername);
             startActivity(intent);
         }
         if (id == R.id.home_logout_btn) {
@@ -157,10 +180,11 @@ public class HomeFragment extends Fragment {
             alert_builder.setPositiveButton("Exit", (dialog, which) -> {
                 // Toast.makeText(getContext(), "Logging-Out Soon...", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                getActivity().finish();
                 //LOG OUT from app and return to login page
             });
             alert_builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
@@ -176,8 +200,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void activitytoadduser() {
-        Intent intent = new Intent(getActivity(),AddUsersActivity.class);
-        intent.putExtra("user",thisusername);
+        Intent intent = new Intent(getActivity(), AddUsersActivity.class);
+        intent.putExtra("user", thisusername);
         startActivity(intent);
     }
 
@@ -185,61 +209,43 @@ public class HomeFragment extends Fragment {
     private void call_fakeCall_activity() {
         new Handler().postDelayed(this::activitytofakecall, 800);// 0.8s Delay
     }
+
     private void activitytofakecall() {
-        Intent intent = new Intent(getActivity(),FakeCallerActivity.class);
-        intent.putExtra("user",thisusername);
+        Intent intent = new Intent(getActivity(), FakeCallerActivity.class);
+        intent.putExtra("user", thisusername);
         startActivity(intent);
     }
 
     //Creating a delay function for where are you activity to load
     private void call_whereareyou_activity() {
-      //  Intent intent = new Intent(getActivity(),WhereAreYourActivity.class)
+        //  Intent intent = new Intent(getActivity(),WhereAreYourActivity.class)
         new Handler().postDelayed(this::wry_activity, 800);// 0.8s Delay
     }
+
     // Send username of current application user to the Where Are You Activity
     private void wry_activity() {
-        Intent intent = new Intent(getActivity(),WhereAreYourActivity.class);
-        intent.putExtra("user",thisusername);
+        Intent intent = new Intent(getActivity(), WhereAreYourActivity.class);
+        intent.putExtra("user", thisusername);
         startActivity(intent);
     }
 
     // Main Functions of the Application
-     // Track Me Function
+    // Track Me Function
     private void trakMe_function() {
-        trackMe_status = "start"; // This is when Track_Me is clicked first time
-        smsPermission();  //Get permission for SMS
-        sendLocation();
-        // Call SHARE LOCATION FUNCTION
+       sendSMS_Loction();  //Get GPS location & send SMS
     }
 
+    /*
     // Send Location
     private void sendLocation() {
         //Get location of current user  send to database
         System.out.println("Inside Send Location");
-        Intent intent = new Intent(getActivity(),LocationTracker.class);
+        Intent intent = new Intent(getActivity().getBaseContext(),LocationTracker.class);
         intent.putExtra("user", thisusername);
         intent.putExtra("status",trackMe_status);
         getActivity().startService(intent);
     }
-
-    // Send SMS function
-    private void sendSMS() {
-        SmsManager smsManager = SmsManager.getDefault();  //Get the sms manager to send the SMS
-        ArrayList<String> phone_array;
-        phone_array = Contacts_SharedPref.retrieve_phoneFromList(getContext());   //Get all the contacts from the list
-        // Message to be send
-        String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking so that you can easily track them & help when needed";
-        for (String number: phone_array)
-        {
-            try {
-                smsManager.sendTextMessage(number,null,message,null,null); //Send SMS
-            }
-            catch (Exception exception)
-            {
-             Toast.makeText(getActivity(),"SMS Service Failed",Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+    */
 
     //Siren Function
     private void siren_function() {
@@ -271,17 +277,59 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    // Check permission for SMS
+    //Get location function
+    private void sendSMS_Loction() {
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            getActivity().requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+        }
+        //When permission is granted
+        else{
+            smsPermission();
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                client.getLastLocation().addOnCompleteListener(task -> {
+                    Location location = task.getResult();
+                    if (location != null) {
+                        longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+                        smsManager = SmsManager.getDefault(); //Get the sms manager to send the SMS
+                        ArrayList<String> phone_array;
+                        phone_array = Contacts_SharedPref.retrieve_phoneFromList(getContext());   //Get all the contacts from the list
+                        // Message to be send
+                        String loc_link = "\'https://maps.google.com/maps?saddr="+latitude+","+longitude;
+                        String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking, their current location is "+loc_link;
+                        System.out.println(message);
+                        for (String number: phone_array)
+                        {
+                            try {
+                                System.out.println("Inside TRY of SMS");
+                                System.out.println(number);
+                                System.out.println(message);
+                                smsManager.sendTextMessage(number, null,message,null,null); //Send SMS
+                            }
+                            catch (Exception exception)
+                            {
+                                Toast.makeText(getActivity(),"SMS Service Failed",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                Toast.makeText(getActivity().getApplicationContext(), "GPS provider was not found", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
+    // Check permission for SMS
     private void smsPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-           // sendSMS(); //Send SMS if permission is granted
-            Toast.makeText(getContext(), "Your location will be tracked shortly", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Your location is being tracked and shared to all contacts", Toast.LENGTH_SHORT).show();
         }
         else
-        {
+            {
             //If permission is not granted then ask for permission
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 100);
+            getActivity().requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 100);
         }
     }
     //Get Permission Result
@@ -290,11 +338,21 @@ public class HomeFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //Check condition for sending SMS
         if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            //GPS Permission is granted now try sending SMS again
+            sendSMS_Loction();
         }
         else {
             Toast.makeText(getActivity(), "Please give the permission for SMS from your phone's settings", Toast.LENGTH_SHORT).show();
         }
+        if (requestCode == 101 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            //SMS Permission is granted now try sending SMS again
+            sendSMS_Loction();
+        }
+        else {
+            Toast.makeText(getActivity(), "Please give the permission for GPS from your phone's settings", Toast.LENGTH_SHORT).show();
+        }
     }
+
     // Store users data onPause
     @Override
     public void onPause() {

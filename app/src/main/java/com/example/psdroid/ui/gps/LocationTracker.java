@@ -4,8 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -21,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 // Location Tracking Services
-public class LocationTracker extends Service {
+public class LocationTracker extends Service implements LocationListener {
     private FusedLocationProviderClient mLocationProviderClient;
     private LocationCallback locationUpdatesCallback;
     private LocationRequest locationRequest;
@@ -40,7 +44,7 @@ public class LocationTracker extends Service {
     public void onCreate() {
         super.onCreate();
         mLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        System.out.println("Inside onCraete Service");
+        System.out.println("Inside onCreate Service");
         setUpLocationRequest();
     }
 
@@ -99,6 +103,26 @@ public class LocationTracker extends Service {
                 }
             }
         };
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
     }
     //End of Code
 }

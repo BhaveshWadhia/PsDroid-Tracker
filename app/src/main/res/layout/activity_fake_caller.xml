@@ -41,7 +41,8 @@
             android:id="@+id/fakename_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -75,28 +76,28 @@
         app:layout_constraintVertical_bias="0.0">
 
         <RadioButton
-            android:id="@+id/timer_5min"
+            android:id="@+id/timer_30sec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/timer1_str"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/timer_10min"
+            android:id="@+id/timer_1min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/timer2_str"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/timer_15min"
+            android:id="@+id/timer_3min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/timer3_str"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/timer_30min"
+            android:id="@+id/timer_5min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/timer4_str"
