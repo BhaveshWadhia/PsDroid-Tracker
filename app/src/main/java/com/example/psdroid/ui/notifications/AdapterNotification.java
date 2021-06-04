@@ -40,7 +40,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     FusedLocationProviderClient fusedLocationProviderClient;
     public AdapterNotification(){
 
-
     }
     // Constructor for Adapter
     public AdapterNotification(Context context, ArrayList<ModelNotification> notificationsList) {

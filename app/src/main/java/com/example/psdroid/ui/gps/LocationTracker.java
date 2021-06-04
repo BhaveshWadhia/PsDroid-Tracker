@@ -3,6 +3,7 @@ package com.example.psdroid.ui.gps;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class LocationTracker extends Service implements LocationListener {
     private LocationCallback locationUpdatesCallback;
     private LocationRequest locationRequest;
     private String thisusername;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
 
     public LocationTracker(){
         // Constructor
@@ -43,6 +46,15 @@ public class LocationTracker extends Service implements LocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF",MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         mLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         System.out.println("Inside onCreate Service");
         setUpLocationRequest();

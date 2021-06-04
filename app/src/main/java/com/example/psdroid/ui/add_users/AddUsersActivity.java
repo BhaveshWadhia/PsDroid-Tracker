@@ -3,6 +3,7 @@ package com.example.psdroid.ui.add_users;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -33,7 +34,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 //Add Users Activity
 public class AddUsersActivity extends AppCompatActivity {
-
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
     //ContactPicker Counter
     public static final int PICK_CONTACT = 1;
     //ArrayLst to store contact details
@@ -53,6 +55,14 @@ public class AddUsersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF",MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
 
         String sender_user = getIntent().getStringExtra("user");
         setContentView(R.layout.friends_family_activity);      // Set content of main activity as family_friends_activity.xml

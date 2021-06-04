@@ -2,6 +2,8 @@ package com.example.psdroid.ui.gps;
 //Import class
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,6 +34,8 @@ import org.jetbrains.annotations.NotNull;
 
 //GPS Fragment
 public class GpsFragment extends Fragment implements OnMapReadyCallback {
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
     GoogleMap map;
     private FirebaseAuth auth;
     MapView mapView;
@@ -48,6 +52,15 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true); // Enable Menu for this fragment
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             LoadedfromNotification = true;

@@ -1,6 +1,7 @@
 package com.example.psdroid.ui.home;
 //Import Class
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ public class Home_Help extends AppCompatActivity {
     public Toolbar settings_toolbar;
     public String thisusername;
     TextView help_text,help_title_text;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +35,15 @@ public class Home_Help extends AppCompatActivity {
         help_title_text = findViewById(R.id.help_title);
         settings_toolbar = findViewById(R.id.settings_toolbar);
         setSupportActionBar(settings_toolbar);   //Set toolbar for the settings activity
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF", MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);    //Set back button on toolbar
         //Create click listener for back button
         settings_toolbar.setNavigationOnClickListener(view -> {

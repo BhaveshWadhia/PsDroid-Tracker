@@ -31,6 +31,7 @@ public class AccountsActivity extends AppCompatActivity {
         });
     }
     private void fetchDetails() {
+        //Current Users Details
         SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF",MODE_PRIVATE);
         fullname = getaccountDetails.getString("fullname","");
         username = getaccountDetails.getString("user","");

@@ -1,6 +1,7 @@
 package com.example.psdroid.ui.settings;
 //Import Class
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import java.util.Objects;
 public class SettingsActivity extends AppCompatActivity {
     public Toolbar settings_toolbar;
     public String thisusername;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
     //Create a instance of the state and replace the current fragment with the settings_activity Fragment
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,6 +26,15 @@ public class SettingsActivity extends AppCompatActivity {
         thisusername = intent.getStringExtra("user");
         settings_toolbar = findViewById(R.id.settings_toolbar);
         setSupportActionBar(settings_toolbar);   //Set toolbar for the settings activity
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF", MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);    //Set back button on toolbar
         //Create click listener for back button
         settings_toolbar.setNavigationOnClickListener(view -> {

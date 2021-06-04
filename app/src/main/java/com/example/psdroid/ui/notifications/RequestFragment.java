@@ -1,6 +1,7 @@
 package com.example.psdroid.ui.notifications;
 //Import class
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,6 +34,8 @@ public class RequestFragment extends Fragment {
     private FirebaseAuth auth;
     private ArrayList<ModelNotification> notificationsList;
     private AdapterNotification adapterNotification;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
 
     public RequestFragment() {
         //Constructor
@@ -46,6 +49,15 @@ public class RequestFragment extends Fragment {
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
         View view = inflater.inflate(R.layout.fragment_request, container, false);
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         //Initialize recyclerview
         notificationRv = view.findViewById(R.id.notificationRv);
         auth = FirebaseAuth.getInstance();

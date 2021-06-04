@@ -1,5 +1,7 @@
 package com.example.psdroid.ui.notifications;
 //Import class
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,9 @@ public class NotificationsFragment extends Fragment {
     ViewPager viewPager;
     TabLayout tabLayout;
     String thisusername;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
+
     //Constructor
     public NotificationsFragment() {
     //Constructor
@@ -29,6 +34,15 @@ public class NotificationsFragment extends Fragment {
         myFragment =  inflater.inflate(R.layout.fragment_notifications, container, false);
         viewPager = myFragment.findViewById(R.id.viewpager);
         tabLayout = myFragment.findViewById(R.id.tablayout);
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         return myFragment;
     }
 

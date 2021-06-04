@@ -2,6 +2,7 @@ package com.example.psdroid.ui.settings;
 //Import Class
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +16,24 @@ import java.util.Objects;
 //Feedback Activity
 public class FeedbackActivity extends AppCompatActivity {
     public Toolbar feedback_toolbar;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_feedback);
         feedback_toolbar = findViewById(R.id.feedback_toolbar);
         setSupportActionBar(feedback_toolbar);   //Set toolbar for the settings activity
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF", MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button on toolbar
         //Create click listener for back button
         feedback_toolbar.setNavigationOnClickListener(view -> {

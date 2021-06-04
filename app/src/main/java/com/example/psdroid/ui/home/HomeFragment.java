@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
     FusedLocationProviderClient client;
     public double latitude, longitude;
     public SmsManager smsManager;
+
     //Constructor
     public HomeFragment(String _user) {
         thisusername = _user;

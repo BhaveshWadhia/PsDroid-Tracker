@@ -3,6 +3,7 @@ package com.example.psdroid.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -22,6 +23,9 @@ public class FakeCallerActivity extends AppCompatActivity {
     public String get_fakename,thisusername;
     public long get_ms;
     boolean set_timer = false;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
+
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +34,15 @@ public class FakeCallerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fake_caller);
         Toolbar fakeCaller_toolbar = findViewById(R.id.fakecall_toolbar);  //Set toolbar for the application
         setSupportActionBar(fakeCaller_toolbar);
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF", MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         //Create click listener for back button
         fakeCaller_toolbar.setNavigationOnClickListener(v -> {

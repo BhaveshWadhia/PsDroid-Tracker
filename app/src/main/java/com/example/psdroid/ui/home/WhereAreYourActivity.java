@@ -1,6 +1,7 @@
 package com.example.psdroid.ui.home;
 // Import Class
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -35,6 +36,8 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
     Boolean checkerBool = Boolean.TRUE;  // Currently target user is not checked
     TextView hidden_txt;
     String sender_user,target_user;
+    //CURRENT USER DETAILS
+    String fullname,username,email,phone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +47,15 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         wry_toolbar = findViewById(R.id.where_are_you_toolbar);  //Set toolbar for the application
         hidden_txt= findViewById(R.id.nocontacts_hidden_txt);
         setSupportActionBar(wry_toolbar);
+
+        //Current Users Details
+        SharedPreferences getaccountDetails= getSharedPreferences("ACCOUNT_SHARED_PREF", MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);  //Set back button for the toolbar
         //Initialize the Recycler View
         recyclerView = findViewById(R.id.wry_contact_recycler);
