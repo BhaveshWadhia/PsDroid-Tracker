@@ -83,11 +83,11 @@
     <string name="family_friends_str" >Family/Friends</string>
     <string name="fakecall_title">Fake Caller</string>
     <string name="fake_call_str" >Fake Call</string>
-    <string name="fakecall_text">write description here</string>
-    <string name="timer1_str">5 minutes</string>
-    <string name="timer2_str">10 minutes</string>
-    <string name="timer3_str">15 minutes</string>
-    <string name="timer4_str">30 minutes</string>
+    <string name="fakecall_text">Create your own system generated fake call to fly out of dangerous situations</string>
+    <string name="timer1_str">30 seconds</string>
+    <string name="timer2_str">1 minute</string>
+    <string name="timer3_str">3 minutes</string>
+    <string name="timer4_str">5 minutes</string>
     <string name="set_call_str">SET CALL</string>
     <string name="fakecaller_inputtext_str">Name</string>
     <string name="select_timer_str">Select Timer</string>

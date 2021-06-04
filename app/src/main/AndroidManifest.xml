@@ -46,7 +46,7 @@
             android:label="Settings"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.home.help_home"
+            android:name=".ui.home.Home_Help"
             android:label="Help"
             android:screenOrientation="portrait" />
         <activity
