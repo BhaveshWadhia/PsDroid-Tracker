@@ -140,6 +140,9 @@ public class HomeFragment extends Fragment {
         }
         if (id == R.id.home_help_btn) {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(),help_home.class);
+            intent.putExtra("user",thisusername);
+            startActivity(intent);
         }
         if (id == R.id.home_settings_btn) {
             Intent intent = new Intent(getContext(),SettingsActivity.class);
@@ -216,7 +219,7 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(getActivity(),LocationTracker.class);
         intent.putExtra("user", thisusername);
         intent.putExtra("status",trackMe_status);
-        requireActivity().startService(intent);
+        getActivity().startService(intent);
     }
 
     // Send SMS function
@@ -269,6 +272,7 @@ public class HomeFragment extends Fragment {
     }
 
     // Check permission for SMS
+
     private void smsPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
            // sendSMS(); //Send SMS if permission is granted
