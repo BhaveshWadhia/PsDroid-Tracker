@@ -8,14 +8,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ActionTypes;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.interfaces.TouchListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -24,7 +20,7 @@ public class Home_Help extends AppCompatActivity {
     ImageSlider imageSlider;
     public Toolbar settings_toolbar;
     public String thisusername;
-    TextView text;
+    TextView help_text,help_title_text;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +28,8 @@ public class Home_Help extends AppCompatActivity {
         setContentView(R.layout.home_help_content);
         Intent intent = getIntent();
         thisusername = intent.getStringExtra("user");
-        text = findViewById(R.id.textView6);
+        help_text = findViewById(R.id.help_text);
+        help_title_text = findViewById(R.id.help_title);
         settings_toolbar = findViewById(R.id.settings_toolbar);
         setSupportActionBar(settings_toolbar);   //Set toolbar for the settings activity
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);    //Set back button on toolbar
@@ -55,54 +52,61 @@ public class Home_Help extends AppCompatActivity {
         images.add(new SlideModel(R.drawable.help7,null));
         images.add(new SlideModel(R.drawable.help8,null));
         imageSlider.setImageList(images, ScaleTypes.FIT);
+        //Set default title & help text for first image
+        String dft_title = "HOME";
+        String dft_msg = "Siren\nTrack Me\nWhere are you?\nSOS\nContacts\nFake Caller";
+        help_title_text.setText(dft_title);
+        help_text.setText(dft_msg);
+        //Change description when slider image is changed
         imageSlider.setItemChangeListener(index ->{
           switch(index){
               case 0:
-                  String message = "•Siren\n" +
-                          "•Track Me" +
-                          "•Where are you?\n" +
-                          "•SOS" +
-                          "•Contacts\n" +
-                          "•Fake Caller";
-                  text.setText(message);
+                  String msg1_title = "HOME";
+                  String msg1 = "Siren\nTrack Me\nWhere are you?\nSOS\nContacts\nFake Caller";
+                  help_title_text.setText(msg1_title);
+                  help_text.setText(msg1);
                   break;
               case 1:
-                  String message1 = "•Siren:"+"ON";
-                  text.setText(message1);
+                  String msg2_title = "SIREN";
+                  String msg2 = "On";
+                  help_title_text.setText(msg2_title);
+                  help_text.setText(msg2);
                   break;
               case 2:
-                  String message2 = "•Siren:"+"OFF";
-                  text.setText(message2);
+                  String msg3_title = "SIREN";
+                  String msg3 = "Off";
+                  help_title_text.setText(msg3_title);
+                  help_text.setText(msg3);
                   break;
               case 3:
-                  String message3 = "Track ME\n"+
-                  "•Track your location\n"+
-                  "•Share location with other members in family";
-              ;
-                  text.setText(message3);
+                  String msg4_title = "TRACK ME";
+                  String msg4 = "Track your location\nShare your location with other family members";
+                  help_title_text.setText(msg4_title);
+                  help_text.setText(msg4);
                   break;
               case 4:
-                  String message4 = "Family/Friends Contact\n"+
-                  "•Add Contact\n"+
-                  "•Delete Contact\n";
-                  text.setText(message4);
+                  String msg5_title = "CONTACTS";
+                  String msg5 = "Add Contacts\nDelete Contacts";
+                  help_title_text.setText(msg5_title);
+                  help_text.setText(msg5);
                   break;
               case 5:
-                  String message5 = "Where are you?\n"+
-                  "•Select a contact from the list\n"+
-                  "•Check target user\n"+
-                  "•Send Request\n";
-                  text.setText(message5);
+                  String msg6_title = "Where Are You?";
+                  String msg6 = "Select a contact from the list\nSend Request\nWait until request is accepted\nView location";
+                  help_title_text.setText(msg6_title);
+                  help_text.setText(msg6);
                   break;
               case 6:
-                  String message6 = "Fake Caller\n"+"•Set Name\n" +
-                          "•Set Timer\n" +
-                          "•Set Call\n";
-                  text.setText(message6);
+                  String msg7_title = "FAKE CALLER";
+                  String msg7 = "Set name\nSet timer\nSet call";
+                  help_title_text.setText(msg7_title);
+                  help_text.setText(msg7);
                   break;
               case 7:
-                  String message7 = "Fake Caller\n"+"•Wait for call\n";
-                  text.setText(message7);
+                  String msg8_title = "FAKE CALL";
+                  String msg8 = "Wait for call\nAccept/Reject Call";
+                  help_title_text.setText(msg8_title);
+                  help_text.setText(msg8);
                   break;
           }
         });
