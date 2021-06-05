@@ -1,11 +1,12 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_screen"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
     <PreferenceCategory
-        android:id="@+id/general"
+        android:id="@+id/General"
         android:layout_height="wrap_content"
         app:icon="@drawable/ic_general_settings"
         app:title="@string/settings_header1">
@@ -13,36 +14,37 @@
             android:id="@+id/Emergency_Services"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:defaultValue="true"
             android:key="switch_preference_1"
+            android:summary="When turned on will send emergency alerts to other users"
             android:summaryOff="@string/emergency_services_off"
             android:summaryOn="@string/emergency_services_on"
-            android:defaultValue="true"
-            android:summary="When turned on will send emergency alerts to other users"
-            app:title="@string/emergency_title" />
+            app:title="@string/emergency_title"
+            />
         <ListPreference
             android:id="@+id/SirenSound"
             android:entries="@array/siren_entries"
             android:entryValues="@array/siren_values"
             android:key="list_preference_1"
-            app:title="@string/siren_sound_title"
             android:summary="Allows user to set siren sound"
+            app:title="@string/siren_sound_title"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
-            android:layout_height="match_parent"
-            android:entries="@array/emergencynotification_entries"
-            android:entryValues="@array/emergencynotification_values"
-            android:key="list_preference_2"
-            android:summary="Allows user to set emergency notification sound"
-            android:title="Emergency Notification Sound"
-            app:useSimpleSummaryProvider="true" />
-        <ListPreference
+            android:id="@+id/TrackingRequest"
             android:defaultValue="true"
             android:entries="@array/tracking_request_entries"
             android:entryValues="@array/tracking_request_values"
             android:key="list_preference_3"
-            android:title="@string/tracking_request_title"
             android:summary="Allows user to receive tracking requests"
+            android:title="@string/tracking_request_title"
             app:useSimpleSummaryProvider="true" />
+        <SwitchPreference
+            android:id="@+id/LowBatteryAlert"
+            android:key="switch_preference_2"
+            android:summaryOff="@string/low_battery_off"
+            android:summaryOn="@string/low_battery_on"
+            android:title="@string/low_battery_title"
+            app:defaultValue="false" />
 
     </PreferenceCategory>
     <PreferenceCategory
@@ -50,8 +52,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:title="@string/settings_header2"
-        app:icon="@drawable/ic_navbar_notifications" >
+        app:icon="@drawable/ic_settings_notification">
         <CheckBoxPreference
+            android:id="@+id/EmergencyAlert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:key="check_box_preference_1"
@@ -60,23 +63,28 @@
             app:defaultValue="true"
             app:enabled="false" />
         <CheckBoxPreference
+            android:id="@+id/AllowNotifications"
             android:key="check_box_preference_2"
             android:summary="@string/allow_notification_summary"
-            android:title="@string/allow_notification_title"
 
+            android:title="@string/allow_notification_title"
             app:defaultValue="true" />
-        <SwitchPreference
-            android:key="switch_preference_2"
-            android:summaryOff="@string/low_battery_off"
-            android:summaryOn="@string/low_battery_on"
-            android:title="@string/low_battery_title"
-            app:defaultValue="false" />
+        <ListPreference
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:entries="@array/emergencynotification_entries"
+            android:entryValues="@array/emergencynotification_values"
+            android:key="list_preference_2"
+            android:summary="Allows user to set emergency notification sound"
+            android:title="Emergency Notification Sound"
+            app:useSimpleSummaryProvider="true" />
         <CheckBoxPreference
+            android:id="@+id/OfflineMode"
             android:key="check_box_preference_3"
             android:summary="@string/offline_mode_summary"
             android:title="@string/offline_mode_title"
             app:defaultValue="false"
-            app:enabled="false"/>
+            app:enabled="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:id="@+id/About"
@@ -84,7 +92,7 @@
         app:icon="@drawable/ic_help"
         app:title="@string/settings_header3">
         <Preference
-            android:id="@+id/version"
+            android:id="@+id/Version"
             android:key="version_key"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -92,7 +100,7 @@
             android:title="@string/version_title"
             app:defaultValue="true" />
         <Preference
-            android:id="@+id/accounts"
+            android:id="@+id/Accounts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:key="account_key"
@@ -106,7 +114,7 @@
                 android:targetPackage="com.example.psdroid" />
         </Preference>
         <Preference
-            android:id="@+id/feedback"
+            android:id="@+id/Feedback"
             android:key="feedback_key"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -118,7 +126,7 @@
                 android:targetPackage="com.example.psdroid" />
         </Preference>
         <Preference
-            android:id="@+id/Terms_and_conditions"
+            android:id="@+id/Terms_And_Conditions"
             android:key="terms_condition_key"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -130,7 +138,7 @@
                 android:data="https://psdroidtracker.blogspot.com/p/terms-conditions.html" />
         </Preference>
         <Preference
-            android:id="@+id/privacy_policy"
+            android:id="@+id/PrivacyPolicy"
             android:key="privacy_policy_key"
             android:selectAllOnFocus="true"
             android:singleLine="true"

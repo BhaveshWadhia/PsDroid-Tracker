@@ -27,9 +27,11 @@ android:layout_height="match_parent">
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:hint="@string/fakecaller_inputtext_str"
+        app:boxStrokeColor="@color/theme_blue"
         app:counterEnabled="true"
         app:counterMaxLength="10"
         app:helperText="*This name will be displayed on the call"
+        app:helperTextTextColor="#B4FF0000"
         app:layout_constraintBottom_toTopOf="@+id/fakecall_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +79,7 @@ android:layout_height="match_parent">
             android:id="@+id/timer_30sec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_blue"
             android:text="@string/timer1_str"
             android:textSize="16sp" />
 
@@ -84,6 +87,7 @@ android:layout_height="match_parent">
             android:id="@+id/timer_1min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_blue"
             android:text="@string/timer2_str"
             android:textSize="16sp" />
 
@@ -91,6 +95,7 @@ android:layout_height="match_parent">
             android:id="@+id/timer_3min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_blue"
             android:text="@string/timer3_str"
             android:textSize="16sp" />
 
@@ -98,9 +103,9 @@ android:layout_height="match_parent">
             android:id="@+id/timer_5min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_blue"
             android:text="@string/timer4_str"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
     </RadioGroup>
 
     <ImageView

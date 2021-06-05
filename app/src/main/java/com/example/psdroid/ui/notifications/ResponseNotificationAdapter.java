@@ -46,7 +46,7 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
     @NonNull @Override
     public HolderNotification onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate view row
-        View view = LayoutInflater.from(context).inflate(R.layout.reponsenotificationscontent,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.notifications_content,parent,false);
         return new HolderNotification(view);
     }
 

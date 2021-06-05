@@ -5,6 +5,8 @@
     <color name="theme_light_textblue">#E390DBFB</color>
     <color name="theme_darkblue">#1B5DA3</color>
     <color name="theme_black">#333333</color>
+    <color name="settings_text">#E390DBFB</color>
+    <color name="settings_icon">#ADADAD</color>
 
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>

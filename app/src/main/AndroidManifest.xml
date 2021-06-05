@@ -17,13 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PsDroidNew"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".ui.forget_password.PasswordChanged" />
-        <activity android:name=".ui.forget_password.SetPassword" />
-        <activity android:name=".ui.forget_password.VerifyOTP" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="LoginActivity"
-            android:screenOrientation="portrait" />
+
+        <!-- INTRODUCTION OF APP -->
         <activity
             android:name=".ui.introduction.IntroductoryActivity"
             android:label="PsDroid Tracker"
@@ -31,29 +26,43 @@
         <activity
             android:name=".ui.login.LoadingActivity"
             android:label="LoadingActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.forget_password.PasswordChanged"
+            android:label="PasswordChangeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.forget_password.SetPassword"
+            android:label="SetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.forget_password.VerifyOTP"
+            android:label="VerifyOTPActvitiy"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.forget_password.ForgotPassword"
             android:label="ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.settings.FeedbackActivity"
-            android:label="Feedback"
+            android:name=".ui.register.AccountCreatedActivity"
+            android:label="AccountCreatedActivity"
             android:screenOrientation="portrait" />
+
+        <!-- MAIN SCREEN OF APP -->
         <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:label="Settings"
+            android:name=".MainScreen"
+            android:label="MainScreenActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.Home_Help"
             android:label="Help"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.settings.AccountsActivity"
-            android:label="AccountsActivity"
-            android:screenOrientation="portrait"
-            />
+
+        <!-- MAIN FEATURES OF APP -->
         <activity
             android:name=".ui.add_users.AddUsersActivity"
             android:label="AddUserActivity"
@@ -69,16 +78,23 @@
         <activity
             android:name=".ui.home.FakeCall"
             android:label="FakeCall"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+
+        <!-- SETTINGS OF APP -->
         <activity
-            android:name=".MainScreen"
-            android:label="MainScreenActivity"
+            android:name=".ui.settings.SettingsActivity"
+            android:label="Settings"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.register.AccountCreatedActivity"
-            android:label="AccountCreatedActivity"
+            android:name=".ui.settings.AccountsActivity"
+            android:label="AccountsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.settings.FeedbackActivity"
+            android:label="Feedback"
+            android:screenOrientation="portrait" />
+
+        <!-- MAIN ACTIVITY -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -95,5 +111,4 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/MAP_KEY" />
     </application>
-
 </manifest>
