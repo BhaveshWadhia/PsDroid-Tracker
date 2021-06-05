@@ -8,6 +8,7 @@
         android:id="@+id/general"
         android:layout_height="wrap_content"
         app:icon="@drawable/ic_general_settings"
+        android:textColor="@color/theme_blue"
         app:title="@string/settings_header1">
         <SwitchPreferenceCompat
             android:id="@+id/Emergency_Services"

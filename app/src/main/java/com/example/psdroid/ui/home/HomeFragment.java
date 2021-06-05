@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -297,8 +298,8 @@ public class HomeFragment extends Fragment {
                         ArrayList<String> phone_array;
                         phone_array = Contacts_SharedPref.retrieve_phoneFromList(getContext());   //Get all the contacts from the list
                         // Message to be send
-                        String loc_link = "\'https://maps.google.com/maps?saddr="+latitude+","+longitude;
-                        String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking, their current location is "+loc_link;
+                        String loc_link = "https://maps.google.com/maps?saddr="+latitude+","+longitude;
+                        String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking, their current location is ";
                         System.out.println(message);
                         for (String number: phone_array)
                         {
@@ -307,6 +308,7 @@ public class HomeFragment extends Fragment {
                                 System.out.println(number);
                                 System.out.println(message);
                                 smsManager.sendTextMessage(number, null,message,null,null); //Send SMS
+                                smsManager.sendTextMessage(number, null,loc_link,null,null); //Send SMS
                             }
                             catch (Exception exception)
                             {
