@@ -48,11 +48,11 @@
         app:layout_constraintWidth_percent=".8" />
 
     <Button
-        android:id="@+id/signupBtn"
+        android:id="@+id/LoginBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:background="@drawable/button_bg"
+        android:background="@drawable/button_1_bg"
         android:text="@string/login_str"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupBtn"
+        app:layout_constraintTop_toBottomOf="@+id/SignupBtn"
         app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

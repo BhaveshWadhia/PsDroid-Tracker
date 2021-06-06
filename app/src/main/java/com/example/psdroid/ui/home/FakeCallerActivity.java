@@ -1,7 +1,6 @@
 package com.example.psdroid.ui.home;
 // Import Class
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -91,16 +90,18 @@ public class FakeCallerActivity extends AppCompatActivity {
             if (!set_timer) {
                 //Timer is not set yet
                 Toast.makeText(getApplicationContext(), "Please select a timer", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Fake call is set!!\nYou will receive a call in " + setTimer + " seconds", Toast.LENGTH_SHORT).show();
                 new FakeCallTask().execute();
             }
         });
     }
     //Background Service for Fake Call
-    public class FakeCallTask extends AsyncTask<String, Context,String>{
+    @SuppressLint("StaticFieldLeak")
+    public class FakeCallTask extends AsyncTask<String,Void,String>{
         @Override
         protected String doInBackground(String... strings) {
-            Toast.makeText(getApplicationContext(), "Fake call is set!!\nYou will receive a call in " + setTimer + " seconds", Toast.LENGTH_SHORT).show();
             new CountDownTimer(get_ms, 1000) {
                 @Override
                 public void onTick(long l) {
@@ -115,6 +116,18 @@ public class FakeCallerActivity extends AppCompatActivity {
                 }
             }.start();
             return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            //Do nothing
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            //Do nothing
+            super.onPostExecute(s);
         }
     }
     //End of Code

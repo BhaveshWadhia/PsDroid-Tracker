@@ -43,7 +43,7 @@ public class LoginTabFragment extends Fragment {
         username = root.findViewById(R.id.username);
         pass = root.findViewById(R.id.pass);
         forget = root.findViewById(R.id.forget);
-        login = root.findViewById(R.id.signupBtn);
+        login = root.findViewById(R.id.SignupBtn);
         progressBar = root.findViewById(R.id.login_progressBar);
 
         username.setTranslationX(800);
@@ -147,7 +147,6 @@ public class LoginTabFragment extends Fragment {
         progressBar.setVisibility(View.INVISIBLE);
         getActivity().finish();
     }
-
     // Open forget password activity
     private void callforget() {
         String userEnteredUsername = username.getText().toString().trim();

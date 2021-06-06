@@ -44,7 +44,7 @@ public class SignupTabFragment extends Fragment {
         user= root.findViewById(R.id.user);
         pass= root.findViewById(R.id.pass);
         conpass= root.findViewById(R.id.conpass);
-        button= root.findViewById(R.id.signupBtn);
+        button= root.findViewById(R.id.SignupBtn);
         name = root.findViewById(R.id.username);
         progressBar = root.findViewById(R.id.signup_progressBar);
 
