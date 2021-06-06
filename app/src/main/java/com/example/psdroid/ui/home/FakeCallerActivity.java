@@ -60,22 +60,18 @@ public class FakeCallerActivity extends AppCompatActivity {
                 case R.id.timer_30sec:
                     setTimer = 0.5f;
                     set_timer = true;
-                    Toast.makeText(getApplicationContext(), "5 minute", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.timer_1min:
                     setTimer = 1f;
                     set_timer = true;
-                    Toast.makeText(getApplicationContext(), "10 minute", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.timer_3min:
                     setTimer = 3f;
                     set_timer = true;
-                    Toast.makeText(getApplicationContext(), "15 minute", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.timer_5min:
                     setTimer = 5f;
                     set_timer = true;
-                    Toast.makeText(getApplicationContext(), "30 minute", Toast.LENGTH_SHORT).show();
                     break;
             }
         });
@@ -93,42 +89,21 @@ public class FakeCallerActivity extends AppCompatActivity {
             }
             else {
                 Toast.makeText(getApplicationContext(), "Fake call is set!!\nYou will receive a call in " + setTimer + " seconds", Toast.LENGTH_SHORT).show();
-                new FakeCallTask().execute();
+                new CountDownTimer(get_ms, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                        System.out.println("FakeCaller background task");
+                    }
+                    @Override
+                    public void onFinish() {
+                        //Receive fake call
+                        Intent intent = new Intent(getApplicationContext(), FakeCall.class);
+                        intent.putExtra("fakename_key", get_fakename);
+                        startActivity(intent);
+                    }
+                }.start();
             }
         });
-    }
-    //Background Service for Fake Call
-    @SuppressLint("StaticFieldLeak")
-    public class FakeCallTask extends AsyncTask<String,Void,String>{
-        @Override
-        protected String doInBackground(String... strings) {
-            new CountDownTimer(get_ms, 1000) {
-                @Override
-                public void onTick(long l) {
-                    System.out.println("FakeCaller background task");
-                }
-                @Override
-                public void onFinish() {
-                    //Receive fake call
-                    Intent intent = new Intent(getApplicationContext(), FakeCall.class);
-                    intent.putExtra("fakename_key", get_fakename);
-                    startActivity(intent);
-                }
-            }.start();
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            //Do nothing
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            //Do nothing
-            super.onPostExecute(s);
-        }
     }
     //End of Code
 }
