@@ -20,7 +20,7 @@ import java.util.Objects;
 public class FakeCallerActivity extends AppCompatActivity {
     public float setTimer;
     public String get_fakename,thisusername;
-    public long get_ms;
+    public long get_ms,get_min;
     boolean set_timer = false;
     //CURRENT USER DETAILS
     String fullname,username,email,phone;
@@ -82,14 +82,20 @@ public class FakeCallerActivity extends AppCompatActivity {
             if (get_fakename.equals("") || get_fakename.equals(" ")) {
                 get_fakename = "Unknown";
             }
-            get_ms = (long) (setTimer * 60 * Math.pow(10, 3));
+            get_ms = (long) (setTimer *60* Math.pow(10, 3));
             if (!set_timer) {
                 //Timer is not set yet
                 Toast.makeText(getApplicationContext(), "Please select a timer", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(getApplicationContext(), "Fake call is set!!\nYou will receive a call in " + setTimer + " seconds", Toast.LENGTH_SHORT).show();
-                new CountDownTimer(get_ms, 1000) {
+                if (setTimer == 0.5f)
+                {
+                    Toast.makeText(getApplicationContext(), "Fake call is set!!\nYou will receive a call in 30 seconds", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Fake call is set!!\nYou will receive a call in " + setTimer + " minutes", Toast.LENGTH_SHORT).show();
+                }
+                    new CountDownTimer(get_ms, 1000) {
                     @Override
                     public void onTick(long l) {
                         System.out.println("FakeCaller background task");

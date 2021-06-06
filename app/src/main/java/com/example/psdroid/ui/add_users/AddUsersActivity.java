@@ -38,7 +38,7 @@ public class AddUsersActivity extends AppCompatActivity {
     String fullname,username,email,phone;
     //ContactPicker Counter
     public static final int PICK_CONTACT = 1;
-    //ArrayLst to store contact details
+    //ArrayList to store contact details
     public ArrayList<String> name_array = new ArrayList<>();
     public ArrayList<String> phone_array = new ArrayList<>();
     String temp_name,temp_number;
@@ -99,10 +99,16 @@ public class AddUsersActivity extends AppCompatActivity {
         //Adding more contacts into to already stored list
         btn.setOnClickListener(v -> {
             // Add contact clicked
-            Intent contacts = new Intent(Intent.ACTION_PICK);
-            contacts.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-            startActivityForResult(contacts, PICK_CONTACT);
+            askForContactPermission(Manifest.permission.READ_CONTACTS, PICK_CONTACT);
         });
+    }
+
+    //Call the contact app
+    private void callContactApp()
+    {
+        Intent contacts = new Intent(Intent.ACTION_PICK);
+        contacts.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        startActivityForResult(contacts, PICK_CONTACT);
     }
 
     //Get contact details from the Phone's Contacts
@@ -120,25 +126,34 @@ public class AddUsersActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to pick contact", Toast.LENGTH_SHORT).show();
         }
     }
-    // Request Contacts permission
+    // Check for contact permission
     public void askForContactPermission(String permission, Integer requestCode) {
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
-        {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, permission))
-            {
-                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
-            }
-            else
-            {
-                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
-            }
+        //If permission is granted then add the contact
+        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+            callContactApp(); //Call the contact app & proceed
+        }
+        // If permission is not granted then ask for permission
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+        }
+    }
+
+    //Result of the requested permission
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //Check if now the user has granted, & toast that permission is granted
+        if (ContextCompat.checkSelfPermission(this, permissions[0]) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Permission has not been granted try again", Toast.LENGTH_SHORT).show();
+        }
+        if (ContextCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Permission has been granted", Toast.LENGTH_SHORT).show();
         }
     }
 
     //Get contacts
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void contactPicked(Intent data) {
-        askForContactPermission(Manifest.permission.READ_CONTACTS, PICK_CONTACT);
         ContentResolver cr = getContentResolver();
         Uri uri = data.getData();
         Cursor cur = cr.query(uri, null, null, null);
