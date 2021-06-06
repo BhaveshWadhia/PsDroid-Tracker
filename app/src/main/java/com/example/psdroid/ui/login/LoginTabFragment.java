@@ -1,6 +1,8 @@
 package com.example.psdroid.ui.login;
 //Import Class
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,9 @@ public class LoginTabFragment extends Fragment {
     EditText username, pass;
     TextView forget;
     ProgressBar progressBar;
+    String userEnteredUsername,userEnteredPassword;
     Button login;
+    SharedPreferences acctDetails,isLoggedIn;
     float v = 0;
     private FirebaseAuth firebaseAuth;
 
@@ -69,12 +73,10 @@ public class LoginTabFragment extends Fragment {
         return root;
     }
 
-
-
     private void isUser() {
         progressBar.setVisibility(View.VISIBLE);
-        String userEnteredUsername = username.getText().toString().trim();
-        String userEnteredPassword = pass.getText().toString().trim();
+        userEnteredUsername = username.getText().toString().trim();
+        userEnteredPassword = pass.getText().toString().trim();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -84,11 +86,8 @@ public class LoginTabFragment extends Fragment {
                     String passwordfromdatabase = snapshot.child(userEnteredUsername).child("pass").getValue(String.class);
                     assert passwordfromdatabase != null;
                     if (passwordfromdatabase.equals(userEnteredPassword)) {
-                        Intent intent = new Intent(getActivity(), MainScreen.class);
-                        intent.putExtra("user", userEnteredUsername);
-                        startActivity(intent);
-                        progressBar.setVisibility(View.INVISIBLE);
-                        getActivity().finish();
+                        UserDetails();  // Load details & store details into shared pref
+                        call_intent();  // Goto main screen of application
                     } else {
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity(), "Wrong Password", Toast.LENGTH_SHORT).show();
@@ -104,9 +103,52 @@ public class LoginTabFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 
+    // Get Current Details of user from the database & store it in account details shared preference
+    private void UserDetails() {
+        // Load user account details from firebase
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userEnteredUsername);
+        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String fullname = (String) snapshot.child("name").getValue();
+                String mobile = (String) snapshot.child("mobile").getValue();
+                String email = (String) snapshot.child("email").getValue();
+
+                // Store data in shared preference when user login first time
+                acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+               SharedPreferences.Editor DtlsEditor = acctDetails.edit();
+                DtlsEditor.clear();  //Clear old data
+                DtlsEditor.putString("fullname",fullname);
+                DtlsEditor.putString("user", userEnteredUsername);
+                DtlsEditor.putString("email", email);
+                DtlsEditor.putString("mob", mobile);
+                DtlsEditor.apply();
+
+                //Set a shared pref to indicate user has logged in
+                isLoggedIn = getActivity().getSharedPreferences("LOGIN_SHARED_PREF",Context.MODE_PRIVATE);
+                SharedPreferences.Editor loginEditor = isLoggedIn.edit();
+                loginEditor.clear();
+                loginEditor.putString("isLoggedIn","true");
+                loginEditor.apply();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    // Open Main screen of the application
+    private void call_intent() {
+        Intent intent = new Intent(getActivity(), MainScreen.class);
+        intent.putExtra("user", userEnteredUsername);
+        startActivity(intent);
+        progressBar.setVisibility(View.INVISIBLE);
+        getActivity().finish();
+    }
+
+    // Open forget password activity
     private void callforget() {
         String userEnteredUsername = username.getText().toString().trim();
         Intent intent = new Intent(getActivity(), ForgotPassword.class);

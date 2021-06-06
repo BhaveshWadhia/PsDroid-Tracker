@@ -1,6 +1,7 @@
 package com.example.psdroid.ui.home;
 //Import Class
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +11,6 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,8 +28,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
-
-import com.airbnb.lottie.model.layer.NullLayer;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.add_users.AddUsersActivity;
 import com.example.psdroid.ui.add_users.Contacts_SharedPref;
@@ -38,25 +36,20 @@ import com.example.psdroid.ui.settings.SettingsActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hitomi.cmlibrary.CircleMenu;
+
 import java.util.ArrayList;
 //Home Fragment
 public class HomeFragment extends Fragment {
     public WifiManager change_wifi;
     MediaPlayer mediaPlayer;
-    public SharedPreferences acctDetails;
-    public SharedPreferences.Editor editor;
-    public String thisusername, fullname, mobile, email, user;
     final int SEND_SMS_PERMISSION_CODE = 1;
-    public boolean gps_switch, wifi_switch = true;
+    public boolean gps_switch = true, wifi_switch = true;
     FusedLocationProviderClient client;
     public double latitude, longitude;
     public SmsManager smsManager;
+    //CURRENT USER DETAILS
+    String thisusername,fullname,username,email,phone;
 
     //Constructor
     public HomeFragment(String _user) {
@@ -69,21 +62,14 @@ public class HomeFragment extends Fragment {
 
     //Inflate view & Enable menus for this fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Toast.makeText(getActivity(), "" + thisusername, Toast.LENGTH_SHORT).show();
-        //Load user account details from firebase
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername);
-        ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fullname = (String) snapshot.child("name").getValue();
-                mobile = (String) snapshot.child("mobile").getValue();
-                email = (String) snapshot.child("email").getValue();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+        //Current Users Details
+        SharedPreferences getaccountDetails= getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
+        fullname = getaccountDetails.getString("fullname","");
+        username = getaccountDetails.getString("user","");
+        email = getaccountDetails.getString("email","");
+        phone = getaccountDetails.getString("mob","");
+        //Current Users Details
 
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
@@ -130,7 +116,6 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-
     //Create the Home Toolbar Menu
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu_1, @NonNull MenuInflater inflater_1) {
@@ -141,6 +126,7 @@ public class HomeFragment extends Fragment {
     }
 
     //When any item from others menu is selected
+    @SuppressLint("CommitPrefEdits")
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.home_gps_btn) {
@@ -161,7 +147,6 @@ public class HomeFragment extends Fragment {
                 item.setIcon(R.drawable.ic_wifi_on);
                 wifi_switch = true;
             }
-
         }
         if (id == R.id.home_help_btn) {
             Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
@@ -179,16 +164,7 @@ public class HomeFragment extends Fragment {
             AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
             alert_builder.setMessage("Are you sure you want to logout?");
             alert_builder.setCancelable(true);
-            alert_builder.setPositiveButton("Exit", (dialog, which) -> {
-                // Toast.makeText(getContext(), "Logging-Out Soon...", Toast.LENGTH_SHORT).show();
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                getActivity().finish();
-                //LOG OUT from app and return to login page
-            });
+            alert_builder.setPositiveButton("Exit", (dialog, which) -> logout());
             alert_builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
             AlertDialog alertDialog = alert_builder.create();
             alertDialog.show();
@@ -236,7 +212,6 @@ public class HomeFragment extends Fragment {
     private void trakMe_function() {
        sendSMS_Loction();  //Get GPS location & send SMS
     }
-
     /*
     // Send Location
     private void sendLocation() {
@@ -307,8 +282,8 @@ public class HomeFragment extends Fragment {
                                 System.out.println("Inside TRY of SMS");
                                 System.out.println(number);
                                 System.out.println(message);
-                                smsManager.sendTextMessage(number, null,message,null,null); //Send SMS
-                                smsManager.sendTextMessage(number, null,loc_link,null,null); //Send SMS
+                                smsManager.sendTextMessage(number, null,message,null,null); //Send SMS Message
+                                smsManager.sendTextMessage(number, null,loc_link,null,null); //Send SMS Lnk
                             }
                             catch (Exception exception)
                             {
@@ -356,19 +331,27 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    // Store users data onPause
-    @Override
-    public void onPause() {
-        // Store data in shared preference
-        acctDetails = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF", Context.MODE_PRIVATE);
-        editor = acctDetails.edit();
-        editor.clear();  //Clear old data
-        editor.putString("fullname",fullname);
-        editor.putString("user", thisusername);
-        editor.putString("email", email);
-        editor.putString("mob", mobile);
-        editor.apply();
-        super.onPause();
+    //Logout function
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        //Clear Account Shared Pref
+        SharedPreferences acctSharedPreferences = getActivity().getSharedPreferences("ACCOUNT_SHARED_PREF",Context.MODE_PRIVATE);
+        SharedPreferences.Editor acctEditor = acctSharedPreferences.edit();
+        acctEditor.clear();
+        acctEditor.apply();
+        //Clear Login Shared Pref
+        SharedPreferences isLoggedIn = getActivity().getSharedPreferences("LOGIN_SHARED_PREF",Context.MODE_PRIVATE);
+        SharedPreferences.Editor loginEditor = isLoggedIn.edit();
+        loginEditor.clear();
+        loginEditor.apply();
+        //Clear contact shared pref
+        Contacts_SharedPref.clearSharedPref(getActivity());
+        //LOG OUT from app and return to login page
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        getActivity().finish();
     }
     //End of Code
 }

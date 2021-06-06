@@ -106,7 +106,6 @@ public class FakeCallerActivity extends AppCompatActivity {
                 public void onTick(long l) {
                     System.out.println("FakeCaller background task");
                 }
-
                 @Override
                 public void onFinish() {
                     //Receive fake call

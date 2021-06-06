@@ -1,5 +1,6 @@
 package com.example.psdroid.ui.add_users;
 //Import Class
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
@@ -55,6 +56,14 @@ public class Contacts_SharedPref {
             returnedList = new ArrayList<>();
         }
         return returnedList;
+    }
+    //Clear Shared Preference
+    @SuppressLint("CommitPrefEdits")
+    public static void clearSharedPref(Context context){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.apply();
     }
     //End of Code
 }

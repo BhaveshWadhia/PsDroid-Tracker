@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.ui.introduction.IntroductoryActivity;
-import com.example.psdroid.ui.login.LoadingActivity;
+import com.example.psdroid.ui.LoginCheckerActivity;
 //Main Activity
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         String FirstTime = preferences.getString("FirstTimeInstall","");
         if(FirstTime.equals("No")){
             //If application was opened for the first time
-                Intent intent = new Intent(MainActivity.this, LoadingActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginCheckerActivity.class);
                 startActivity(intent);
         }
         else{
