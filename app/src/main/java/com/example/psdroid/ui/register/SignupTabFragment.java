@@ -71,13 +71,13 @@ public class SignupTabFragment extends Fragment {
         button.setOnClickListener(v -> {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
-           txt_email = email.getText().toString().trim();
-           txt_name = name.getText().toString().trim();
-           txt_mobile = mobile.getText().toString().trim();
-           txt_user = user.getText().toString().trim();
-           txt_pass = pass.getText().toString().trim();
-           txt_conpass = conpass.getText().toString().trim();
-           npWhiteSpace = "(?=\\s+$)";
+            txt_email = email.getText().toString().trim();
+            txt_name = name.getText().toString().trim();
+            txt_mobile = mobile.getText().toString().trim();
+            txt_user = user.getText().toString().trim();
+            txt_pass = pass.getText().toString().trim();
+            txt_conpass = conpass.getText().toString().trim();
+            npWhiteSpace = "(?=\\s+$)";
 
             if(TextUtils.isEmpty(txt_email)|| TextUtils.isEmpty(txt_mobile)|| TextUtils.isEmpty(txt_user)||TextUtils.isEmpty(txt_pass)|| TextUtils.isEmpty(txt_conpass)){
                 Toast.makeText(getActivity(), "Empty Credentials!", Toast.LENGTH_SHORT).show();
@@ -167,12 +167,11 @@ public class SignupTabFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    String mob = ds.child("mobile").getValue(String.class);
-                   // Toast.makeText(getActivity(), ""+mob, Toast.LENGTH_SHORT).show();
+                    String mob = (String) ds.child("mobile").getValue();
                     assert mob != null;
                     if (mob.equals(txt_mobile)) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getActivity(), "Mobile Number is already in use!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Mobile number is already in use!", Toast.LENGTH_SHORT).show();
                         mobile.setText("");
                         mobile.requestFocus();
                     }
