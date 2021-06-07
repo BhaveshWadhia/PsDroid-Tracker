@@ -163,7 +163,6 @@ public class HomeFragment extends Fragment {
             }
         }
         if (id == R.id.home_help_btn) {
-            Toast.makeText(getContext(), "Helping...", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), Home_Help.class);
             intent.putExtra("user", thisusername);
             startActivity(intent);

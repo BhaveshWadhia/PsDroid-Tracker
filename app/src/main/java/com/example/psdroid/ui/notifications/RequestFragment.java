@@ -64,7 +64,7 @@ public class RequestFragment extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         boolean yes = prefs.getBoolean("check_box_preference_2",false);
         if(!yes) {
-            Toast.makeText(getContext(), "You may have not allowed to show the notification", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "You have to allow notifications from settings in order to get notifications", Toast.LENGTH_SHORT).show();
         }
         else{
             getAllNotifications();

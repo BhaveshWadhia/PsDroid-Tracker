@@ -88,7 +88,6 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
         //Get the data of the user which is clicked & then send it to the firebase database through a request
         String sendToName = name_array.get(pos);
         String sendToPhone = phone_array.get(pos);
-        System.out.println("SendToPhone = "+sendToPhone);
         //Check all users phone number in the database & compare if the target user exist
         Query checkuser = FirebaseDatabase.getInstance().getReference("users").orderByChild("user");
         ValueEventListener eventListener_1 = new ValueEventListener() {
@@ -98,9 +97,6 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
                     //Get details of the user which is selected
                     String uname = ds.child("user").getValue(String.class);
                     String mob = ds.child("mobile").getValue(String.class);
-
-                    System.out.println("Uname = "+uname);
-                    System.out.println("Mob = "+mob);
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
                     assert mob != null;
@@ -108,7 +104,6 @@ public class WhereAreYourActivity extends AppCompatActivity implements WRY_Recyc
                         //Set boolean to true when phone number is matched & get username of that user
                         checkerBool =false;
                         target_user = uname;
-                        System.out.println("targetusername = "+target_user);
                         //Send request to that particular user
                         sendrequest(auth.getUid(), "" + target_user, "" + sender_user, "" + mob, "Wants to access your location");
                         Toast.makeText(getApplicationContext(), "Tracking request has been made\nPlease wait until user accepts request", Toast.LENGTH_SHORT).show();

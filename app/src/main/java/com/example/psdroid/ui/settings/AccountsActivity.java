@@ -26,7 +26,6 @@ public class AccountsActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
             intent.putExtra("user",username);
             startActivity(intent);
-           // startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
             finish();       //Close the activity
         });
     }

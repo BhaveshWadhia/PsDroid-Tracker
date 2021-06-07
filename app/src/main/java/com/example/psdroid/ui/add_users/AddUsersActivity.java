@@ -181,11 +181,6 @@ public class AddUsersActivity extends AppCompatActivity {
             else {
                 name_array.add(temp_name);
                 phone_array.add(temp_number);
-                //Used for debugging
-                for (int i = 0; i < name_array.size(); i++) {
-                    System.out.println(name_array.get(i));
-                    System.out.println(phone_array.get(i));
-                }
                 //Recycler View Adapter Calling
                 recyclerViewAdapter = new RecyclerViewAdapter(name_array, phone_array, this);
                 recyclerView.setAdapter(recyclerViewAdapter);

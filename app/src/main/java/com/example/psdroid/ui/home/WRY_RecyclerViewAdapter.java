@@ -51,7 +51,6 @@ public class WRY_RecyclerViewAdapter extends RecyclerView.Adapter<WRY_RecyclerVi
     //Binding Function
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder function is called.");
         holder.con_name.setText(name_array.get(position));
         holder.con_phone.setText(phone_array.get(position));
     }

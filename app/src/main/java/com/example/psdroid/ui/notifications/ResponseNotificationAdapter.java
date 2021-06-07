@@ -87,9 +87,7 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     String not = (String) ds.child("Location").getValue();
-                    // String res = (String) ds.child("Location").getValue();
                     model.setNotification(not);
-                    //  model.setNotification(res);
                 }
             }
             @Override
@@ -113,8 +111,7 @@ public class ResponseNotificationAdapter extends RecyclerView.Adapter<ResponseNo
                 }).addOnFailureListener(e -> Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show());
             });
             builder.setNegativeButton("Cancel", (dialogInterface, i) ->{
-
-                  // sendrequest(auth.getUid(), "" + name, "" + uname, ""+"123", "Has allowed you request for location");//uname=sender,name=target_user
+                //Nothing
             });
             builder.create().show();
             return false;

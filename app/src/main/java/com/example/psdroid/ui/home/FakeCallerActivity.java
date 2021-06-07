@@ -98,7 +98,6 @@ public class FakeCallerActivity extends AppCompatActivity {
                     new CountDownTimer(get_ms, 1000) {
                     @Override
                     public void onTick(long l) {
-                        System.out.println("FakeCaller background task");
                     }
                     @Override
                     public void onFinish() {
