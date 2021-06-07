@@ -48,9 +48,10 @@ public class ForgotPassword extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (validateMobile(number.getText().toString())) {
+                if (validateMobile(number.getText().toString().trim())) {
                     next.setEnabled(true);
-                } else {
+                }
+                else {
                     next.setEnabled(false);
                     number.setError("Invalid Mobile No");
                 }
@@ -75,12 +76,19 @@ public class ForgotPassword extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    Intent intent = new Intent(getApplicationContext(), VerifyOTP.class);
-                    intent.putExtra("mob",valmob);
-                    intent.putExtra("user",_user);
-                    intent.putExtra("whatToDo","updateData");
-                    startActivity(intent);
-                    finish();
+                    String mobileChecker = (String) snapshot.child(_user).child("mobile").getValue();
+                    if(valmob.equals(mobileChecker)) {
+                        Intent intent = new Intent(getApplicationContext(), VerifyOTP.class);
+                        intent.putExtra("mob", valmob);
+                        intent.putExtra("user", _user);
+                        intent.putExtra("whatToDo", "updateData");
+                        startActivity(intent);
+                        finish();
+                    }
+                    else
+                    {
+                        number.setError("Please use your registered mobile number to verify");
+                    }
                 }
                 else{
                     number.setError("No such user exists or you may have provided wrong username. Please provide correct username");

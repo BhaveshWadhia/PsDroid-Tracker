@@ -42,7 +42,7 @@ public class SetPassword extends AppCompatActivity {
             String np = npass.getText().toString().trim();
             String cnp = connpass.getText().toString().trim();
             if((np.length()<8) && (cnp.length()<8)) {
-                Toast.makeText(this, "Password too match", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Password too small", Toast.LENGTH_SHORT).show();
             }
             else if (!np.equals(cnp)){
                 Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
