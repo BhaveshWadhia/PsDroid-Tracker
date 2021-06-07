@@ -73,11 +73,9 @@
             android:layout_height="match_parent"
             android:enabled="false"
             android:entries="@array/emergencynotification_entries"
-            android:entryValues="@array/emergencynotification_values"
             android:key="list_preference_2"
-            android:summary="Allows user to set emergency notification sound"
-            android:title="Emergency Notification Sound"
-            app:useSimpleSummaryProvider="true" />
+            android:summary="@string/offline_mode_summary"
+            android:title="Emergency Notification Sound" />
         <CheckBoxPreference
             android:id="@+id/OfflineMode"
             android:key="check_box_preference_3"
