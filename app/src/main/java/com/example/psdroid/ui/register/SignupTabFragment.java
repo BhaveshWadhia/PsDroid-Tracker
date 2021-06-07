@@ -36,6 +36,7 @@ public class SignupTabFragment extends Fragment {
     DatabaseReference reference;
     private FirebaseAuth auth;
     ProgressBar progressBar;
+    boolean mobileExist = false;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_signup,container,false);
@@ -122,8 +123,7 @@ public class SignupTabFragment extends Fragment {
                             progressBar.setVisibility(View.INVISIBLE);
                             getActivity().finish();
                         }
-                        else
-                        {
+                        else {
                             checkUsername();
                         }
                     }
@@ -170,24 +170,29 @@ public class SignupTabFragment extends Fragment {
                     String mob = (String) ds.child("mobile").getValue();
                     assert mob != null;
                     if (mob.equals(txt_mobile)) {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getActivity(), "Mobile number is already in use!", Toast.LENGTH_SHORT).show();
-                        mobile.setText("");
-                        mobile.requestFocus();
+                      mobileExist = true;
                     }
-                    else {
-                        Intent intent = new Intent(getActivity(), VerifyOTP.class);
-                        intent.putExtra("user", txt_user);
-                        intent.putExtra("name", txt_name);
-                        intent.putExtra("mob", txt_mobile);
-                        intent.putExtra("mail", txt_email);
-                        intent.putExtra("pass", txt_pass);
-                        intent.putExtra("cpass", txt_conpass);
-                        startActivity(intent);
-                        progressBar.setVisibility(View.INVISIBLE);
-                        getActivity().finish();
-                    }
-                }}
+                }
+                if(mobileExist)
+                {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getActivity(), "Mobile number is already in use!", Toast.LENGTH_SHORT).show();
+                    mobile.setText("");
+                    mobile.requestFocus();
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), VerifyOTP.class);
+                    intent.putExtra("user", txt_user);
+                    intent.putExtra("name", txt_name);
+                    intent.putExtra("mob", txt_mobile);
+                    intent.putExtra("mail", txt_email);
+                    intent.putExtra("pass", txt_pass);
+                    intent.putExtra("cpass", txt_conpass);
+                    startActivity(intent);
+                    progressBar.setVisibility(View.INVISIBLE);
+                    getActivity().finish();
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
