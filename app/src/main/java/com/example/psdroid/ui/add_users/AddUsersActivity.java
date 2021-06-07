@@ -37,18 +37,18 @@ public class AddUsersActivity extends AppCompatActivity {
     //CURRENT USER DETAILS
     String fullname,username,email,phone;
     //ContactPicker Counter
-    public static final int PICK_CONTACT = 1;
+    static final int PICK_CONTACT = 1;
     //ArrayList to store contact details
-    public ArrayList<String> name_array = new ArrayList<>();
-    public ArrayList<String> phone_array = new ArrayList<>();
+    ArrayList<String> name_array = new ArrayList<>();
+    ArrayList<String> phone_array = new ArrayList<>();
     String temp_name,temp_number;
     //Layout Elements
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-    public FloatingActionButton btn;
-    public Toolbar addUser_toolbar;
-    public ImageView layout_img;
-    public TextView layout_txt1,layout_txt2;
+    FloatingActionButton btn;
+    Toolbar addUser_toolbar;
+    ImageView layout_img;
+    TextView layout_txt1,layout_txt2;
     ProgressBar progressBar;
 
     //Create instance of the screen & display page content as Add users activity

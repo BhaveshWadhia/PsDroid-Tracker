@@ -18,9 +18,9 @@ import com.example.psdroid.R;
 import java.util.Objects;
 // Fake Caller Activity
 public class FakeCallerActivity extends AppCompatActivity {
-    public float setTimer;
-    public String get_fakename,thisusername;
-    public long get_ms,get_min;
+    float setTimer;
+    String get_fakename,thisusername;
+    long get_ms;
     boolean set_timer = false;
     //CURRENT USER DETAILS
     String fullname,username,email,phone;

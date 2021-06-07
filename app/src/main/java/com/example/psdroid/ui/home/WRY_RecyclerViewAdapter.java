@@ -13,7 +13,7 @@ import java.util.ArrayList;
 //Where are you recycler adapter
 public class WRY_RecyclerViewAdapter extends RecyclerView.Adapter<WRY_RecyclerViewAdapter.ViewHolder> {
     //Declaration
-    public static  final String TAG = "RecyclerViewAdapter";
+    static final String TAG = "RecyclerViewAdapter";
     private final ArrayList<String> name_array;
     private ArrayList<String> phone_array = new ArrayList<>();
     private final Context context;

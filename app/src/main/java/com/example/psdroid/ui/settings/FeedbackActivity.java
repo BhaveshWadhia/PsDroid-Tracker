@@ -15,7 +15,7 @@ import java.util.Objects;
 
 //Feedback Activity
 public class FeedbackActivity extends AppCompatActivity {
-    public Toolbar feedback_toolbar;
+    Toolbar feedback_toolbar;
     //CURRENT USER DETAILS
     String fullname,username,email,phone;
 

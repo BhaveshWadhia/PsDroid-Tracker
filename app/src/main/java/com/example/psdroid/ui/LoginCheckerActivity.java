@@ -11,22 +11,23 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.login.LoginActivity;
-
 // Introductory Activity
 public class LoginCheckerActivity extends AppCompatActivity {
-    public ImageView logo, intro;
-    public LottieAnimationView lottieAnimationView;
-    public TextView appname;
+    ImageView logo,intro;
+    LottieAnimationView lottieAnimationView;
+    TextView appname;
     String isLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introductory);
-        logo = findViewById(R.id.logo);
-        intro = findViewById(R.id.image);
-        lottieAnimationView = findViewById(R.id.tick_lottie);
+
+        logo =  findViewById(R.id.logo);
+        intro =  findViewById(R.id.image);
+        lottieAnimationView =  findViewById(R.id.tick_lottie);
         appname = findViewById(R.id.appname);
+
         intro.animate().translationY(-3000).setDuration(1000).setStartDelay(4000);
         logo.animate().translationY(2300).setDuration(1000).setStartDelay(4000);
         lottieAnimationView.animate().translationY(2300).setDuration(1000).setStartDelay(4000);
@@ -38,18 +39,20 @@ public class LoginCheckerActivity extends AppCompatActivity {
         // If user has already logged in to the application
         if (isLoggedIn.equals("true"))
         {
-            System.out.println("If of LoginChecker:"+isLoggedIn);
             // Load Login Activity
-            new Handler().postDelayed(() -> startActivity(new Intent(this, MainScreen.class)), 5000);
-            finish();
+            new Handler().postDelayed(() -> {
+                startActivity(new Intent(this, MainScreen.class));
+                finish();
+            }, 5000);
         }
         // If user is logging in first time
        else
         {
-            System.out.println("Else of LoginChecker:"+isLoggedIn);
             // Load Login Activity
-            new Handler().postDelayed(() -> startActivity(new Intent(this, LoginActivity.class)), 5000);
-            finish();
+            new Handler().postDelayed(() -> {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                }, 5000);
         }
     }
     //End of Code

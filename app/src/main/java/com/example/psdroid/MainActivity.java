@@ -15,8 +15,7 @@ public class MainActivity extends AppCompatActivity {
         String FirstTime = preferences.getString("FirstTimeInstall","");
         if(FirstTime.equals("No")){
             // Application was already installed, skip the intro
-            startActivity(new Intent(MainActivity.this, LoginCheckerActivity.class));
-            finish();
+            startActivity(new Intent(this, LoginCheckerActivity.class));
         }
         else{
             // Application was installed first time, show the intro
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("FirstTimeInstall","No");
             editor.apply();
             startActivity(new Intent(this, IntroductoryActivity.class));
-            finish();
         }
     }
 //End of Code

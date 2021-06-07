@@ -15,9 +15,9 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.psdroid.R;
 // Introductory Activity
 public class IntroductoryActivity extends AppCompatActivity {
-    public ImageView logo,intro;
-    public LottieAnimationView lottieAnimationView;
-    public TextView appname;
+    ImageView logo,intro;
+    LottieAnimationView lottieAnimationView;
+    TextView appname;
     private static final int NUM_PAGES = 3;
     Animation anim;
 

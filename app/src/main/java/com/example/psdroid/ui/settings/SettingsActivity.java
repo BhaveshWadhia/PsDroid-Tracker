@@ -12,8 +12,8 @@ import com.example.psdroid.R;
 import java.util.Objects;
 //Settings Activity
 public class SettingsActivity extends AppCompatActivity {
-    public Toolbar settings_toolbar;
-    public String thisusername;
+    Toolbar settings_toolbar;
+    String thisusername;
     //CURRENT USER DETAILS
     String fullname,username,email,phone;
     //Create a instance of the state and replace the current fragment with the settings_activity Fragment

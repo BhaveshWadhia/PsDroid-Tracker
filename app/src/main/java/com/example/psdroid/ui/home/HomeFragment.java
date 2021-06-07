@@ -42,13 +42,13 @@ import com.hitomi.cmlibrary.CircleMenu;
 import java.util.ArrayList;
 //Home Fragment
 public class HomeFragment extends Fragment {
-    public WifiManager change_wifi;
+    WifiManager change_wifi;
     MediaPlayer mediaPlayer;
     final int SEND_SMS_PERMISSION_CODE = 1;
-    public boolean gps_switch = true, wifi_switch = true;
+    boolean gps_switch = true, wifi_switch = true;
     FusedLocationProviderClient client;
-    public double latitude, longitude;
-    public SmsManager smsManager;
+    double latitude, longitude;
+    SmsManager smsManager;
     //CURRENT USER DETAILS
     String thisusername,fullname,username,email,phone;
     // Layout Elements

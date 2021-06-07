@@ -6,7 +6,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.R;
 import com.example.psdroid.ui.login.LoginActivity;
-
 // Password Changer Activity
 public class PasswordChanged extends AppCompatActivity {
 

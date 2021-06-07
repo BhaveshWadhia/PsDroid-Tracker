@@ -10,7 +10,7 @@ import com.example.psdroid.R;
 import java.util.Objects;
 //Accounts Activity
 public class AccountsActivity extends AppCompatActivity {
-    public Toolbar account_toolbar;
+    Toolbar account_toolbar;
     TextView textView;
     String fullname,username,email,phone;
     @Override

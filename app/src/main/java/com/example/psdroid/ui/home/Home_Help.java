@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Home_Help extends AppCompatActivity {
     ImageSlider imageSlider;
     public Toolbar settings_toolbar;
-    public String thisusername;
+    String thisusername;
     TextView help_text,help_title_text;
     //CURRENT USER DETAILS
     String fullname,username,email,phone;

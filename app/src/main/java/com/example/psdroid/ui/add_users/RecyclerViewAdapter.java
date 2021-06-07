@@ -12,7 +12,7 @@ import com.example.psdroid.R;
 import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     // Declaration
-    public static  final String TAG = "RecyclerViewAdapter";
+    static  final String TAG = "RecyclerViewAdapter";
     private final ArrayList<String> name_array;
     private final ArrayList<String> phone_array;
     private final Context context;
