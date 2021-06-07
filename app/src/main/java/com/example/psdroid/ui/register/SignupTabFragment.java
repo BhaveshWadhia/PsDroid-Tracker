@@ -173,31 +173,31 @@ public class SignupTabFragment extends Fragment {
                       mobileExist = true;
                     }
                 }
-                if(mobileExist)
-                {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getActivity(), "Mobile number is already in use!", Toast.LENGTH_SHORT).show();
-                    mobile.setText("");
-                    mobile.requestFocus();
-                }
-                else {
-                    Intent intent = new Intent(getActivity(), VerifyOTP.class);
-                    intent.putExtra("user", txt_user);
-                    intent.putExtra("name", txt_name);
-                    intent.putExtra("mob", txt_mobile);
-                    intent.putExtra("mail", txt_email);
-                    intent.putExtra("pass", txt_pass);
-                    intent.putExtra("cpass", txt_conpass);
-                    startActivity(intent);
-                    progressBar.setVisibility(View.INVISIBLE);
-                    getActivity().finish();
-                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         };
         checkmob.addListenerForSingleValueEvent(eventListener);
+        if(mobileExist)
+        {
+            progressBar.setVisibility(View.INVISIBLE);
+            Toast.makeText(getActivity(), "Mobile number is already in use!", Toast.LENGTH_SHORT).show();
+            mobile.setText("");
+            mobile.requestFocus();
+        }
+        else {
+            Intent intent = new Intent(getActivity(), VerifyOTP.class);
+            intent.putExtra("user", txt_user);
+            intent.putExtra("name", txt_name);
+            intent.putExtra("mob", txt_mobile);
+            intent.putExtra("mail", txt_email);
+            intent.putExtra("pass", txt_pass);
+            intent.putExtra("cpass", txt_conpass);
+            startActivity(intent);
+            progressBar.setVisibility(View.INVISIBLE);
+            getActivity().finish();
+        }
     }
 
     boolean validateMobile(String input){
