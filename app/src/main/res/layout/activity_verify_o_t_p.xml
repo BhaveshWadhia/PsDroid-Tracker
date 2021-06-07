@@ -93,7 +93,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/LoginButton_bg"
+            android:background="@drawable/button_1_bg"
             android:text="VERFIY"
             android:textColor="@color/white"
             android:textSize="16sp"
