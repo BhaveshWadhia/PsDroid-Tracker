@@ -41,9 +41,11 @@ public class LoginActivity extends AppCompatActivity {
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                // Nothing
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                // Nothing
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

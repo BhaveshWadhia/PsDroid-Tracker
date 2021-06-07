@@ -14,16 +14,17 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("PREFERENCE",MODE_PRIVATE);
         String FirstTime = preferences.getString("FirstTimeInstall","");
         if(FirstTime.equals("No")){
-            //If application was opened for the first time
-                Intent intent = new Intent(MainActivity.this, LoginCheckerActivity.class);
-                startActivity(intent);
+            // Application was already installed, skip the intro
+            startActivity(new Intent(MainActivity.this, LoginCheckerActivity.class));
+            finish();
         }
         else{
-            //Else
+            // Application was installed first time, show the intro
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("FirstTimeInstall","No");
             editor.apply();
             startActivity(new Intent(this, IntroductoryActivity.class));
+            finish();
         }
     }
 //End of Code

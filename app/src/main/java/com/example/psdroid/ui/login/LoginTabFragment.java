@@ -33,11 +33,10 @@ public class LoginTabFragment extends Fragment {
     Button login;
     SharedPreferences acctDetails,isLoggedIn;
     float v = 0;
-    private FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.tab_login, container, false);
-
 
         firebaseAuth = FirebaseAuth.getInstance();
         username = root.findViewById(R.id.username);
@@ -60,15 +59,18 @@ public class LoginTabFragment extends Fragment {
         pass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         forget.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         login.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
+        //When login button is clicked
         login.setOnClickListener(v -> {
             String txt_user = username.getText().toString();
             String txt_pass = pass.getText().toString();
             if (txt_user.isEmpty() || txt_pass.isEmpty()) {
                 Toast.makeText(getActivity(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else {
                 isUser();
             }
         });
+        // When clicked on forget password
         forget.setOnClickListener(v -> callforget());
         return root;
     }
@@ -87,13 +89,15 @@ public class LoginTabFragment extends Fragment {
                     assert passwordfromdatabase != null;
                     if (passwordfromdatabase.equals(userEnteredPassword)) {
                         UserDetails();  // Load details & store details into shared pref
-                        call_intent();  // Goto main screen of application
-                    } else {
+                        call_intent();  // Go to main screen of application
+                    }
+                    else {
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity(), "Wrong Password", Toast.LENGTH_SHORT).show();
                         pass.requestFocus();
                     }
-                } else {
+                }
+                else {
                     progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(getActivity(), "No such user exists", Toast.LENGTH_SHORT).show();
                     username.requestFocus();

@@ -41,6 +41,7 @@ public class LoginCheckerActivity extends AppCompatActivity {
             System.out.println("If of LoginChecker:"+isLoggedIn);
             // Load Login Activity
             new Handler().postDelayed(() -> startActivity(new Intent(this, MainScreen.class)), 5000);
+            finish();
         }
         // If user is logging in first time
        else
@@ -48,6 +49,7 @@ public class LoginCheckerActivity extends AppCompatActivity {
             System.out.println("Else of LoginChecker:"+isLoggedIn);
             // Load Login Activity
             new Handler().postDelayed(() -> startActivity(new Intent(this, LoginActivity.class)), 5000);
+            finish();
         }
     }
     //End of Code

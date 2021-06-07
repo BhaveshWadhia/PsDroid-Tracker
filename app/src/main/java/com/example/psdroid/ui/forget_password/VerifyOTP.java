@@ -121,6 +121,7 @@ public class VerifyOTP extends AppCompatActivity {
         finish();
     }
     private void storeNewUser() {
+
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
         String _user = getIntent().getStringExtra("user");

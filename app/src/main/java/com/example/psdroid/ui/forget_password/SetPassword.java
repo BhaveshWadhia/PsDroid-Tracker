@@ -51,7 +51,6 @@ public class SetPassword extends AppCompatActivity {
                 String _user = getIntent().getStringExtra("user");
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
-
                 reference.child(_user).child("pass").setValue(np);
                 reference.child(_user).child("conpass").setValue(cnp);
                 Intent intent = new Intent(getApplicationContext(), PasswordChanged.class);

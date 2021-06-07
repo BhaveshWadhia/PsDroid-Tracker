@@ -16,19 +16,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class OnBoardingFragment3 extends Fragment {
     FloatingActionButton fab;
     TextView skip;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_onboarding3,container,false);
         skip = root.findViewById(R.id.skip);
         skip.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
         });
         fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            startActivity( new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
         });
         return root;

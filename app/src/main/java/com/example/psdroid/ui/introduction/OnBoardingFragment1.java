@@ -21,8 +21,7 @@ public class OnBoardingFragment1 extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_onboarding1, container, false);
         skip = root.findViewById(R.id.skip);
         skip.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            startActivity( new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
         });
         return root;

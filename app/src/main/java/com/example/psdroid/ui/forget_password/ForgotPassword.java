@@ -80,12 +80,15 @@ public class ForgotPassword extends AppCompatActivity {
                     intent.putExtra("user",_user);
                     intent.putExtra("whatToDo","updateData");
                     startActivity(intent);
+                    finish();
                 }
                 else{
                     number.setError("No such user exists or you may have provided wrong username. Please provide correct username");
-                    new Handler().postDelayed(() ->startActivity(new Intent(ForgotPassword.this,LoginActivity.class)),2000);
+                    new Handler().postDelayed(() -> {
+                        startActivity(new Intent(ForgotPassword.this,LoginActivity.class));
+                        finish();
+                    },2000);
                 }
-                finish();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
