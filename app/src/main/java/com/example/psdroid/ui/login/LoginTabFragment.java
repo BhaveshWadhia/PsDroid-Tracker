@@ -43,7 +43,7 @@ public class LoginTabFragment extends Fragment {
         username = root.findViewById(R.id.username);
         pass = root.findViewById(R.id.pass);
         forget = root.findViewById(R.id.forget);
-        login = root.findViewById(R.id.SignupBtn);
+        login = root.findViewById(R.id.LoginBtn);
         progressBar = root.findViewById(R.id.login_progressBar);
 
         username.setTranslationX(800);

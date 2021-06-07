@@ -339,10 +339,10 @@ public class HomeFragment extends Fragment {
         SharedPreferences.Editor acctEditor = acctSharedPreferences.edit();
         acctEditor.clear();
         acctEditor.apply();
-        //Clear Login Shared Pref
+        //Set isLoggedIn from Login Shared Pref to false
         SharedPreferences isLoggedIn = getActivity().getSharedPreferences("LOGIN_SHARED_PREF",Context.MODE_PRIVATE);
         SharedPreferences.Editor loginEditor = isLoggedIn.edit();
-        loginEditor.clear();
+        loginEditor.putString("isLoggedIn","false");
         loginEditor.apply();
         //Clear contact shared pref
         Contacts_SharedPref.clearSharedPref(getActivity());
