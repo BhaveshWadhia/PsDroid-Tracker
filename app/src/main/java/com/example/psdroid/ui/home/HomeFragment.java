@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +51,9 @@ public class HomeFragment extends Fragment {
     public SmsManager smsManager;
     //CURRENT USER DETAILS
     String thisusername,fullname,username,email,phone;
-
+    // Layout Elements
+    ImageView centerImg;
+    boolean menuOpened = false;
     //Constructor
     public HomeFragment(String _user) {
         thisusername = _user;
@@ -70,9 +73,9 @@ public class HomeFragment extends Fragment {
         email = getaccountDetails.getString("email","");
         phone = getaccountDetails.getString("mob","");
         //Current Users Details
-
         setHasOptionsMenu(true);   //Enable options menu for this fragment
         setMenuVisibility(true);  //Enable visibility
+        centerImg = getActivity().findViewById(R.id.center_image);
         client = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
         change_wifi = (WifiManager) requireContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);    // **This is not working** //
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -114,6 +117,17 @@ public class HomeFragment extends Fragment {
                             break;
                     }
                 });
+        // Set click listener so that image can be changed
+        home_circleMenu.setOnClickListener(view1 -> {
+            if(menuOpened) {
+                menuOpened = false;
+                centerImg.setVisibility(View.VISIBLE);  //When menu is closed show the image
+            }
+            else {
+                menuOpened = true;
+                centerImg.setVisibility(View.GONE); //Hide image when menu is opened
+            }
+            });
     }
 
     //Create the Home Toolbar Menu
