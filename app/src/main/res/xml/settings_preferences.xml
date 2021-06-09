@@ -14,7 +14,6 @@
             android:id="@+id/Emergency_Services"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="true"
             android:key="switch_preference_1"
             android:summary="When turned on will send emergency alerts to other users"
             android:summaryOff="@string/emergency_services_off"
@@ -60,15 +59,12 @@
             android:key="check_box_preference_1"
             android:summary="@string/alert_summary"
             android:title="@string/emergency_alerts_title"
-            app:defaultValue="true"
             app:enabled="false" />
         <CheckBoxPreference
             android:id="@+id/AllowNotifications"
             android:key="check_box_preference_2"
             android:summary="@string/allow_notification_summary"
-
-            android:title="@string/allow_notification_title"
-            app:defaultValue="true" />
+            android:title="@string/allow_notification_title" />
         <ListPreference
             android:layout_height="match_parent"
             android:enabled="false"
