@@ -128,8 +128,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                             try {
                                 Geocoder geocoder = new Geocoder(context,Locale.getDefault());
                                 List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                                Toast.makeText(context, ""+addresses.get(0).getLatitude(), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(context, ""+addresses.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
                                 double lat = addresses.get(0).getLatitude();
                                 double lon = addresses.get(0).getLongitude();
                                 sendrequest(auth.getUid(), "" + name, "" + uname,""+lat,""+lon, "Has allowed you request for location");//uname=sender,name=target_user

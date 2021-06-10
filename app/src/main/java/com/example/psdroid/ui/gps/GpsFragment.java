@@ -23,6 +23,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -108,6 +109,10 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         }
         if(LoadedfromNotification)
         {
+            // Set bottom navigation bar to GPS
+            BottomNavigationView nav_view = getView().findViewById(R.id.nav_view);
+            nav_view.setSelectedItemId(R.id.navGps_btn);
+
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername).child("Location").child(timestamp);
             ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
