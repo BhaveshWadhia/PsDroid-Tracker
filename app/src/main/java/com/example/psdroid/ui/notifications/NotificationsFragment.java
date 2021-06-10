@@ -70,7 +70,7 @@ public class NotificationsFragment extends Fragment {
     private void setUpViewPager(ViewPager viewPager) {
         NotificationPagerAdapter adapter = new NotificationPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new RequestFragment(thisusername),"Request Received");
-        adapter.addFragment(new ResponseFragment(thisusername),"Request Accepted");
+        adapter.addFragment(new ResponseFragment(thisusername),"Request Send");
         viewPager.setAdapter(adapter);
     }
     //End of Code
