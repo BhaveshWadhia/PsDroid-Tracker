@@ -223,7 +223,7 @@ public class HomeFragment extends Fragment {
     // Main Functions of the Application
     // Track Me Function
     private void trakMe_function() {
-       sendSMS_Loction();  //Get GPS location & send SMS
+        sendSMS_Loction();  //Get GPS location & send SMS
     }
     /*
     // Send Location
@@ -289,25 +289,28 @@ public class HomeFragment extends Fragment {
                         String loc_link = "https://maps.google.com/maps?saddr="+latitude+","+longitude;
                         String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking, their current location is ";
                         System.out.println(message);
-                        for (String number: phone_array)
+                        if(phone_array.size()==0)
                         {
-                            try {
-                                System.out.println("Inside TRY of SMS");
-                                System.out.println(number);
-                                System.out.println(message);
-                                smsManager.sendTextMessage(number, null,message,null,null); //Send SMS Message
-                                smsManager.sendTextMessage(number, null,loc_link,null,null); //Send SMS Lnk
-                            }
-                            catch (Exception exception)
-                            {
-                                Toast.makeText(getActivity(),"SMS Service Failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "You need to at least add one contact into the list in order to share your location", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            for (String number : phone_array) {
+                                try {
+                                    System.out.println("Inside TRY of SMS");
+                                    System.out.println(number);
+                                    System.out.println(message);
+                                    smsManager.sendTextMessage(number, null, message, null, null); //Send SMS Message
+                                    smsManager.sendTextMessage(number, null, loc_link, null, null); //Send SMS Lnk
+                                } catch (Exception exception) {
+                                    Toast.makeText(getActivity(), "SMS Service Failed", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     }
                 });
             }
             else {
-                Toast.makeText(getActivity().getApplicationContext(), "GPS provider was not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "GPS provider was not found, try manually turning on your gps location", Toast.LENGTH_SHORT).show();
             }
         }
     }
