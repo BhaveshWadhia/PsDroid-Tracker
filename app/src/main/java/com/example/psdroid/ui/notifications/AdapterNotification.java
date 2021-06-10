@@ -106,8 +106,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         holder.timeTv.setText(pTime);
         holder.itemView.setOnLongClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Deny");
-            builder.setMessage("Are you sure you want to deny the request?");
+            builder.setTitle("Request");
+            builder.setMessage("What action do you want to take for this request?");
             builder.setPositiveButton("Deny", (dialogInterface, i) -> {
                 DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("users");
                 ref1.child(uname).child("Notifications").child(timestamp).removeValue().addOnSuccessListener(aVoid -> {
