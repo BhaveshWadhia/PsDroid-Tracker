@@ -19,6 +19,7 @@
             android:summaryOff="@string/emergency_services_off"
             android:summaryOn="@string/emergency_services_on"
             app:title="@string/emergency_title"
+            android:enabled="false"
             />
         <ListPreference
             android:id="@+id/SirenSound"
