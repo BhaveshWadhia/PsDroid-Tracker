@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
         home_circleMenu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.cm_ic_start, R.drawable.cm_ic_cancel)
                 .addSubMenu(Color.parseColor("#258CFF"), R.drawable.cm_ic_siren)
                 .addSubMenu(Color.parseColor("#30A400"), R.drawable.cm_ic_trackme) //change it
-                .addSubMenu(Color.parseColor("#FF4B32"), R.drawable.cm_ic_where_are_you)
+                .addSubMenu(Color.parseColor("#FAD02C"), R.drawable.cm_ic_where_are_you)
                 .addSubMenu(Color.parseColor("#FF4B32"), R.mipmap.ic_cm_sos_foreground)
                 .addSubMenu(Color.parseColor("#8A39FF"), R.drawable.ic_adduser)  // contact list icon
                 .addSubMenu(Color.parseColor("#FF6A00"), R.drawable.cm_ic_fakecall)

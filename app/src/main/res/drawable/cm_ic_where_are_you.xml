@@ -29,6 +29,6 @@
       android:pathData="M19,23.5h3.5v-0.853c0,-3.023 -2.217,-3.511 -4.308,-4.285 -0.7,-0.257 -0.581,-2.072 -0.273,-2.41a5.129,5.129 0,0 0,1.335 -3.976"
       android:strokeLineJoin="round"
       android:fillColor="#00000000"
-      android:strokeColor="#ffff"
+      android:strokeColor="#000"
       android:strokeLineCap="round"/>
 </vector>
