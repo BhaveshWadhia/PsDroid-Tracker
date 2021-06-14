@@ -121,7 +121,6 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
                     String Lon = (String) snapshot.child("lon").getValue();
                     String u = (String) snapshot.child("uname").getValue();
                     LatLng location = new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon));
-                    //  LatLng location = new LatLng(Lat,Lon);
                     map.addMarker(new MarkerOptions().position(location).title(responsesenderusername + "'s Location"));
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14F));
                 }
@@ -143,9 +142,7 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         alert_builder.setTitle("GPS Tracking");
         alert_builder.setMessage("While you're here, you can check out the location of your contacts added if they have allowed your request for their location.\n You can also see your own location");
         alert_builder.setCancelable(true);
-        alert_builder.setPositiveButton("OK", (dialog, which) -> {
-            dialog.cancel();
-        });
+        alert_builder.setPositiveButton("OK", (dialog, which) -> dialog.cancel());
         AlertDialog alertDialog = alert_builder.create();
         alertDialog.show();
     }
