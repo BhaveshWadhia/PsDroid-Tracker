@@ -287,7 +287,7 @@ public class HomeFragment extends Fragment {
                         phone_array = Contacts_SharedPref.retrieve_phoneFromList(getContext());   //Get all the contacts from the list
                         // Message to be send
                         String loc_link = "https://maps.google.com/maps?saddr="+latitude+","+longitude;
-                        String message = "PsDroid Tracker wants to notify you that "+"\""+thisusername+"\""+" has turned on their location tracking, their current location is ";
+                        String message = "PsDroid Tracker wants to notify you that "+"\""+fullname+"\""+" has turned on their location tracking, their current location is ";
                         System.out.println(message);
                         if(phone_array.size()==0)
                         {

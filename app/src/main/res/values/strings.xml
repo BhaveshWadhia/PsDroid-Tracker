@@ -1,6 +1,30 @@
 <resources>
     <string name="app_name" translatable="false">PsDroid Tracker</string>
     <!--<string name="default_web_client_id">408198163992-u8nsr4060vgbseu711di7f0h96je8q29.apps.googleusercontent.com</string>-->
+   
+    <!-- INTRODUCTION / START-UP-->
+    <string name="intro1_str1">Extra Step\nto Safety</string>
+    <string name="intro2_str1">Safety in\nyour hands</string>
+    <string name="intro1_str2">We believe in keeping you safe</string>
+    <string name="intro2_str2">We suppose your security is your success</string>
+    <string name="advanced_str">Advanced</string>
+    <string name="skip_str">Skip</string>
+    <string name="sos_str">SOS</string>
+    <string name="help_str2">Help !!</string>
+    <string name="intro3_str1">Keep each\nother safe</string>
+    <string name="intro3_str2">Security is not a product, but a process</string>
+    <string name="mobile_number_str">Mobile Number</string>
+    <string name="email_str">Email</string>
+    <string name="password_str">Password</string>
+    <string name="confirm_password_str">Confirm Password</string>
+    <string name="signup_str">Signup</string>
+    <string name="email_id_username_str">Email ID/Username</string>
+    <string name="login_str">Login</string>
+    <string name="forget_password_str">Forgot Password?</string>
+    <string name="enter_email_id_str">Enter Email ID</string>
+    <string name="reset_password_str">Reset Password</string>
+    <string name="username">Username</string>
+
     <!-- **MAIN SCREEEN STRINGS** -->
     <string name="navbar_home">Home</string>
     <string name="navbar_gps">GPS Tracking</string>
@@ -27,6 +51,22 @@
     <string name="empty_list_desc">Currently no contacts are added, why not start by tapping on the below "Add User" button</string>
     <string name="contact_list_icon">Contact List Icon</string>
     <string name="add_contacts_button">Add contacts button</string>
+    <!-- FAKE CALLER ACTIVITY -->
+    <string name="family_friends_str" >Family/Friends</string>
+    <string name="fakecall_title">Fake Caller</string>
+    <string name="fake_call_str" >Fake Call</string>
+    <string name="fakecall_text">Create your own system generated fake call to fly out of dangerous situations</string>
+    <string name="timer1_str">30 seconds</string>
+    <string name="timer2_str">1 minute</string>
+    <string name="timer3_str">3 minutes</string>
+    <string name="timer4_str">5 minutes</string>
+    <string name="set_call_str">SET CALL</string>
+    <string name="fakecaller_inputtext_str">Name</string>
+    <string name="select_timer_str">Select Timer</string>
+    <string name="where_are_you_str">Where Are You ?</string>
+    <string name="terms_condition_title"><![CDATA[Terms & Condition]]></string>
+    <string name="unknown_str">Unknown</string>
+
     <!-- **SETTINGS SCREEN STRINGS** -->
     <string name="title_activity_settings">Settings</string>
     <!-- GENERAL -->
@@ -59,42 +99,7 @@
     <string name="privacy_policy_title">Privacy Policy</string>
     <string name="terms_conditions_title">Terms __ Conditions</string>
     <string name="welcome_to_psdroid_tracer">Welcome to Psdroid Tracer</string>
-    <string name="intro1_str1">Extra Step\nto Safety</string>
-    <string name="intro2_str1">Safety in\nyour hands</string>
-    <string name="intro1_str2">We believe in keeping you safe</string>
-    <string name="intro2_str2">We suppose your security is your success</string>
-    <string name="advanced_str">Advanced</string>
-    <string name="skip_str">Skip</string>
-    <string name="sos_str">SOS</string>
-    <string name="help_str2">Help !!</string>
-    <string name="intro3_str1">Keep each\nother safe</string>
-    <string name="intro3_str2">Security is not a product, but a process</string>
-    <string name="mobile_number_str">Mobile Number</string>
-    <string name="email_str">Email</string>
-    <string name="password_str">Password</string>
-    <string name="confirm_password_str">Confirm Password</string>
-    <string name="signup_str">Signup</string>
-    <string name="email_id_username_str">Email ID/Username</string>
-    <string name="login_str">Login</string>
-    <string name="forget_password_str">Forget Password?</string>
-    <string name="enter_email_id_str">Enter Email ID</string>
-    <string name="reset_password_str">Reset Password</string>
-    <string name="username">Username</string>
-    <string name="family_friends_str" >Family/Friends</string>
-    <string name="fakecall_title">Fake Caller</string>
-    <string name="fake_call_str" >Fake Call</string>
-    <string name="fakecall_text">Create your own system generated fake call to fly out of dangerous situations</string>
-    <string name="timer1_str">30 seconds</string>
-    <string name="timer2_str">1 minute</string>
-    <string name="timer3_str">3 minutes</string>
-    <string name="timer4_str">5 minutes</string>
-    <string name="set_call_str">SET CALL</string>
-    <string name="fakecaller_inputtext_str">Name</string>
-    <string name="select_timer_str">Select Timer</string>
-    <string name="where_are_you_str">Where Are You ?</string>
-    <string name="terms_condition_title"><![CDATA[Terms & Condition]]></string>
-    <string name="unknown_str">Unknown</string>
-<!--    Account strings-->
+    <!-- ACCOUNTS -->
     <string name="account_subtitle">Account Info</string>
     <string name="name_title">Username</string>
     <string name="fullname_title">Full Name</string>

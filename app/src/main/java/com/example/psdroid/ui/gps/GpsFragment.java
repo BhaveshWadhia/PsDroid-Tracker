@@ -110,7 +110,7 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         if(LoadedfromNotification)
         {
             // Set bottom navigation bar to GPS
-            BottomNavigationView nav_view = getView().findViewById(R.id.nav_view);
+            BottomNavigationView nav_view = getActivity().findViewById(R.id.nav_view);
             nav_view.setSelectedItemId(R.id.navGps_btn);
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername).child("Location").child(timestamp);
