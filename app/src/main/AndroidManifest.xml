@@ -58,7 +58,7 @@
             android:label="MainScreenActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.home.Home_Help"
+            android:name=".ui.home.HomeHelp"
             android:label="Help"
             android:screenOrientation="portrait" />
 

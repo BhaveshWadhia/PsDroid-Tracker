@@ -17,7 +17,7 @@ import com.example.psdroid.R;
 import java.util.ArrayList;
 import java.util.Objects;
 //Home fragment Help
-public class Home_Help extends AppCompatActivity {
+public class HomeHelp extends AppCompatActivity {
     ImageSlider imageSlider;
     public Toolbar settings_toolbar;
     String thisusername;
@@ -63,7 +63,7 @@ public class Home_Help extends AppCompatActivity {
         images.add(new SlideModel(R.drawable.help6,null));
         images.add(new SlideModel(R.drawable.help7,null));
         images.add(new SlideModel(R.drawable.help8,null));
-        imageSlider.setImageList(images, ScaleTypes.FIT);
+        imageSlider.setImageList(images, ScaleTypes.CENTER_INSIDE);
         //Set default title & help text for first image
         String dft_title = "HOME";
         String dft_msg = "Siren\nTrack Me\nWhere are you?\nSOS\nContacts\nFake Caller";

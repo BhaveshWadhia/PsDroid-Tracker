@@ -163,7 +163,7 @@ public class HomeFragment extends Fragment {
             }
         }
         if (id == R.id.home_help_btn) {
-            Intent intent = new Intent(getActivity(), Home_Help.class);
+            Intent intent = new Intent(getActivity(), HomeHelp.class);
             intent.putExtra("user", thisusername);
             startActivity(intent);
         }
