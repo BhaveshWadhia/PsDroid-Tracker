@@ -90,15 +90,15 @@
 
         <Button
             android:id="@+id/verify"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/button_1_bg"
+            android:onClick="callnextscreenfromotp"
             android:text="VERFIY"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:onClick="callnectscreenfromotp"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintWidth_percent=".8" />
 

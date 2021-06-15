@@ -84,6 +84,13 @@ public class VerifyOTP extends AppCompatActivity {
                 }
             };
 
+    public void callnextscreenfromotp(View view){
+        String code = pinview.getText().toString();
+        if(!code.isEmpty()){
+            verifyCode(code);
+        }
+    }
+
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codebysystem,code);
         signInWithPhoneAuthCredential(credential);
@@ -103,7 +110,7 @@ public class VerifyOTP extends AppCompatActivity {
                     }
                     else {
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            Toast.makeText(VerifyOTP.this, "Verification Not Completed! Try again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Verification Not Completed! Try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -121,7 +128,6 @@ public class VerifyOTP extends AppCompatActivity {
         finish();
     }
     private void storeNewUser() {
-
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
         String _user = getIntent().getStringExtra("user");
@@ -133,8 +139,9 @@ public class VerifyOTP extends AppCompatActivity {
         System.out.println("Storing Data");
         UserHeplerClass heplerClass = new UserHeplerClass(_user,_name,_mail,_mobile,_pass,_cpass);
         reference.child(_user).setValue(heplerClass);
-        Intent intent = new Intent(VerifyOTP.this, AccountCreatedActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AccountCreatedActivity.class);
         System.out.println("After storing");
+        Toast.makeText(getApplicationContext(), "Verification Completed!", Toast.LENGTH_SHORT).show();
         intent.putExtra("user",_user);
         intent.putExtra("mob",_mobile);
         intent.putExtra("name",_name);
@@ -142,15 +149,7 @@ public class VerifyOTP extends AppCompatActivity {
         intent.putExtra("pass",_pass);
         intent.putExtra("cpass",_cpass);
         startActivity(intent);
-        Toast.makeText(VerifyOTP.this, "Verification Completed!", Toast.LENGTH_SHORT).show();
         finish();
-    }
-
-    public void callnectscreenfromotp(View view){
-        String code = pinview.getText().toString();
-        if(!code.isEmpty()){
-            verifyCode(code);
-        }
     }
     //End of Code
 }

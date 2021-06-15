@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.psdroid.MainScreen;
 import com.example.psdroid.R;
+import com.example.psdroid.ui.login.LoginActivity;
+
 // Account Created Successfully Activity
 public class AccountCreatedActivity extends AppCompatActivity {
     @Override
@@ -22,7 +24,7 @@ public class AccountCreatedActivity extends AppCompatActivity {
         String _pass = getIntent().getStringExtra("pass");
         String _cpass = getIntent().getStringExtra("cpass");
         startBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(AccountCreatedActivity.this, MainScreen.class);
+            Intent intent = new Intent(AccountCreatedActivity.this, LoginActivity.class);
             intent.putExtra("user",_user);
             intent.putExtra("name",_name);
             intent.putExtra("mob",_mobile);
@@ -30,7 +32,6 @@ public class AccountCreatedActivity extends AppCompatActivity {
             intent.putExtra("pass",_pass);
             intent.putExtra("cpass",_cpass);
             startActivity(intent);
-            //startActivity(new Intent(getApplicationContext(), MainScreen.class));
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_in_right);
             finish();
         });

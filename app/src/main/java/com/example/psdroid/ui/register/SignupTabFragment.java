@@ -86,7 +86,7 @@ public class SignupTabFragment extends Fragment {
             else if(txt_name.length()==0)
             {
                 name.requestFocus();
-                name.setError("FIELD CANNOT BE EMPTY");
+                name.setError("Field cannot be empty");
             }
             else if(!txt_name.matches("[a-zA-Z ]+"))
             {
@@ -107,31 +107,7 @@ public class SignupTabFragment extends Fragment {
             }
             else if(!user.getText().toString().isEmpty()) {
                 progressBar.setVisibility(View.VISIBLE);
-                DatabaseReference nouser_reference = FirebaseDatabase.getInstance().getReference();
-                nouser_reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(!snapshot.hasChild("users")) {
-                            Intent intent = new Intent(getActivity(), VerifyOTP.class);
-                            intent.putExtra("user", txt_user);
-                            intent.putExtra("name", txt_name);
-                            intent.putExtra("mob", txt_mobile);
-                            intent.putExtra("mail", txt_email);
-                            intent.putExtra("pass", txt_pass);
-                            intent.putExtra("cpass", txt_conpass);
-                            startActivity(intent);
-                            progressBar.setVisibility(View.INVISIBLE);
-                            getActivity().finish();
-                        }
-                        else {
-                            checkUsername();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                checkUsername();
             }
         });
         return root;
@@ -141,7 +117,8 @@ public class SignupTabFragment extends Fragment {
         String userEnteredUsername = user.getText().toString().trim();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUser = reference.orderByChild("user").equalTo(userEnteredUsername);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        checkUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -163,41 +140,43 @@ public class SignupTabFragment extends Fragment {
     private void checkmob(String txt_email, String txt_mobile, String txt_user, String txt_pass, String txt_conpass) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         Query checkmob = ref.orderByChild("user");
-        ValueEventListener eventListener = new ValueEventListener() {
+        checkmob.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     String mob = (String) ds.child("mobile").getValue();
+                    System.out.println("Checking user");
                     assert mob != null;
                     if (mob.equals(txt_mobile)) {
                       mobileExist = true;
+                      System.out.println("User Found");
                     }
+                }
+                if(mobileExist)
+                {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getActivity(), "Mobile number is already in use!", Toast.LENGTH_SHORT).show();
+                    mobile.setText("");
+                    mobile.requestFocus();
+                    mobileExist = false;
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), VerifyOTP.class);
+                    intent.putExtra("user", txt_user);
+                    intent.putExtra("name", txt_name);
+                    intent.putExtra("mob", txt_mobile);
+                    intent.putExtra("mail", txt_email);
+                    intent.putExtra("pass", txt_pass);
+                    intent.putExtra("cpass", txt_conpass);
+                    startActivity(intent);
+                    progressBar.setVisibility(View.INVISIBLE);
+                    getActivity().finish();
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
-        };
-        checkmob.addListenerForSingleValueEvent(eventListener);
-        if(mobileExist)
-        {
-            progressBar.setVisibility(View.INVISIBLE);
-            Toast.makeText(getActivity(), "Mobile number is already in use!", Toast.LENGTH_SHORT).show();
-            mobile.setText("");
-            mobile.requestFocus();
-        }
-        else {
-            Intent intent = new Intent(getActivity(), VerifyOTP.class);
-            intent.putExtra("user", txt_user);
-            intent.putExtra("name", txt_name);
-            intent.putExtra("mob", txt_mobile);
-            intent.putExtra("mail", txt_email);
-            intent.putExtra("pass", txt_pass);
-            intent.putExtra("cpass", txt_conpass);
-            startActivity(intent);
-            progressBar.setVisibility(View.INVISIBLE);
-            getActivity().finish();
-        }
+        });
     }
 
     boolean validateMobile(String input){
