@@ -67,6 +67,7 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
             LoadedfromNotification = true;
             responsesenderusername = bundle.getString("key");
             timestamp = bundle.getString("time");
+            System.out.println("Location Bundle from Notification");
         }
         auth = FirebaseAuth.getInstance();
         return inflater.inflate(R.layout.fragment_gps, container, false);
@@ -83,8 +84,7 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id==R.id.gps_help_btn)
-        {
+        if(id==R.id.gps_help_btn) {
             help_message();
         }
         return super.onOptionsItemSelected(item);
@@ -109,32 +109,28 @@ public class GpsFragment extends Fragment implements OnMapReadyCallback {
         }
         if(LoadedfromNotification)
         {
+            System.out.println("Inside Location display");
             // Set bottom navigation bar to GPS
             BottomNavigationView nav_view = getActivity().findViewById(R.id.nav_view);
-            nav_view.setSelectedItemId(R.id.navGps_btn);
-
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(thisusername).child("Location").child(timestamp);
+            nav_view.getMenu().findItem(R.id.navGps_btn).setChecked(true);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(username).child("Location").child(timestamp);
             ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String Lat = (String) snapshot.child("lat").getValue();
                     String Lon = (String) snapshot.child("lon").getValue();
                     String u = (String) snapshot.child("uname").getValue();
+                    System.out.println("Lon:"+Lon+" Lat:"+Lat);
                     LatLng location = new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon));
                     map.addMarker(new MarkerOptions().position(location).title(responsesenderusername + "'s Location"));
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14F));
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
         }
-        else
-        {
-            // DO NOTHING
-        }
-        map.setMyLocationEnabled(true);
+            map.setMyLocationEnabled(true);
     }
     // Help message function for ths activity
     private void help_message() {
